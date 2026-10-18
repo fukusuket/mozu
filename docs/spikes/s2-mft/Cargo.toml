@@ -5,7 +5,7 @@ edition = "2024"
 publish = false
 description = "Phase 0 spike S2: mft crate (master) on synthetic FILE records (throwaway)"
 
-# Standalone: excluded from the main workspace (Cargo.toml `exclude = ["spikes"]`).
+# Standalone: excluded from the main workspace (Cargo.toml `exclude = ["docs/spikes"]`).
 [workspace]
 
 [dependencies]

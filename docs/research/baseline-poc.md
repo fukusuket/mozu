@@ -1,6 +1,6 @@
 # Baseline PoC (spike S4)
 
-Question: how much of a real volume falls outside the VanillaWindowsReference (VWR) baseline, and is `$UpCase` the same across builds? Code and raw numbers: `spikes/s4-baseline/`.
+Question: how much of a real volume falls outside the VanillaWindowsReference (VWR) baseline, and is `$UpCase` the same across builds? Code and raw numbers: [docs/spikes/s4-baseline/](../spikes/s4-baseline/).
 
 ## Setup
 - Images (public, used under their publishers' terms, never committed):

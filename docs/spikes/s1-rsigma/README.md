@@ -1,6 +1,6 @@
 # Spike S1: `rsigma-eval` on NTFS-shaped events
 
-Throwaway. Result recorded in [ADR 0003](../../docs/adr/0003-sigma-engine.md).
+Throwaway. Result recorded in [ADR 0003](../../adr/0003-sigma-engine.md).
 
 ## Run
 

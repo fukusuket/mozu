@@ -1,7 +1,7 @@
 ---
 paths:
   - "crates/**/*.rs"
-  - "spikes/**/*.rs"
+  - "docs/spikes/**/*.rs"
 ---
 
 # Rust code

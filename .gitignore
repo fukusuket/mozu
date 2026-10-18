@@ -1,5 +1,5 @@
 /target/
-/spikes/*/target/
+/docs/spikes/*/target/
 **/*.rs.bk
 
 # viewer

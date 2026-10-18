@@ -7,7 +7,7 @@ disable-model-invocation: true
 Spike: $ARGUMENTS
 
 1. Read the spike's row in `docs/plan.md` (what to verify, pass criteria, fallback).
-2. Create `spikes/<name>/` as a standalone crate (`[workspace]` table in its `Cargo.toml`); it is excluded from the main workspace.
+2. Create `docs/spikes/<name>/` as a standalone crate (`[workspace]` table in its `Cargo.toml`); it is excluded from the main workspace.
 3. Implement only what is needed to check each criterion. Print measured numbers.
 4. Run it and capture the evidence (command, output, timings).
 5. Write the outcome as a proposed ADR with the `adr` skill (pass → adopt; fail → fallback), quoting the evidence.

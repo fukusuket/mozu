@@ -3,7 +3,7 @@
 Status: accepted (2026-10-04, approved by the maintainer); rule 4 superseded by [ADR 0023](0023-rule-yaml-as-evidence.md) once that is accepted
 
 ## Context
-Spike S1 (docs/plan.md) had to show whether `rsigma-eval` can run our Sigma rules on NTFS events before we build the `sigma` adapter crate; the fallback was extracting Hayabusa's engine. Evidence and commands: [spikes/s1-rsigma/README.md](../../spikes/s1-rsigma/README.md).
+Spike S1 (docs/plan.md) had to show whether `rsigma-eval` can run our Sigma rules on NTFS events before we build the `sigma` adapter crate; the fallback was extracting Hayabusa's engine. Evidence and commands: [docs/spikes/s1-rsigma/README.md](../spikes/s1-rsigma/README.md).
 
 ## Decision
 **Adopt `rsigma-eval` and `rsigma-parser`** behind our own `sigma` adapter crate.

@@ -1,4 +1,4 @@
-@AGENTS.md
+@../AGENTS.md
 
 ## Claude Code
 - Path-scoped rules in `.claude/rules/` load automatically; `.rs` files are auto-formatted by a hook.

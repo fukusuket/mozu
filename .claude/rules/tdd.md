@@ -23,5 +23,5 @@ One cycle = one behavior. Split a task until each step has exactly one failing t
 - A `refactor:` commit never changes test expectations.
 
 ## Exceptions
-- `spikes/` is exploratory: no TDD.
+- `docs/spikes/` is exploratory: no TDD.
 - Pure renames/moves are refactor-only cycles: green before and after.

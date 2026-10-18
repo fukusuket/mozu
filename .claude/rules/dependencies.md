@@ -1,7 +1,7 @@
 ---
 paths:
   - "**/Cargo.toml"
-  - "deny.toml"
+  - ".cargo/deny.toml"
   - "NOTICE"
 ---
 
