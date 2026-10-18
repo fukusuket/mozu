@@ -39,7 +39,7 @@ checksum = "683d7910e743518b0e34f1186f92494becacb047c7b6bf616c96772180fef923"
 
 [[package]]
 name = "analyze"
-version = "0.0.0"
+version = "0.3.0"
 dependencies = [
  "baseline",
  "detect",
@@ -85,7 +85,7 @@ checksum = "ac07cdecf99051d9a5238b80f35af32cdeba5b336e55d957b318b50137e18da5"
 
 [[package]]
 name = "baseline"
-version = "0.0.0"
+version = "0.3.0"
 dependencies = [
  "csv",
  "fst",
@@ -225,7 +225,7 @@ checksum = "1c133bc6a41be0d194c306b5506d15e6feeea7b1d6604bd3f8310dfb2ca96486"
 
 [[package]]
 name = "cli"
-version = "0.0.0"
+version = "0.3.0"
 dependencies = [
  "analyze",
  "anyhow",
@@ -243,7 +243,7 @@ dependencies = [
 
 [[package]]
 name = "collector"
-version = "0.0.0"
+version = "0.3.0"
 dependencies = [
  "flate2",
  "ntfs-reader",
@@ -355,7 +355,7 @@ checksum = "9e9de72ce2ad1f90dc62fa25f0f430ef85eb4b0d8fa0be4f30373bc40a21d28e"
 
 [[package]]
 name = "detect"
-version = "0.0.0"
+version = "0.3.0"
 dependencies = [
  "baseline",
  "mft-parse",
@@ -660,7 +660,7 @@ dependencies = [
 
 [[package]]
 name = "mft-parse"
-version = "0.0.0"
+version = "0.3.0"
 dependencies = [
  "mft",
  "ntfs-types",
@@ -692,7 +692,7 @@ dependencies = [
 
 [[package]]
 name = "ntfs-types"
-version = "0.0.0"
+version = "0.3.0"
 dependencies = [
  "proptest",
 ]
@@ -932,7 +932,7 @@ checksum = "d6f6ff9a378485b298a5286656da665ba74413d36db0979633275d2e708145d4"
 
 [[package]]
 name = "report"
-version = "0.0.0"
+version = "0.3.0"
 dependencies = [
  "analyze",
  "baseline",
@@ -950,7 +950,7 @@ dependencies = [
 
 [[package]]
 name = "resolve"
-version = "0.0.0"
+version = "0.3.0"
 dependencies = [
  "mft-parse",
  "ntfs-types",
@@ -1074,7 +1074,7 @@ checksum = "f8fadd59c855ef2080decdef8ff161eb6661b86933c9d82e5ba29dc602a55aba"
 
 [[package]]
 name = "sigma"
-version = "0.0.0"
+version = "0.3.0"
 dependencies = [
  "rsigma-eval",
  "rsigma-parser",
@@ -1246,7 +1246,7 @@ checksum = "d245f478577f809a851594d02313b640fb437e0bb33866753cff937863096954"
 
 [[package]]
 name = "usn-parse"
-version = "0.0.0"
+version = "0.3.0"
 dependencies = [
  "ntfs-types",
  "proptest",
@@ -1460,7 +1460,7 @@ checksum = "1ebf944e87a7c253233ad6766e082e3cd714b5d03812acc24c318f549614536e"
 
 [[package]]
 name = "xtask"
-version = "0.0.0"
+version = "0.3.0"
 
 [[package]]
 name = "yaml_serde"
