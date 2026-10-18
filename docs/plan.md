@@ -1,6 +1,6 @@
 # Plan
 
-Current phase: **2** (gate pending); Phase 3 runs alongside, as it does not depend on the Phase 1–2 gates (P3-1 and P3-P done, P3-R and P3-G pending). Tick items as they land (same change). Every item states **Done when** (checkable) and **Out of scope**; agents do nothing outside it. Flow per item: H1 tests approved → TDD cycles on a branch → H3 human review and merge (AGENTS.md). Scope: [product.md](product.md). Design: [architecture.md](architecture.md).
+Current phase: **2** (gate pending); Phase 3 runs alongside, as it does not depend on the Phase 1–2 gates (P3-1 and P3-P done, P3-1a, P3-R and P3-G pending). Tick items as they land (same change). Every item states **Done when** (checkable) and **Out of scope**; agents do nothing outside it. Flow per item: H1 tests approved → TDD cycles on a branch → H3 human review and merge (AGENTS.md). Scope: [product.md](product.md). Design: [architecture.md](architecture.md).
 
 ## Phases
 
@@ -219,6 +219,10 @@ Goal: M1 of [product.md §4](product.md#4-mvp): `mozu collect` on a live Windows
   - Done when: `mozu collect [-v C:] [-o <zip>]` writes `$MFT`, `$J` (stored extents only), `$Boot`, `$Secure:$SDS` and `meta.json` into one zip, written atomically and never over an existing file; not elevated, a non-NTFS volume or a missing `$J` → a message, not a panic; `cargo check --target x86_64-pc-windows-msvc` in CI; a Windows runner job collects, checks each file against `meta.json`, extracts the zip and runs `mozu analyze -i <$MFT> --usn <$J>` on it. Pure parts (the `meta.json` writer, zip layout, sparse/lost byte counts) are unit-tested on every platform.
   - Out of scope: reading the zip in `analyze` (P4-1), using `meta.json` in analysis, VSS, volumes other than NTFS, remote collection, uploading.
   - Human steps: approve the Windows CI job; sign the release binary (ADR 0024).
+- [ ] **P3-1a Collect on more Windows runners, downloadable outputs** (`.github/workflows/ci.yml`; after P3-1; M1)
+  - Done when: the `collect-windows` job runs the P3-1 checks on `windows-2022`, `windows-2025` and `windows-11-arm` (`fail-fast: false`), the analysis also writes an HTML report with `testdata/rules`, and each OS uploads `collect.zip`, `report.html` and `out.csv` as the artifact `collect-<os>` (retention 7 days); zizmor passes.
+  - Out of scope: client Windows other than the runner images, x64 emulation on ARM64, baselines, comparing outputs across OSes, keeping artifacts beyond the retention.
+  - Human steps: push the branch; if `windows-11-arm` cannot build, drop it from the matrix; download one artifact and open its report.
 - [x] **P3-P Prune before the gate** (`collector`, `cli`; AGENTS.md)
   - Done when: every `pub` item, `collect` flag and `meta.json` field is listed with M1, ADR 0024 or the Phase 4 item that reads it; those without one are removed after human approval.
   - Out of scope: adding anything.
