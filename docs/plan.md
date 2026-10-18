@@ -220,9 +220,9 @@ Goal: M1 of [product.md §4](product.md#4-mvp): `mozu collect` on a live Windows
   - Out of scope: reading the zip in `analyze` (P4-1), using `meta.json` in analysis, VSS, volumes other than NTFS, remote collection, uploading.
   - Human steps: approve the Windows CI job; sign the release binary (ADR 0024).
 - [ ] **P3-1a Collect on more Windows runners, downloadable outputs** (`.github/workflows/ci.yml`; after P3-1; M1)
-  - Done when: the `collect-windows` job runs the P3-1 checks on `windows-2022`, `windows-2025` and `windows-11-arm` (`fail-fast: false`), the analysis also writes an HTML report with `testdata/rules`, and each OS uploads `collect.zip`, `report.html` and `out.csv` as the artifact `collect-<os>` (retention 7 days); zizmor passes.
+  - Done when: the `collect-windows` job runs the P3-1 checks on `windows-2022`, `windows-2025` and `windows-11-arm` (`fail-fast: false`), the analysis also writes an HTML report with `testdata/rules`, and on `workflow_dispatch` each OS uploads `collect.zip`, `report.html` and `out.csv` as the artifact `collect-<os>` (retention 7 days); zizmor passes.
   - Out of scope: client Windows other than the runner images, x64 emulation on ARM64, baselines, comparing outputs across OSes, keeping artifacts beyond the retention.
-  - Human steps: push the branch; if `windows-11-arm` cannot build, drop it from the matrix; download one artifact and open its report.
+  - Human steps: push the branch; if `windows-11-arm` cannot build, drop it from the matrix; run the workflow manually, download one artifact and open its report.
 - [x] **P3-P Prune before the gate** (`collector`, `cli`; AGENTS.md)
   - Done when: every `pub` item, `collect` flag and `meta.json` field is listed with M1, ADR 0024 or the Phase 4 item that reads it; those without one are removed after human approval.
   - Out of scope: adding anything.
