@@ -1,6 +1,6 @@
 # ADR 0025: Release workflow
 
-Status: proposed (2026-10-18)  <!-- a human changes this to accepted (AGENTS.md H2) -->
+Status: accepted (2026-10-18)
 
 ## Context
 There is no release build: users build from source (quickstart.md), against product.md P3 "single binary, no install". ADR 0007 P9 requires releases behind a human-approved environment with provenance attestations; ADR 0024 leaves Phase 3 builds unsigned and makes signing a human step from v0.4. Agents never publish (AGENTS.md).

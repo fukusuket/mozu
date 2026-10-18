@@ -222,10 +222,10 @@ Goal: M1 of [product.md §4](product.md#4-mvp): `mozu collect` on a live Windows
 - [x] **P3-P Prune before the gate** (`collector`, `cli`; AGENTS.md)
   - Done when: every `pub` item, `collect` flag and `meta.json` field is listed with M1, ADR 0024 or the Phase 4 item that reads it; those without one are removed after human approval.
   - Out of scope: adding anything.
-- [ ] **P3-R Release workflow** (`.github/workflows/release.yml`; [ADR 0025](adr/0025-release-workflow.md), if accepted; ADR 0007 P9; product.md P3)
+- [ ] **P3-R Release workflow** (`.github/workflows/release.yml`; [ADR 0025](adr/0025-release-workflow.md); ADR 0007 P9; product.md P3)
   - Done when: a `v*` tag push or `workflow_dispatch` with `tag` builds `x86_64-pc-windows-msvc`, `aarch64-apple-darwin` and `x86_64-unknown-linux-musl` archives (binary, `rules/`, `LICENSE`, `NOTICE`, `README.md`), `SHA256SUMS` and a provenance attestation per archive, then, after `release` environment approval, a draft release for the tag; the run fails if the tag differs from `mozu --version`, a binary contains a runner path, or `mozu.exe` (static CRT) names `vcruntime140.dll`; each extracted binary analyzes a synthetic `$MFT` with the bundled `rules/`; `permissions: {}` at the top and write permissions only in the attest and draft jobs; `--locked`, no cache; zizmor passes.
   - Out of scope: code signing (ADR 0024, v0.4), crates.io, baselines (P4-6/P4-7), Windows ARM64, installers, Homebrew/winget, the version bump, a changelog, renaming rules or changing their `status`, quickstart download steps.
-  - Human steps: accept ADR 0025; create the `release` environment with the maintainer as required reviewer; bump the workspace version to `0.3.0`; push the tag or run the workflow; check and publish the draft; run `gh attestation verify` on one archive.
+  - Human steps: create the `release` environment with the maintainer as required reviewer; bump the workspace version to `0.3.0`; push the tag or run the workflow; check and publish the draft; run `gh attestation verify` on one archive.
 - [ ] **P3-G Gate material**
   - Done when: on the Windows VM, collection time, peak memory (the whole `$MFT` is held in memory), zip size, the CRC32 and size check and the analysis of the extracted files are recorded in `docs/research/collect.md`. The human runs it again if needed and ticks the gate.
   - Out of scope: optimization beyond the gate.
