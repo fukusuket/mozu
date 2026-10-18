@@ -1,4 +1,4 @@
-//! Builder for synthetic NTFS FILE records (moved from `spikes/s2-mft`).
+//! Builder for synthetic NTFS FILE records (moved from `docs/spikes/s2-mft`).
 //! Layout per Microsoft's FILE_RECORD_SEGMENT_HEADER and resident attribute header.
 
 #![allow(dead_code)] // each test binary uses a different subset

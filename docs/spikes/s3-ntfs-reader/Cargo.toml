@@ -5,7 +5,7 @@ edition = "2024"
 publish = false
 description = "Phase 0 spike S3: collect $MFT, $J, $SDS, $Boot from a live Windows volume with ntfs-reader (throwaway)"
 
-# Standalone: excluded from the main workspace (Cargo.toml `exclude = ["spikes"]`).
+# Standalone: excluded from the main workspace (Cargo.toml `exclude = ["docs/spikes"]`).
 [workspace]
 
 # Approved for this spike (H2, 2026-10-05). Windows only: the crate refuses to build elsewhere.

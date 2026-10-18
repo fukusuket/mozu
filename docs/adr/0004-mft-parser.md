@@ -3,7 +3,7 @@
 Status: accepted (2026-10-04, approved by the maintainer)
 
 ## Context
-Spike S2 (docs/plan.md) had to show whether the `mft` crate's unreleased `master` meets ADR 0002 (lossless UTF-16 names, no panics) for `mft-parse`; the fallback was porting `ntfs-core`. Evidence and commands: [spikes/s2-mft/README.md](../../spikes/s2-mft/README.md). Development is on macOS, so the spike used synthetic 1024- and 4096-byte FILE records.
+Spike S2 (docs/plan.md) had to show whether the `mft` crate's unreleased `master` meets ADR 0002 (lossless UTF-16 names, no panics) for `mft-parse`; the fallback was porting `ntfs-core`. Evidence and commands: [docs/spikes/s2-mft/README.md](../spikes/s2-mft/README.md). Development is on macOS, so the spike used synthetic 1024- and 4096-byte FILE records.
 
 ## Decision
 **Adopt `mft` at commit `18b6c05` (git dependency) behind `mft-parse`, until a release contains it.**

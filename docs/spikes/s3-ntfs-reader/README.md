@@ -18,7 +18,7 @@ Our code has `#![forbid(unsafe_code)]`; all `unsafe` stays inside `ntfs-reader` 
 ## Run
 - macOS: `cargo check --target x86_64-pc-windows-msvc` (needs `rustup target add x86_64-pc-windows-msvc`).
 - Windows runner: workflow `.github/workflows/spike-s3.yml` (`workflow_dispatch`). It builds, prints whether the job is elevated and the OS build, runs the spike on the runner's `C:`, and uploads `out/` as the artifact `s3-ntfs-reader-output` (kept 3 days).
-- Then on the Mac: parse `MFT` with `spikes/s2-mft` and check the `UpCase` MD5.
+- Then on the Mac: parse `MFT` with `docs/spikes/s2-mft` and check the `UpCase` MD5.
 
 ## Results (2026-10-06, GitHub `windows-latest` runner, `C:` 160 GB, 4 KiB clusters, 512-byte sectors)
 `run.log` from the artifact:
@@ -37,7 +37,7 @@ Checks on the Mac:
 
 | File | Check | Result |
 |---|---|---|
-| `MFT` | `spikes/s4-baseline` (`mft` @ `18b6c05`) loads every record and builds paths | 1,363,200 records, 0 corrupt; 1,129,580 in-use files, 0 unresolved paths; 10 s |
+| `MFT` | `docs/spikes/s4-baseline` (`mft` @ `18b6c05`) loads every record and builds paths | 1,363,200 records, 0 corrupt; 1,129,580 in-use files, 0 unresolved paths; 10 s |
 | `J` | Walk `USN_RECORD` headers; the first USN equals the skipped sparse length | 373,795 v2 records, 0 malformed; first USN 3,506,438,144 = sparse skipped |
 | `Boot` | NTFS OEM ID, `55AA`, geometry matches `run.log` | Pass (512 B/sector, 8 sectors/cluster) |
 | `SDS` | First entry header (hash, id `0x100`, offset 0, length) | Plausible; not parsed further |

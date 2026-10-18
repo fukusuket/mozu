@@ -3,7 +3,7 @@
 Status: accepted (2026-10-06, approved by the maintainer)
 
 ## Context
-`collector` must copy `$MFT`, `$UsnJrnl:$J` (without its sparse region), `$Secure:$SDS` and `$Boot` from a live Windows volume, with no `unsafe` in our code (ADR 0002). Spike S3 (docs/plan.md) ran `ntfs-reader =0.6.0` on a disposable GitHub `windows-latest` runner. Evidence and commands: [spikes/s3-ntfs-reader/README.md](../../spikes/s3-ntfs-reader/README.md). The fallback was `std::fs::File` on `\\.\C:` plus `ntfs-core`.
+`collector` must copy `$MFT`, `$UsnJrnl:$J` (without its sparse region), `$Secure:$SDS` and `$Boot` from a live Windows volume, with no `unsafe` in our code (ADR 0002). Spike S3 (docs/plan.md) ran `ntfs-reader =0.6.0` on a disposable GitHub `windows-latest` runner. Evidence and commands: [docs/spikes/s3-ntfs-reader/README.md](../spikes/s3-ntfs-reader/README.md). The fallback was `std::fs::File` on `\\.\C:` plus `ntfs-core`.
 
 ## Decision
 **Adopt `ntfs-reader =0.6.0` (Windows only) behind `collector`.**

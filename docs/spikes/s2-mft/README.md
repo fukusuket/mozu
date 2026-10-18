@@ -1,6 +1,6 @@
 # Spike S2: `mft` crate (master @ `18b6c05`) on synthetic FILE records
 
-Throwaway. Result recorded in [ADR 0004](../../docs/adr/0004-mft-parser.md).
+Throwaway. Result recorded in [ADR 0004](../../adr/0004-mft-parser.md).
 
 ## Run
 

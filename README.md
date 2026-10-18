@@ -1,4 +1,4 @@
-<p align="center"><img src="mozu.png" alt="mozu" width="480"></p>
+<p align="center"><img src="docs/images/mozu.png" alt="mozu" width="480"></p>
 
 # Mozu
 
