@@ -10,11 +10,11 @@ Mozu is a triage tool for the first look after a ransomware or EDR alert, built 
 
 ## Why Mozu
 
-1. **Works after the logs are deleted.** Mozu reads only `$MFT` and the USN journal, which clearing event logs does not touch. Deleted and renamed files are rebuilt from the journal.
-2. **Hides normal Windows files.** Files that a clean Windows install also has are removed from view. The rest are listed, even when no rule matches them.
-3. **Every finding comes from a readable rule.** A finding is a Sigma rule match, ordered by level, then time. You can read, edit or replace the rules. No scores.
+1. **Survives log clearing.** Reads only `$MFT` and the USN journal; deleted and renamed files are rebuilt from the journal.
+2. **Hides normal Windows files.** What a clean install also has is filtered out; everything else stays visible, rule match or not.
+3. **Readable rules, no scores.** A finding is a Sigma rule match, ordered by level, then time.
 
-Light to run: a zip of tens to hundreds of MB instead of a disk image, one offline HTML report (plus CSV / JSONL), a single binary with no install and no network. Same input → byte-identical output.
+Light to run: a zip of tens to hundreds of MB instead of a disk image, a single binary, one offline HTML report (plus CSV / JSONL), no network. Same input → byte-identical output.
 
 ## How it works
 
