@@ -48,7 +48,11 @@ jobs:
 
   collect-windows:
     # P3-1: collect the runner's C: (a disposable GitHub-hosted VM, no evidence) and analyze it.
-    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-2022, windows-2025, windows-11-arm]
+    runs-on: ${{ matrix.os }}
     permissions:
       contents: read
     steps:
@@ -72,10 +76,21 @@ jobs:
             $len = (Get-Item -LiteralPath "c\$($f.name)").Length
             if ($len -ne $f.size) { throw "$($f.name): $len bytes, meta.json says $($f.size)" }
           }
-          .\target\release\mozu.exe analyze -i 'c\$MFT' --usn 'c\$J' --csv out.csv
+          New-Item -ItemType Directory out | Out-Null
+          .\target\release\mozu.exe analyze -i 'c\$MFT' --usn 'c\$J' --rules testdata\rules -o out\report.html --csv out\out.csv
           if ($LASTEXITCODE -ne 0) { exit 1 }
-          "zip: $((Get-Item c.zip).Length) bytes"
+          Move-Item c.zip out\collect.zip
+          "zip: $((Get-Item out\collect.zip).Length) bytes"
           $meta | ConvertTo-Json -Depth 3
+      # Hundreds of MB per OS: upload only on a manual run.
+      - if: github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: collect-${{ matrix.os }}
+          path: out/
+          if-no-files-found: error
+          compression-level: 0 # collect.zip is already compressed
+          retention-days: 7
 
   coverage:
     runs-on: ubuntu-latest
