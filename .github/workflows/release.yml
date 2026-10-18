@@ -1,0 +1,163 @@
+name: Release
+
+# ADR 0025: build, attest and draft a release for a tag. A human approves the `release`
+# environment and publishes the draft; not approving it is the dry run.
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing tag to release (vX.Y.Z)
+        required: true
+        type: string
+
+permissions: {}
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.tag.outputs.tag }}
+    steps:
+      - id: tag
+        env:
+          TAG: ${{ inputs.tag || github.ref_name }}
+        run: |
+          if [[ ! "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::the tag is not vX.Y.Z"
+            exit 1
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+
+  build:
+    needs: tag
+    strategy:
+      matrix:
+        include:
+          - { os: windows-latest, target: x86_64-pc-windows-msvc, exe: mozu.exe }
+          - { os: macos-latest, target: aarch64-apple-darwin, exe: mozu }
+          - { os: ubuntu-latest, target: x86_64-unknown-linux-musl, exe: mozu }
+    runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read
+    defaults:
+      run:
+        shell: bash
+    env:
+      TAG: ${{ needs.tag.outputs.tag }}
+      TARGET: ${{ matrix.target }}
+      EXE: ${{ matrix.exe }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: refs/tags/${{ needs.tag.outputs.tag }}
+          persist-credentials: false
+      # No rust-cache: a poisoned cache must not reach a release.
+      - name: Toolchain (rust-toolchain.toml) and target
+        run: |
+          rustup show
+          rustup target add "$TARGET"
+      - name: Build with runner paths remapped
+        run: |
+          cargo_home="${CARGO_HOME:-$HOME/.cargo}"
+          if command -v cygpath > /dev/null; then cargo_home="$(cygpath -w "$cargo_home")"; fi
+          export RUSTFLAGS="--remap-path-prefix=$GITHUB_WORKSPACE=mozu --remap-path-prefix=$cargo_home=cargo"
+          # Static CRT: mozu.exe must run on a host without the VC++ redistributable.
+          if [ "$RUNNER_OS" = Windows ]; then RUSTFLAGS="$RUSTFLAGS -C target-feature=+crt-static"; fi
+          cargo build --release --locked -p cli --target "$TARGET"
+      - name: No runner paths in the binary
+        run: |
+          bin="target/$TARGET/release/$EXE"
+          if grep -a -o -F -e /home/runner -e /Users/runner -e 'D:\a\' -e 'C:\Users\runneradmin' \
+              -e .cargo/registry -e '.cargo\registry' "$bin" | sort | uniq -c; then
+            echo "::error::runner paths found in $bin"
+            exit 1
+          fi
+          if [ "$RUNNER_OS" = Windows ] && grep -a -i -q -F vcruntime140.dll "$bin"; then
+            echo "::error::$bin imports vcruntime140.dll"
+            exit 1
+          fi
+      - name: Package
+        run: |
+          dir="mozu-${TAG#v}-$TARGET"
+          mkdir -p "$dir/rules" dist
+          cp "target/$TARGET/release/$EXE" LICENSE NOTICE README.md "$dir/"
+          cp testdata/rules/*.yml "$dir/rules/"
+          if [ "$RUNNER_OS" = Windows ]; then
+            7z a -tzip "dist/$dir.zip" "$dir" > /dev/null
+          else
+            tar -czf "dist/$dir.tar.gz" "$dir"
+          fi
+      - name: Smoke test the extracted archive
+        run: |
+          version="${TAG#v}"
+          dir="mozu-$version-$TARGET"
+          mkdir smoke
+          if [ "$RUNNER_OS" = Windows ]; then
+            7z x -osmoke "dist/$dir.zip" > /dev/null
+          else
+            tar -xzf "dist/$dir.tar.gz" -C smoke
+          fi
+          bin="smoke/$dir/$EXE"
+          got="$("$bin" --version)"
+          if [ "$got" != "mozu $version" ]; then
+            echo "::error::--version says '$got', the tag says $version"
+            exit 1
+          fi
+          cargo run -q --locked -p xtask -- synth-mft 1000 smoke/synth-MFT
+          "$bin" analyze -i smoke/synth-MFT --rules "smoke/$dir/rules" -o smoke/synth.html --csv smoke/synth.csv
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: dist-${{ matrix.target }}
+          path: dist/
+          if-no-files-found: error
+          retention-days: 7
+
+  attest:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      attestations: write
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          pattern: dist-*
+          path: dist
+          merge-multiple: true
+      - name: SHA256SUMS
+        working-directory: dist
+        run: |
+          sha256sum mozu-* > SHA256SUMS
+          cat SHA256SUMS
+      - uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-checksums: dist/SHA256SUMS
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: release
+          path: dist/
+          if-no-files-found: error
+          retention-days: 7
+
+  draft-release:
+    needs: [tag, attest]
+    runs-on: ubuntu-latest
+    environment: release
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: release
+          path: dist
+      - name: Draft release (a human publishes it)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ needs.tag.outputs.tag }}
+        run: gh release create "$TAG" --draft --verify-tag --title "mozu $TAG" dist/*
