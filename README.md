@@ -12,11 +12,10 @@ Reads `$MFT` and the USN journal of one Windows host and writes one HTML report 
 
 | | |
 |---|---|
-| **Survives log clearing** | Clearing event logs does not touch `$MFT` or the USN journal; deleted and renamed files are rebuilt from the journal |
-| **Hides normal Windows files** | What a clean install also has is filtered out; everything else stays visible, rule match or not |
-| **Readable rules, no scores** | A finding is a Sigma rule match, ordered by level, then time |
-| **Light to run** | A zip of tens to hundreds of MB instead of a disk image, a single binary, one offline HTML report (plus CSV / JSONL), no network |
-| **Reproducible** | Same input → byte-identical output |
+| **Logs wiped? Still works.** | `$MFT` and the USN journal survive log clearing, deleted and renamed files included |
+| **Noise removed.** | Files a clean Windows also has are hidden; the rest stay visible |
+| **No black box.** | Every finding is a readable Sigma rule. No scores |
+| **Small and offline.** | One binary, one zip, one HTML file. No network, same output every run |
 
 ## How it works
 
