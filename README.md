@@ -4,7 +4,7 @@
 
 **Find what to look at on a Windows host, even after the event logs were wiped.**
 
-mozu reads NTFS metadata (`$MFT` and `$UsnJrnl:$J`), hides files that a clean Windows also has, runs Sigma rules and writes one HTML report you open in a browser.
+Mozu reads NTFS metadata (`$MFT` and `$UsnJrnl:$J`), hides files that a clean Windows also has, runs Sigma rules and writes one HTML report you open in a browser.
 
 > Pre-alpha. Phases 1–3 of the [plan](docs/plan.md) are built; their gates are pending. Interfaces may change.
 

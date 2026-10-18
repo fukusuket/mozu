@@ -242,7 +242,7 @@ Starts after the Phase 1, 2 and 3 gates are ticked: P4-20 extends the P1-6 gener
 
 | Track | Items | Product |
 |---|---|---|
-| A Input | P4-1, P4-2 | M2, M3 |
+| A Input | P4-1, P4-1b, P4-2 | M2, M3 |
 | B Baseline | ADR P4-0a, ADR P4-0b, P4-3 – P4-7 | M5 |
 | C Detection | ADR P4-0c, P4-8 – P4-11 | M6, facts |
 | D Report | ADR P4-0d, ADR P4-0e, P4-12 – P4-18 | M8, M9 |
@@ -278,6 +278,9 @@ Track A: input
 - [ ] **P4-1 Collection directory and zip input** (`cli`, `analyze`; ADR 0024; M2)
   - Done when: `-i` accepts a raw `$MFT` (as today), a directory or a zip, and finds `$MFT` and `$J` in the layouts of `mozu collect`, KAPE (`C/$MFT`, `C/$Extend/$UsnJrnl%3A$J`), Velociraptor (`uploads/ntfs/…/$MFT`, URL-encoded names) and FTK Imager exports; `meta.json` is read when present. `--usn` still overrides. A missing or ambiguous `$MFT` fails with a message naming the candidates. The zip rules of ADR 0024 hold (tests with a zip bomb and a `../` entry). Synthetic layouts in tests, no evidence. Output byte-identical whether the input is a directory or the same files zipped.
   - Out of scope: `$SDS` and `$Boot` use (P4-11), E01/VHDX images, multi-volume collections.
+- [ ] **P4-1b `analyze --collect`** (`cli`; after P4-1; product.md §4 "collection to report ≤ 30 min", P2)
+  - Done when: `mozu analyze --collect <VOL> [analyze flags]` writes the zip exactly as `mozu collect -v <VOL>` (default name, never overwrites, kept) and then analyzes it; outputs are byte-identical to `mozu analyze -i <that zip>` with the same flags; `--collect` and `-i` are mutually exclusive and one is required; `--usn` is refused with `--collect`; flag errors (window, rules, baseline, output collisions incl. the zip path) fail before collection starts; off Windows it fails like `collect` and writes nothing; the Windows CI job runs it and compares its outputs with `analyze -i`.
+  - Out of scope: a flag for the zip path, deleting the zip, `collect --analyze`, progress output, analysis without a zip on disk.
 - [ ] **P4-2 USN V4** (`usn-parse`; M3)
   - Done when: V4 range-tracking records are parsed (`FileRef`s, reason, USN, extent count) and counted on the Summary instead of being a `Diagnostic`; they give no event and no row (V3 records carry the same operation). Proptest and fuzz target cover V4. Synthetic V4 records from the test builder.
   - Out of scope: detection on ranges, extent offsets in outputs.

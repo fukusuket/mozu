@@ -78,7 +78,7 @@ This is the MVP interface, not the current command set; the rest comes in Phase 
 
 ```
 mozu collect   [-v C:] [-o collection.zip]
-mozu analyze   -i <collection.zip | dir> [--from DATE] [--to DATE] [--tz +09:00]
+mozu analyze   (-i <collection.zip | dir> | --collect C:) [--from DATE] [--to DATE] [--tz +09:00]
                [--baseline auto|<name>] [--lang en|ja] [--mask-users]
                [-o report.html] [--jsonl timeline.jsonl] [--csv timeline.csv]
 mozu baseline  list | update
