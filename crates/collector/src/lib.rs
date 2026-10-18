@@ -1,4 +1,8 @@
 //! Copies the NTFS metadata files of a live volume into one zip (ADR 0005, ADR 0024).
+#![cfg_attr(
+    not(windows),
+    allow(dead_code, reason = "used by the Windows reader; tested on every OS")
+)]
 
 use std::io::{Read, Seek, SeekFrom, Write};
 
@@ -16,15 +20,15 @@ pub use windows::{Error, collect};
 
 /// A stretch of a stream and where its bytes are.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub struct Extent {
+pub(crate) struct Extent {
     /// Offset of the stretch from the start of the stream.
-    pub offset: u64,
-    pub length: u64,
-    pub kind: ExtentKind,
+    pub(crate) offset: u64,
+    pub(crate) length: u64,
+    pub(crate) kind: ExtentKind,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum ExtentKind {
+pub(crate) enum ExtentKind {
     /// On the volume or in the MFT record.
     Stored,
     /// Not stored; reads as zeroes.
@@ -33,22 +37,18 @@ pub enum ExtentKind {
     Lost,
 }
 
-/// What [`copy_stored`] wrote and skipped, in bytes.
+/// What the copy of one stream wrote and skipped, in bytes.
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Serialize)]
 pub struct StreamCounts {
     /// Stream offset of the first stored byte; for `$J` it equals that byte's USN.
-    pub first_offset: u64,
-    pub stored: u64,
-    pub sparse: u64,
-    pub lost: u64,
+    pub(crate) first_offset: u64,
+    pub(crate) stored: u64,
+    pub(crate) sparse: u64,
+    pub(crate) lost: u64,
 }
 
 /// Bytes of `extents` that are not stored (sparse or lost). Only `$J` may have them: a gap in
 /// `$MFT`, `$Boot` or `$SDS` would shift every later byte.
-#[cfg_attr(
-    all(not(windows), not(test)),
-    expect(dead_code, reason = "used by the Windows reader")
-)]
 fn unstored(extents: &[Extent]) -> u64 {
     (extents.iter())
         .filter(|extent| extent.kind != ExtentKind::Stored)
@@ -57,7 +57,7 @@ fn unstored(extents: &[Extent]) -> u64 {
 
 /// Copies the stored extents of `source` to `sink`, in order; sparse and lost extents are
 /// counted, never padded (ADR 0005 #2). A stream without extents is copied whole.
-pub fn copy_stored(
+pub(crate) fn copy_stored(
     source: &mut (impl Read + Seek),
     extents: &[Extent],
     sink: &mut impl Write,
@@ -89,14 +89,14 @@ pub fn copy_stored(
 
 /// A zip being written: one entry per [`Collection::add`], then `meta.json` (ADR 0024).
 #[derive(Debug)]
-pub struct Collection<W: Write> {
+pub(crate) struct Collection<W: Write> {
     archive: ZipArchiveWriter<W>,
     started: UtcDateTime,
 }
 
 impl<W: Write> Collection<W> {
     /// `started` is the collection start time, used as every entry's time.
-    pub fn new(writer: W, started: Filetime) -> Self {
+    pub(crate) fn new(writer: W, started: Filetime) -> Self {
         // Seconds from 1601-01-01 to 1970-01-01.
         const UNIX_EPOCH: i64 = 11_644_473_600;
         let seconds = i64::try_from(started.raw() / 10_000_000).unwrap_or(i64::MAX);
@@ -107,7 +107,7 @@ impl<W: Write> Collection<W> {
     }
 
     /// Adds entry `name`: the stored extents of `source` (see [`copy_stored`]), deflated.
-    pub fn add(
+    pub(crate) fn add(
         &mut self,
         name: &str,
         source: &mut (impl Read + Seek),
@@ -129,7 +129,7 @@ impl<W: Write> Collection<W> {
     }
 
     /// Writes `meta.json` and the central directory; returns the writer.
-    pub fn finish(mut self, meta: &Meta) -> std::io::Result<W> {
+    pub(crate) fn finish(mut self, meta: &Meta) -> std::io::Result<W> {
         let mut json = serde_json::to_vec_pretty(&MetaJson { format: 1, meta })?;
         json.push(b'\n');
         self.add("meta.json", &mut std::io::Cursor::new(json), &[])?;
@@ -141,24 +141,24 @@ impl<W: Write> Collection<W> {
 #[derive(Debug, Serialize)]
 pub struct Meta {
     /// `mozu` version and commit.
-    pub tool: String,
+    pub(crate) tool: String,
     /// `COMPUTERNAME`; display only.
-    pub host: String,
-    pub volume: String,
+    pub(crate) host: String,
+    pub(crate) volume: String,
     #[serde(serialize_with = "iso8601")]
-    pub started: Filetime,
+    pub(crate) started: Filetime,
     #[serde(serialize_with = "iso8601")]
-    pub finished: Filetime,
-    pub files: Vec<FileSize>,
+    pub(crate) finished: Filetime,
+    pub(crate) files: Vec<FileSize>,
     /// `None` when the volume has no USN journal.
     pub j: Option<StreamCounts>,
 }
 
 /// An entry of the zip and the bytes written to it.
 #[derive(Debug, Serialize)]
-pub struct FileSize {
-    pub name: String,
-    pub size: u64,
+pub(crate) struct FileSize {
+    pub(crate) name: String,
+    pub(crate) size: u64,
 }
 
 /// `meta.json` as written: the format version first; a reader refuses another one.

@@ -219,7 +219,7 @@ Goal: M1 of [product.md §4](product.md#4-mvp): `mozu collect` on a live Windows
   - Done when: `mozu collect [-v C:] [-o <zip>]` writes `$MFT`, `$J` (stored extents only), `$Boot`, `$Secure:$SDS` and `meta.json` into one zip, written atomically and never over an existing file; not elevated, a non-NTFS volume or a missing `$J` → a message, not a panic; `cargo check --target x86_64-pc-windows-msvc` in CI; a Windows runner job collects, checks each file against `meta.json`, extracts the zip and runs `mozu analyze -i <$MFT> --usn <$J>` on it. Pure parts (the `meta.json` writer, zip layout, sparse/lost byte counts) are unit-tested on every platform.
   - Out of scope: reading the zip in `analyze` (P4-1), using `meta.json` in analysis, VSS, volumes other than NTFS, remote collection, uploading.
   - Human steps: approve the Windows CI job; sign the release binary (ADR 0024).
-- [ ] **P3-P Prune before the gate** (`collector`, `cli`; AGENTS.md)
+- [x] **P3-P Prune before the gate** (`collector`, `cli`; AGENTS.md)
   - Done when: every `pub` item, `collect` flag and `meta.json` field is listed with M1, ADR 0024 or the Phase 4 item that reads it; those without one are removed after human approval.
   - Out of scope: adding anything.
 - [ ] **P3-G Gate material**
@@ -356,7 +356,7 @@ Track E: measurement and gate
 | `ntfs-reader` cannot skip the `$J` sparse region | `ntfs-core` `NtfsFs` approach |
 | VanillaWindowsReference lacks hidden/system files | Supplement with one clean-VM `$MFT` in Phase 1 |
 | Drift from ported `ntfs-core` code | Record source commit in `NOTICE`; review upstream periodically |
-| Build or language cannot be inferred from `$MFT` (ADR P4-0b) | `meta.json` from `mozu collect`; otherwise `--baseline <file>` with the Summary warning |
+| Build or language cannot be inferred from `$MFT` (ADR P4-0b) | `--baseline <file>` with the Summary warning (`meta.json` has no build or language, ADR 0024) |
 | Updated-image baselines still leave > 5 % outside | More normalization (P4-4); revisit the target with the measurement, as in Phase 1 |
 | No client Windows in CI | Baseline VMs and collector checks on the maintainer's VM; CI only rebuilds from stored collections |
 | `rsigma-eval` correlations behave differently from Hayabusa | Synthetic journal tests in P4-8; pin the version |
