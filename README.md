@@ -10,12 +10,13 @@ Reads `$MFT` and the USN journal of one Windows host and writes one HTML report 
 
 ## Why Mozu
 
-| | |
+| Problem | Mozu |
 |---|---|
-| **Logs wiped? Still works.** | `$MFT` and the USN journal survive log clearing, deleted and renamed files included |
-| **Noise removed.** | Files a clean Windows also has are hidden; the rest stay visible |
-| **No black box.** | Every finding is a readable Sigma rule. No scores |
-| **Small and offline.** | One binary, one zip, one HTML file. No network, same output every run |
+| Event logs were wiped | Reads only `$MFT` and the USN journal, which survive log clearing |
+| Normal Windows activity drowns the signal | Hides files a clean Windows also has; unknown files stay visible |
+| MFT parsers give CSV with no guidance | Shows Sigma rule matches you can read. No scores |
+| Full forensics takes days | Collects a zip of tens to hundreds of MB |
+| Results are hard to share | One offline HTML report from one binary |
 
 ## How it works
 
