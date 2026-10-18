@@ -4,22 +4,27 @@
 
 **Find what to look at on a Windows host, even after the event logs were wiped.**
 
-Mozu reads NTFS metadata (`$MFT` and `$UsnJrnl:$J`), hides files that a clean Windows also has, runs Sigma rules and writes one HTML report you open in a browser.
+Mozu is a triage tool for the first look after a ransomware or EDR alert, built for responders who are not forensic specialists. It reads the NTFS metadata of one Windows host (`$MFT` and the USN journal), hides files that a clean Windows install also has, matches Sigma rules and writes one HTML report that shows which files to check first.
 
 > Pre-alpha. Phases 1–3 of the [plan](docs/plan.md) are built; their gates are pending. Interfaces may change.
 
-## What you get
+## Why Mozu
 
-| | |
-|---|---|
-| **Collection** | `mozu collect` on Windows: `$MFT`, `$J`, `$Boot`, `$SDS` of a live volume in one zip |
-| **Findings** | Files and file events that match a Sigma rule, ordered by level, then time. No scores |
-| **Outside-baseline files** | Files a clean Windows does not have, even when no rule matched |
-| **Deleted and renamed files** | Paths rebuilt from the USN journal |
-| **One HTML file** | Works offline; no install, no network |
-| **CSV / JSONL** | Every row, for `jq`, Timeline Explorer or a spreadsheet |
+1. **Works after the logs are deleted.** Mozu reads only `$MFT` and the USN journal, which clearing event logs does not touch. Deleted and renamed files are rebuilt from the journal.
+2. **Hides normal Windows files.** Files that a clean Windows install also has are removed from view. The rest are listed, even when no rule matches them.
+3. **Every finding comes from a readable rule.** A finding is a Sigma rule match, ordered by level, then time. You can read, edit or replace the rules. No scores.
 
-Same input → byte-identical output.
+Light to run: a zip of tens to hundreds of MB instead of a disk image, one offline HTML report (plus CSV / JSONL), a single binary with no install and no network. Same input → byte-identical output.
+
+## How it works
+
+```sh
+mozu collect -o D:\PC-042.zip            # on the Windows host, as administrator
+# extract the zip, then on any OS:
+mozu analyze -i 'PC-042/$MFT' --usn 'PC-042/$J' --baseline win11.fst --rules testdata/rules -o PC-042.html
+```
+
+Open `PC-042.html`: Summary → Findings → Outside-baseline. Full walk-through in the [quick start](docs/quickstart.md).
 
 ## What it cannot tell you
 
