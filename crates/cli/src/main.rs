@@ -14,7 +14,7 @@ use report::{CsvWriter, HtmlReport, Input, JsonlWriter, Provenance, WindowText};
 use sigma::Rules;
 
 #[derive(Debug, Parser)]
-#[command(version, about = "NTFS triage from $MFT")]
+#[command(name = "mozu", version, about = "NTFS triage from $MFT")]
 struct Cli {
     #[command(subcommand)]
     command: Command,
