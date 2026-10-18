@@ -1,6 +1,6 @@
 # Use cases
 
-Recipes for the current CLI. Setup and options: [README](../README.md#quick-start). Users: [product.md §2](product.md#2-target-users). Output columns: [architecture.md](architecture.md#outputs).
+Recipes for the current CLI. Setup: [quickstart.md](quickstart.md). Users: [product.md §2](product.md#2-target-users). Output columns: [architecture.md](architecture.md#outputs).
 
 | # | I want to… | Section |
 |---|---|---|
@@ -14,7 +14,7 @@ Recipes for the current CLI. Setup and options: [README](../README.md#quick-star
 
 ## U1 First look after an incident
 
-1. **Collect** the raw `$MFT` and `$UsnJrnl:$J` with KAPE, Velociraptor or FTK Imager. Extract them as plain files (zip and collection directories are not read yet).
+1. **Collect** with `mozu collect` on the host (Windows, administrator), or the raw `$MFT` and `$UsnJrnl:$J` with KAPE, Velociraptor or FTK Imager. Extract them as plain files (zip and collection directories are not read yet).
 2. **Baseline:** use one of the same edition (client vs Server). The Summary warns on a mismatch.
 3. **Run** with a window around the alert, in the host's UTC offset:
    ```sh
@@ -92,4 +92,4 @@ Ready-made baselines and `--baseline auto` come in Phase 4.
 ## Not covered
 
 - From NTFS metadata: creating user or process, execution, file content, activity older than the USN journal ([product.md §1](product.md#1-problem)).
-- Not built yet: zip/collection input, `mozu collect`, Timeline and File detail screens, correlation rules, en/ja ([plan.md](plan.md) Phases 3–4).
+- Not built yet: zip/collection input, Timeline and File detail screens, correlation rules, en/ja ([plan.md](plan.md) Phase 4).

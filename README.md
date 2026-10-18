@@ -6,12 +6,13 @@
 
 mozu reads NTFS metadata (`$MFT` and `$UsnJrnl:$J`), hides files that a clean Windows also has, runs Sigma rules and writes one HTML report you open in a browser.
 
-> Pre-alpha. Phase 2 of the [plan](docs/plan.md). Interfaces may change.
+> Pre-alpha. Phases 1–3 of the [plan](docs/plan.md) are built; their gates are pending. Interfaces may change.
 
 ## What you get
 
 | | |
 |---|---|
+| **Collection** | `mozu collect` on Windows: `$MFT`, `$J`, `$Boot`, `$SDS` of a live volume in one zip |
 | **Findings** | Files and file events that match a Sigma rule, ordered by level, then time. No scores |
 | **Outside-baseline files** | Files a clean Windows does not have, even when no rule matched |
 | **Deleted and renamed files** | Paths rebuilt from the USN journal |
@@ -29,12 +30,13 @@ Same input → byte-identical output.
 
 ## Not yet
 
-`mozu collect` (Phase 3). Zip or collection-directory input, ready-made baselines, correlation rules, Timeline and File detail screens, Japanese UI (Phase 4). USN V4 records are reported, not parsed.
+Reading the zip or a collection directory directly (extract it first), ready-made baselines, correlation rules, Timeline and File detail screens, Japanese UI (Phase 4). USN V4 records are reported, not parsed.
 
 ## Docs
 
 | | |
 |---|---|
+| [Quick start](docs/quickstart.md) | Build, collect, analyze, open the report |
 | [Use cases](docs/usecases.md) | Step-by-step recipes |
 | [Product](docs/product.md) | Problems, users, MVP |
 | [Architecture](docs/architecture.md) | Pipeline, output columns, rule support |

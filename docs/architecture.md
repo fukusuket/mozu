@@ -23,7 +23,7 @@ entries + USN ─► resolve (paths, Rewind) ─► baseline lookup, facts, fold
 rows ─► CSV / JSONL / HTML (+ skipped-rules lists), each written atomically
 ```
 
-Target: collection (Phase 3) and collection-directory/zip input (Phase 4).
+`mozu collect` (Windows) writes the zip below; `analyze` reads the extracted files until zip and collection-directory input (Phase 4).
 
 ```
 [collect] raw volume → $MFT, $J, $Boot, $SDS, meta.json → collection.zip

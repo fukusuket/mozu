@@ -2,7 +2,7 @@
 
 What we build and why. How: [architecture.md](architecture.md). When: [plan.md](plan.md).
 
-Name: `mozu`. The current analyzer inputs are `$MFT` and `$UsnJrnl:$J`; the target collector also acquires `$Boot` and `$Secure:$SDS`.
+Name: `mozu`. The current analyzer inputs are `$MFT` and `$UsnJrnl:$J`; the collector also acquires `$Boot` and `$Secure:$SDS`.
 
 ## 1. Problem
 
@@ -74,7 +74,7 @@ Out of scope for MVP: Windows Server baselines, baseline sources other than the 
 
 ## 5. Target CLI (Phase 4)
 
-This is the MVP interface, not the current command set; `collect` comes in Phase 3, the rest in Phase 4. Today the implemented commands are `analyze` with raw `$MFT`/optional raw `$J`, and `baseline build`; see the [README quick start](../README.md#quick-start) and [current use cases](usecases.md).
+This is the MVP interface, not the current command set; the rest comes in Phase 4. Today the implemented commands are `collect` as shown (Windows), `analyze` with raw `$MFT`/optional raw `$J`, and `baseline build`; see the [quick start](quickstart.md) and [current use cases](usecases.md).
 
 ```
 mozu collect   [-v C:] [-o collection.zip]

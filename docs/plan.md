@@ -1,6 +1,6 @@
 # Plan
 
-Current phase: **2** (gate pending); Phase 3 runs alongside, as it does not depend on the Phase 1–2 gates. Tick items as they land (same change). Every item states **Done when** (checkable) and **Out of scope**; agents do nothing outside it. Flow per item: H1 tests approved → TDD cycles on a branch → H3 human review and merge (AGENTS.md). Scope: [product.md](product.md). Design: [architecture.md](architecture.md).
+Current phase: **2** (gate pending); Phase 3 runs alongside, as it does not depend on the Phase 1–2 gates (P3-1 and P3-P done, P3-G pending). Tick items as they land (same change). Every item states **Done when** (checkable) and **Out of scope**; agents do nothing outside it. Flow per item: H1 tests approved → TDD cycles on a branch → H3 human review and merge (AGENTS.md). Scope: [product.md](product.md). Design: [architecture.md](architecture.md).
 
 ## Phases
 
