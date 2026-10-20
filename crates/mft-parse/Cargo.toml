@@ -14,7 +14,7 @@ mft = { git = "https://github.com/omerbenamram/mft", rev = "18b6c05dcff93e9f5ea6
 thiserror = "=2.0.21" # ADR 0010
 
 [dev-dependencies]
-proptest = { version = "=1.11.0", default-features = false, features = ["std"] } # ADR 0008
+proptest = { version = "=1.12.0", default-features = false, features = ["std"] } # ADR 0008
 
 [lints]
 workspace = true
