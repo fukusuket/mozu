@@ -17,7 +17,7 @@ resolve = { path = "../resolve" }
 usn-parse = { path = "../usn-parse" }
 csv = "=1.4.0" # ADR 0010
 serde = { version = "=1.0.229", features = ["derive"] } # ADR 0010
-serde_json = "=1.0.151" # ADR 0010
+serde_json = "=1.0.154" # ADR 0010
 thiserror = "=2.0.21" # ADR 0010
 
 [dev-dependencies]
