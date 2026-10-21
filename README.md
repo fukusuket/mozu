@@ -8,6 +8,12 @@ Reads `$MFT` and the USN journal of one Windows host and writes one HTML report 
 
 > Pre-alpha. Phases 1–3 of the [plan](docs/plan.md) are built; their gates are pending. Interfaces may change.
 
+## From alert to the next file to check
+
+Even when event logs are deleted, NTFS metadata can still provide leads. Mozu subtracts a Windows baseline, focuses on the incident window, and applies Sigma rules to show what to check next.
+
+<p align="center"><img src="docs/images/mozu-usecase.png" alt="Mozu workflow: examine NTFS metadata after event log deletion, subtract a Windows baseline, focus on a time window, apply Sigma rules, and produce an offline report" width="960"></p>
+
 ## Why Mozu
 
 | Problem | Mozu |
