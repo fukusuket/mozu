@@ -340,6 +340,9 @@ Track D: report
 - [ ] **P4-18 Findings JSONL for Hayabusa/Takajo** (`report`, `cli`; ADR P4-0e; M9)
   - Done when: `--findings-jsonl` writes the ADR's fields, one finding per line, level → time; a sample loads in Takajo and merges with a Hayabusa timeline (checked by the human); atomic write and overwrite checks as P1-7; byte-identical across runs.
   - Out of scope: Hayabusa CSV profiles, changing `--csv`/`--jsonl`.
+- [x] **P4-22 Report branding** (`report`; product.md P6: a shared report is recognizable as mozu output)
+  - Done when: the header shows the mozu mark (inline SVG of `docs/images/mozu-mark.svg`'s paths on a white disc, no other elements, ≤ 12 KiB), the name "Mozu" and "NTFS triage report"; the page title starts with "Mozu"; navy (`#012551`) is the accent in light mode and a light navy in dark mode (name, line under the header, selected tab), and the header background (`--head`) is tinted navy; the mark stays visible on a dark page; severity colors, CSP, `viewer.js` and CSV/JSONL unchanged; output byte-identical across runs.
+  - Out of scope: favicon, layout changes beyond the header, the README logo, en/ja (P4-17).
 
 Track E: measurement and gate
 - [ ] **P4-19 Accuracy measurement** (`xtask`; ADR P4-0f)

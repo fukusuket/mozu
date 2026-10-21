@@ -426,6 +426,7 @@ mod tests {
     use super::*;
     use mft_parse::{Diagnostic, Entry, FileName, Namespace};
     use ntfs_types::{FileRef, NtfsName};
+    use std::collections::BTreeSet;
 
     type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 
@@ -1195,6 +1196,46 @@ mod tests {
         assert!(page.contains(
             r#"<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">"#
         ));
+    }
+
+    #[test]
+    fn header_shows_the_mozu_mark_and_name() {
+        let header = TEMPLATE
+            .split_once("<header>")
+            .and_then(|(_, rest)| rest.split_once("</header>"))
+            .map_or("", |(header, _)| header);
+
+        assert!(header.contains(r#"<svg class="mark" role="img" aria-label="Mozu""#));
+        assert!(header.contains("<h1>Mozu</h1>"));
+    }
+
+    /// The inline logo, from `<svg` through `</svg>`.
+    fn mark() -> &'static str {
+        let start = TEMPLATE.find("<svg").unwrap_or(0);
+        let end = TEMPLATE
+            .find("</svg>")
+            .map_or(0, |end| end + "</svg>".len());
+        TEMPLATE.get(start..end).unwrap_or("")
+    }
+
+    #[test]
+    fn mark_is_drawn_only_with_paths_on_a_disc() {
+        let mark = mark();
+        let elements: BTreeSet<&str> = mark
+            .split('<')
+            .skip(1)
+            .map(|tag| tag.split([' ', '>', '/']).next().unwrap_or(""))
+            .filter(|name| !name.is_empty())
+            .collect();
+
+        assert_eq!(elements, BTreeSet::from(["circle", "path", "svg"]));
+        assert!(!mark.contains(" on"), "the mark has an event attribute");
+    }
+
+    #[test]
+    fn mark_stays_within_12_kib() {
+        assert!(!mark().is_empty());
+        assert!(mark().len() <= 12 * 1024, "{} bytes", mark().len());
     }
 
     #[test]
