@@ -475,6 +475,10 @@ mod tests {
     }
 
     fn decode(text: &str) -> Result<serde_json::Value> {
+        Ok(serde_json::from_slice(&decode_bytes(text)?)?)
+    }
+
+    fn decode_bytes(text: &str) -> Result<Vec<u8>> {
         const ALPHABET: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
         let mut bits = 0u32;
         let mut count = 0;
@@ -488,7 +492,7 @@ mod tests {
                 bytes.push(u8::try_from(bits >> count & 0xff)?);
             }
         }
-        Ok(serde_json::from_slice(&bytes)?)
+        Ok(bytes)
     }
 
     fn units(s: &str) -> Vec<u16> {
@@ -1187,14 +1191,15 @@ mod tests {
             "eval(",
             "Function(",
             "src=",
-            "href=",
             "http://",
             "https://",
         ] {
             assert!(!page.contains(banned), "the page contains {banned:?}");
         }
+        assert_eq!(page.matches("href=").count(), 1);
+        assert_eq!(page.matches(ICON_LINK).count(), 1);
         assert!(page.contains(
-            r#"<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">"#
+            r#"<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">"#
         ));
     }
 
@@ -1209,6 +1214,39 @@ mod tests {
         assert!(header.contains("<h1>Mozu</h1>"));
     }
 
+    const ICON_LINK: &str = r#"<link rel="icon" href="data:image/svg+xml;base64,"#;
+
+    /// The Base64 in the favicon's `data:` URL.
+    fn icon_base64() -> Result<&'static str> {
+        let (_, rest) = TEMPLATE.split_once(ICON_LINK).ok_or("no icon link")?;
+        let (base64, _) = rest.split_once('"').ok_or("unterminated icon link")?;
+        Ok(base64)
+    }
+
+    fn icon() -> Result<String> {
+        Ok(String::from_utf8(decode_bytes(icon_base64()?)?)?)
+    }
+
+    #[test]
+    fn head_links_the_mozu_icon() -> Result<()> {
+        let (head, _) = TEMPLATE.split_once("</head>").ok_or("no </head>")?;
+
+        assert_eq!(head.matches(ICON_LINK).count(), 1);
+        assert!(icon()?.starts_with(r#"<svg xmlns="http://www.w3.org/2000/svg""#));
+        Ok(())
+    }
+
+    #[test]
+    fn icon_is_drawn_only_with_paths_on_a_disc() -> Result<()> {
+        let icon = icon()?;
+
+        assert_eq!(elements(&icon), BTreeSet::from(["circle", "path", "svg"]));
+        assert_eq!(icon.matches("http").count(), 1, "only the SVG namespace");
+        assert!(!icon.contains(" on"), "the icon has an event attribute");
+        assert!(icon_base64()?.len() <= 2 * 1024);
+        Ok(())
+    }
+
     /// The inline logo, from `<svg` through `</svg>`.
     fn mark() -> &'static str {
         let start = TEMPLATE.find("<svg").unwrap_or(0);
@@ -1218,17 +1256,20 @@ mod tests {
         TEMPLATE.get(start..end).unwrap_or("")
     }
 
-    #[test]
-    fn mark_is_drawn_only_with_paths_on_a_disc() {
-        let mark = mark();
-        let elements: BTreeSet<&str> = mark
-            .split('<')
+    /// The element names in an SVG.
+    fn elements(svg: &str) -> BTreeSet<&str> {
+        svg.split('<')
             .skip(1)
             .map(|tag| tag.split([' ', '>', '/']).next().unwrap_or(""))
             .filter(|name| !name.is_empty())
-            .collect();
+            .collect()
+    }
 
-        assert_eq!(elements, BTreeSet::from(["circle", "path", "svg"]));
+    #[test]
+    fn mark_is_drawn_only_with_paths_on_a_disc() {
+        let mark = mark();
+
+        assert_eq!(elements(mark), BTreeSet::from(["circle", "path", "svg"]));
         assert!(!mark.contains(" on"), "the mark has an event attribute");
     }
 

@@ -343,6 +343,9 @@ Track D: report
 - [x] **P4-22 Report branding** (`report`; product.md P6: a shared report is recognizable as mozu output)
   - Done when: the header shows the mozu mark (inline SVG of `docs/images/mozu-mark.svg`'s paths on a white disc, no other elements, ≤ 12 KiB), the name "Mozu" and "NTFS triage report"; the page title starts with "Mozu"; navy (`#012551`) is the accent in light mode and a light navy in dark mode (name, line under the header, selected tab), and the header background (`--head`) is tinted navy; the mark stays visible on a dark page; severity colors, CSP, `viewer.js` and CSV/JSONL unchanged; output byte-identical across runs.
   - Out of scope: favicon, layout changes beyond the header, the README logo, en/ja (P4-17).
+- [x] **P4-23 Report favicon** (`report`; product.md P6: tabs of several open reports are recognizable)
+  - Done when: `<head>` has exactly one `<link rel="icon" href="data:image/svg+xml;base64,…">` with a simplified mark (no waves or stamens; `svg`, `circle` and `path` only; ≤ 2 KiB of Base64); the CSP gains only `img-src data:`; the page has no other `href=`; the icon shows in a Chrome and a Firefox tab (checked by the human); output byte-identical across runs.
+  - Out of scope: PNG/ICO sizes, the header mark, the README.
 
 Track E: measurement and gate
 - [ ] **P4-19 Accuracy measurement** (`xtask`; ADR P4-0f)
