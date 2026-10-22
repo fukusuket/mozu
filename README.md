@@ -26,13 +26,22 @@ Even when event logs are deleted, NTFS metadata can still provide leads. Mozu su
 
 ## How it works
 
-```sh
-mozu collect -o D:\PC-042.zip   # Windows host, as administrator
-# unzip, then on any OS:
-mozu analyze -i 'PC-042/$MFT' --usn 'PC-042/$J' --baseline win11.fst --rules testdata/rules -o PC-042.html
-```
+1. **Collect** on the Windows host, in an elevated shell. You get a zip with `$MFT` and `$J`.
 
-Open the HTML in a browser. Step by step: [quick start](docs/quickstart.md).
+   ```powershell
+   mozu collect -o D:\host.zip
+   ```
+
+2. **Analyze** on any OS. Unzip first, then point Mozu at the files, a [baseline](docs/quickstart.md#4-baseline) and the rules:
+
+   ```sh
+   mozu analyze -i 'host/$MFT' --usn 'host/$J' \
+     --baseline win11.fst --rules testdata/rules -o report.html
+   ```
+
+3. **Open** `report.html` in a browser. It works offline.
+
+Every step in detail: [quick start](docs/quickstart.md).
 
 ## What it cannot tell you
 
