@@ -40,7 +40,7 @@ rows ─► CSV / JSONL / HTML (+ skipped-rules lists), each written atomically
 
 ```
 all USN events + all MFT entries
-  ├─► Detect A: Sigma, logsource file_event / file_delete / file_rename / file_change
+  ├─► Detect A: Sigma, logsource file_event / file_delete / file_rename
   ├─► Baseline lookup ─► outside-baseline set
   │       ├─► Detect B: Sigma, logsource service: baseline_outside
   │       └─► "Outside-baseline files" list (shown even without a rule match)
@@ -67,10 +67,9 @@ USN events come from the record with `CLOSE`, which carries every reason of its 
 |---|---|---|
 | `FILE_CREATE` | `file_event` | `TargetFilename`, `CreationUtcTime` and `UtcTime` (USN time) |
 | `RENAME_NEW_NAME` | `file_rename` | `SourceFilename` (from the same file's last `RENAME_OLD_NAME`, when its path is known), `TargetFilename`, `UtcTime` |
-| `BASIC_INFO_CHANGE` | `file_change` | `TargetFilename`, `UtcTime` |
 | `FILE_DELETE` | `file_delete` | `TargetFilename`, `UtcTime` |
 
-Data writes (`DATA_*`) are not events. An operation still open at the end of `$J` has no closing record and gives no event.
+Data writes (`DATA_*`) and basic-info changes (`BASIC_INFO_CHANGE`) are not events: Sigma's `file_change` means a creation-time change (Sysmon 2), which the USN reason does not establish. An operation still open at the end of `$J` has no closing record and gives no event.
 A rule without `category` matches each event of a record, so it can list the same finding twice. USN baseline status uses the path whenever it is known, `inferred` included: those names come from the journal, not guesses.
 
 Facts shown next to findings, never used to rank them: baseline status, path-resolution state (`resolved`/`inferred`/`unknown`), and:
