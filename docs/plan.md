@@ -244,7 +244,7 @@ Starts after the Phase 1, 2 and 3 gates are ticked: P4-20 extends the P1-6 gener
 |---|---|---|
 | A Input | P4-1, P4-1b, P4-2 | M2, M3 |
 | B Baseline | ADR P4-0a, ADR P4-0b, P4-3 – P4-7 | M5 |
-| C Detection | ADR P4-0c, P4-8 – P4-11 | M6, facts |
+| C Detection | ADR P4-0c, P4-8 – P4-11, P4-24, P4-25 | M6, facts |
 | D Report | ADR P4-0d, ADR P4-0e, P4-12 – P4-18 | M8, M9 |
 | E Gate | ADR P4-0f, P4-19 – P4-21, P4-P, P4-G | §4 criteria |
 
@@ -270,7 +270,7 @@ Decisions before the first slice of each track (H2):
   - Done when: ADR accepted, field mapping checked against a current Hayabusa JSONL sample.
   - Out of scope: the code, Hayabusa CSV profiles other than the default.
 - [ ] **ADR P4-0f: attack corpus and accuracy measurement** (track E)
-  - Proposal: the corpus is public images and generated hosts (Simulated-Case-1, Yamato, plus an Atomic Red Team run on a Win11 VM), kept outside the repo; for each host a label file lists the attack-related paths (written by the human, outside the repo). `cargo run -p xtask -- accuracy <report.jsonl> <labels>` prints shown/missed per label (Findings or Outside-baseline). "Accuracy CI" means this check runs on demand on the maintainer's machine, not on GitHub (evidence never leaves it).
+  - Proposal: the corpus is public images and generated hosts (Simulated-Case-1, Yamato, plus an Atomic Red Team run on a Win11 VM, tests as listed in [research/community-knowledge.md](research/community-knowledge.md)), kept outside the repo; for each host a label file lists the attack-related paths (written by the human, outside the repo). The Ransomware Tool Matrix tools used by ≥ 10 gangs (CC-BY-4.0, attributed) serve as a checklist of tool footprints to label; the labels stay outside the repo. `cargo run -p xtask -- accuracy <report.jsonl> <labels>` prints shown/missed per label (Findings or Outside-baseline). "Accuracy CI" means this check runs on demand on the maintainer's machine, not on GitHub (evidence never leaves it).
   - Done when: ADR accepted, corpus and label owners named.
   - Out of scope: the code.
 
@@ -317,6 +317,12 @@ Track C: detection
 - [ ] **P4-11 Owner SID from `$Secure:$SDS`** (new crate `sds-parse` or `mft-parse`, decided at H1; `analyze`, `report`; product.md §6)
   - Done when: `$SI` `security_id` → `$SDS` entry → owner SID; well-known SIDs get their name (`S-1-5-18` SYSTEM, `S-1-5-32-544` Administrators); the owner is a fact (CSV/JSONL column `owner`, HTML detail) and never orders findings; `$SDS` absent → empty; corrupt entries → `Diagnostic`; proptest no-panic and a fuzz target.
   - Out of scope: DACLs, resolving domain SIDs to names, a Sigma field for the owner.
+- [ ] **P4-24 Folder rule candidates: measure** (measurement; draft rules stay outside the repo; [research/abused-folders.md](research/abused-folders.md); product.md P1)
+  - Done when: draft rules for abused-folders.md F1–F5, F7, F10 and F6 (file form) run with `--rules` from outside the repo on the 12 local hosts and an Atomic Red Team sample; per candidate the matching files, parent directory, extension, `$MFT`/USN origin and USN operation are recorded in abused-folders.md; for F2, whether a rule can select USN-created rows only is shown by a test or recorded as not possible; each candidate ends as "propose a rule and level at a later H1" or "drop".
+  - Out of scope: committing rules, directory events, DACLs, changing existing rules (F8 and F10 stay H5).
+- [ ] **P4-25 HijackLibs as `unexpected_location`** (`detect`, `analyze`; [ADR 0006](adr/0006-gpl-reference-data.md); [research/community-knowledge.md](research/community-knowledge.md))
+  - Done when: the import is approved (H2); HijackLibs is pinned to an upstream commit with its license and a `NOTICE` entry; a `.dll` whose name is listed and whose path is not one of its expected locations is also emitted under `service: unexpected_location` (architecture.md updated); one generic rule (no names) with an e2e test and a near-miss; per-host counts on the 12 local hosts in the hand-over; output byte-identical across runs.
+  - Out of scope: LOLBAS, winbindex, LOLDrivers (needs its own ADR: ADR 0019 boundary), pairing with vulnerable executables, fetching the data at run time.
 
 Track D: report
 - [ ] **P4-12 One item per file in Findings** (`report`; ADR P4-0d; viewer-review.md U1, U2)
@@ -330,7 +336,7 @@ Track D: report
   - Out of scope: a time zone switch, the activity sparkline, a "same folder" pivot (the search does it).
 - [ ] **P4-15 Outside-baseline by directory** (`report`; viewer-review.md H2; product.md P7)
   - Done when: the top-most directories not in the baseline are listed with file count and first created time, in an explicit order (first created, then path); clicking one filters the list; rows show deleted, MFT-only/USN-only, hints and `$FN` created (H8); on desktop6 the three remote-access tool folders are on the first screen (hand-over).
-  - Out of scope: ranking by count, product names, the privilege grouping of product.md §6 (removed from product.md in this item unless the human keeps it).
+  - Out of scope: ranking by count, product names, the privilege grouping (removed from product.md: a path does not show write access, [research/abused-folders.md](research/abused-folders.md)).
 - [ ] **P4-16 Summary guidance** (`report`; product.md §6)
   - Done when: OS build (P4-5), baseline used and its metadata, key events (critical/high files, deleted `.evtx`) and "what this report cannot tell you" are shown; no scores or rankings.
   - Out of scope: the sparkline, new counts.
@@ -358,7 +364,7 @@ Track E: measurement and gate
   - Done when: one page in en and ja: download, `mozu collect` on the client, `mozu analyze` with `--baseline auto`, reading the report, next steps; README and usecases.md link it and drop what it replaces.
   - Out of scope: developer docs.
 - [ ] **P4-P Prune before the gate** (all crates; AGENTS.md)
-  - Done when: every feature, `pub` item, CLI flag, report row and output field is listed with the need or test that justifies it; those without one are removed after human approval. Candidates: `--mask-users`, `mozu rules list`, `mozu baseline list|update`, `mozu rules update` from product.md §5 (not built unless an item needs them), `-i <$MFT> --usn` vs directory input.
+  - Done when: every feature, `pub` item, CLI flag, report row and output field is listed with the need or test that justifies it; those without one are removed after human approval. Candidates: merging `public_executable` and `public_script_or_archive` (same folder and level, [research/abused-folders.md](research/abused-folders.md)), `--mask-users`, `mozu rules list`, `mozu baseline list|update`, `mozu rules update` from product.md §5 (not built unless an item needs them), `-i <$MFT> --usn` vs directory input.
   - Out of scope: adding anything.
 - [ ] **P4-G Gate material**
   - Done when: each product.md §4 criterion has a measured value with its source (P3-G, P4-4/P4-6, P4-19, P4-20); usability session plan for ≥ 3 non-experts with the manual (as `research/phase2-gate.md`). The human runs the sessions and ticks the gate.

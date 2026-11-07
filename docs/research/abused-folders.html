@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Abused Folders Survey</title>
+<style>
+:root{--bg:#fbfbfa;--fg:#1c1f24;--mut:#5b6270;--line:#dfe2e6;--head:#eef1f6;--acc:#012551;--code:#f1f2f4;
+--new:#0b6b3a;--newbg:#e3f4ea;--reuse:#1f4f99;--reusebg:#e5edfa;--hold:#8a5a00;--holdbg:#fbf0d9}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#16181c;--fg:#e4e6ea;--mut:#9aa1ad;--line:#2e333b;--head:#1f2530;--acc:#9fb8e8;--code:#23272e;
+--new:#7fd6a4;--newbg:#16321f;--reuse:#9fc0f5;--reusebg:#18263d;--hold:#f0c56b;--holdbg:#36290e}}
+:root[data-theme="dark"]{--bg:#16181c;--fg:#e4e6ea;--mut:#9aa1ad;--line:#2e333b;--head:#1f2530;--acc:#9fb8e8;--code:#23272e;
+--new:#7fd6a4;--newbg:#16321f;--reuse:#9fc0f5;--reusebg:#18263d;--hold:#f0c56b;--holdbg:#36290e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,-apple-system,"Segoe UI","Hiragino Sans","Yu Gothic UI",Meiryo,sans-serif}
+main{max-width:1180px;margin:0 auto;padding:24px 16px 64px}
+nav{position:sticky;top:0;z-index:1;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 16px;display:flex;gap:16px;flex-wrap:wrap;font-size:13px}
+nav a{color:var(--mut);text-decoration:none} nav a:hover{color:var(--acc)}
+h1{color:var(--acc);font-size:28px;margin:8px 0 4px} h2{margin-top:40px;border-bottom:2px solid var(--acc);padding-bottom:4px;scroll-margin-top:48px}
+h3{margin-top:28px} a{color:var(--acc)}
+code{background:var(--code);padding:1px 4px;border-radius:4px;font-size:.88em;overflow-wrap:anywhere}
+.tw{overflow-x:auto;margin:12px 0;border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{text-align:left;vertical-align:top;padding:6px 10px;border-bottom:1px solid var(--line)}
+th{background:var(--head);position:sticky;top:0} tr:last-child td{border-bottom:0}
+ol li{margin:6px 0}
+.tag{display:inline-block;padding:0 6px;border-radius:4px;font-size:12px;white-space:nowrap}
+.new{color:var(--new);background:var(--newbg)} .reuse{color:var(--reuse);background:var(--reusebg)} .hold{color:var(--hold);background:var(--holdbg)}
+@media (max-width:640px){body{font-size:14px} h1{font-size:22px}}
+</style></head>
+<body><nav><a href="#inputs">Inputs</a><a href="#what-mozu-emits-today">What mozu emits today</a><a href="#conclusion">Conclusion</a><a href="#folder-catalog">Folder catalog</a><a href="#candidates">Candidates</a><a href="#effect-on-existing-features">Effect on existing features</a><a href="#for-comparison-with-the-codex-survey">For comparison with the Codex survey</a><a href="#caveats">Caveats</a></nav><main>
+<h1 id="folders-abused-in-intrusions">Folders abused in intrusions</h1>
+<p>Surveyed 2026-11-07; revised the same day after an independent fact-check (not in the repository). Goal: list the Windows folders that intrusion reports and detection rules name, check what mozu can already express there, and list measurement candidates for the rule review (P4-9), P4-15 and the privilege-grouping question (product.md §6). HTML: <a href="abused-folders.html">abused-folders.html</a>. Plan items that follow: P4-24 (measure the candidates), P2-18 (<code>file_change</code>), P4-P candidate (merge the Public rules). Japanese: <a href="abused-folders.ja.md">abused-folders.ja.md</a>.</p>
+<h2 id="inputs">Inputs</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Version</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ATT&amp;CK Enterprise (<code>mitre/cti</code>)</td>
+<td><code>50be388e93</code> (2026-10-13)</td>
+<td>Mentions: <code>uses</code> relationships whose procedure text names a folder</td>
+</tr>
+<tr>
+<td>SigmaHQ <code>rules</code>, <code>rules-threat-hunting</code>, <code>rules-emerging-threats</code> (<code>windows/</code> only)</td>
+<td><code>46da2482c</code> (2026-10-20)</td>
+<td>Rules that name a folder in a non-negated selection; statically loadable rules</td>
+</tr>
+<tr>
+<td><a href="https://github.com/api0cradle/UltimateAppLockerByPassList/blob/master/Generic-AppLockerbypasses.md">UltimateAppLockerByPassList</a></td>
+<td><code>master</code>, read 2026-11-07</td>
+<td>Folders under <code>C:\Windows</code> reported writable by standard users</td>
+</tr>
+<tr>
+<td>mozu <code>detect</code> (<code>crates/detect/src/lib.rs</code>), own rules, <code>folder</code> categories</td>
+<td><code>main</code> <code>acbedc2</code></td>
+<td>What mozu emits to Sigma today (<a href="../architecture.md#folder">architecture.md § Folder</a>)</td>
+</tr>
+<tr>
+<td>ATT&amp;CK <a href="https://attack.mitre.org/techniques/T1074/001/">T1074.001</a></td>
+<td>v20</td>
+<td>Staging examples (APT5 <code>C:\Users\Public</code>, Leviathan <code>C:\Windows\Debug</code>, <code>C:\PerfLogs</code>)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Every count below is a row set in <a href="abused-folders-counts.csv">abused-folders-counts.csv</a> (columns <code>source,folder,id,name,category,level,loadable,technique</code>; <code>source</code> is <code>attack</code>, <code>sigma</code> or <code>sigma-loadable</code>).</p>
+<h3 id="method">Method</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Folder match</td>
+<td>One lower-cased regular expression per folder (e.g. <code>\\users\\public\\</code> or <code>%public%</code>); in ATT&amp;CK prose the trailing <code>\</code> is optional and "Recycle Bin" also matches</td>
+</tr>
+<tr>
+<td>Sigma positive text</td>
+<td>Strings of all selections except those that occur <strong>only</strong> after <code>not</code> in <code>condition</code> (<code>not x</code>, <code>not 1 of x*</code>, <code>not all of x*</code>, <code>not (a or b)</code>). Selections used both ways count as positive</td>
+</tr>
+<tr>
+<td>Sigma loadable (static)</td>
+<td><code>logsource.category</code> in <code>file_event</code>, <code>file_delete</code>, <code>file_rename</code>, <code>create_stream_hash</code>, and every field in every selection (negated ones included) is one mozu emits: <code>TargetFilename</code>, <code>SourceFilename</code>, <code>CreationUtcTime</code>, <code>UtcTime</code></td>
+</tr>
+<tr>
+<td>ATT&amp;CK</td>
+<td><code>uses</code> relationships to techniques; revoked or deprecated relationships and techniques excluded</td>
+</tr>
+</tbody>
+</table></div>
+<p>Limits: the condition parser handles the forms above, not arbitrary nesting; correlation documents are skipped (no <code>detection</code>); "loadable" is a static check, not mozu's loader. The 88 loadable rules in <code>rules/</code> equal the loader's count on desktop6 in <a href="detection-gaps.md">detection-gaps.md</a>, but the two sets were not compared rule by rule. The script lives outside the repository; committing it is a separate plan-item decision.</p>
+<h2 id="what-mozu-emits-today">What mozu emits today</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Fact</th>
+<th>Source</th>
+<th>Limit relevant here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file_event</code> with <code>TargetFilename</code>, <code>CreationUtcTime</code>, <code>FnCreationUtcTime</code>, <code>SiCreatedBeforeFnCreated</code></td>
+<td>Every in-use <code>$MFT</code> file</td>
+<td>An existing file, not a creation</td>
+</tr>
+<tr>
+<td><code>file_event</code> / <code>file_rename</code> / <code>file_delete</code> with <code>TargetFilename</code> (+ <code>SourceFilename</code>), <code>UtcTime</code></td>
+<td>USN close records</td>
+<td>Only USN events carry <code>UtcTime</code></td>
+</tr>
+<tr>
+<td><code>create_stream_hash</code></td>
+<td>Named <code>$DATA</code> streams</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>service: baseline_outside</code></td>
+<td>Baseline lookup</td>
+<td>Needs a baseline</td>
+</tr>
+<tr>
+<td><strong>Directories</strong></td>
+<td>—</td>
+<td><strong>Not emitted</strong>: <code>file_target</code> returns <code>None</code> for directories (<code>crates/detect/src/lib.rs:82</code>) and USN directory records are skipped (<code>:105</code>). A rule sees a directory only through the paths of files under it</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="conclusion">Conclusion</h2>
+<ol>
+<li>The folders named most often in ATT&amp;CK procedure texts (user Temp 50, <code>AppData\Roaming</code> 31, <code>ntds.dit</code> copies 25, ProgramData 22, <code>Users\Public</code> 19, <code>Windows\Temp</code> 17) already have a mozu <code>folder</code> category or are reachable by path rules. Mention counts are not prevalence.</li>
+<li>Most candidates can be written with today's file facts. Two cannot as stated: a folder whose own name is suspicious (F6) needs files under it or a new directory fact, and "created" (not "exists") needs an event condition that only USN rows satisfy (F2).</li>
+<li>Three persistence or tampering traces can survive event-log deletion and have no own rule: Startup folders (T1547.001), task files under <code>System32\Tasks</code> (T1053.005), drivers outside the baseline. Paths alone do not show a task's action, a shortcut's target, a driver's vulnerability, or any execution.</li>
+<li>A path does not show who can write a folder: a public list names 16 user-writable folders under <code>C:\Windows</code>. Grouping by privilege needs DACLs; P4-11 covers only the owner SID, so mozu cannot check this. Supports removing the grouping in P4-15.</li>
+<li>SigmaHQ folder rules are mostly <code>process_creation</code> (<code>Image</code>): 57 of 103 <code>Users\Public</code> rules, 54 of 93 <code>Windows\Temp</code>. 0–12 rules per folder load statically here.</li>
+<li>No new rule is proposed yet. F1–F7 are measurement candidates; levels follow ADR 0016 after measurement.</li>
+</ol>
+<h2 id="folder-catalog">Folder catalog</h2>
+<p>Write = default write access as reported by Microsoft or the public list above, not measured. ATT&amp;CK = procedure texts naming the folder (texts / distinct groups, software or campaigns). Sigma = distinct rules naming it in a non-negated selection / of those statically loadable. Merged rows count distinct rules and sources.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Folder</th>
+<th>Write</th>
+<th>Abuse (from ATT&amp;CK texts or rule descriptions)</th>
+<th>ATT&amp;CK</th>
+<th>Sigma</th>
+<th>mozu <code>folder</code></th>
+<th>Own rules</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Users\&lt;u&gt;\AppData\Local\Temp</code></td>
+<td>user</td>
+<td>Drop, staging (T1074.001 ×16), masquerade</td>
+<td>50 / 38</td>
+<td>87 / 12</td>
+<td><code>temp</code></td>
+<td><code>executable_in_temp</code> (low), deleted (low)</td>
+</tr>
+<tr>
+<td><code>Users\&lt;u&gt;\AppData\Roaming</code></td>
+<td>user</td>
+<td>Run-key payloads (T1547.001 ×6), staging</td>
+<td>31 / 26</td>
+<td>47 / 4</td>
+<td><code>appdata</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>Users\&lt;u&gt;\AppData\Local</code> (other)</td>
+<td>user</td>
+<td>Side-loading, browser data</td>
+<td>7 / 7</td>
+<td>49 / 7</td>
+<td><code>appdata</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ProgramData</code> (root and new subfolders)</td>
+<td>any user can create</td>
+<td>Staging, persistence, hidden files (T1564.001), masquerade</td>
+<td>22 / 18</td>
+<td>33 / 2</td>
+<td><code>programdata</code></td>
+<td>— (ProgramData-root rule deferred in P1)</td>
+</tr>
+<tr>
+<td><code>Users\Public</code></td>
+<td>any user</td>
+<td>Staging (T1074.001 ×6), tools, task payloads</td>
+<td>19 / 16</td>
+<td>103 / 3</td>
+<td><code>public</code></td>
+<td><code>public_executable</code>, <code>public_script_or_archive</code> (medium)</td>
+</tr>
+<tr>
+<td><code>Windows\Temp</code></td>
+<td>any user can create</td>
+<td>Staging, <code>ntds.dit</code> and hive copies, cleanup</td>
+<td>17 / 14</td>
+<td>93 / 6</td>
+<td><code>temp</code></td>
+<td><code>executable_in_temp</code> (low), deleted (low)</td>
+</tr>
+<tr>
+<td><code>PerfLogs</code></td>
+<td>not verified</td>
+<td>Staging (Leviathan, Wizard Spider)</td>
+<td>2 / 2</td>
+<td>63 / 2</td>
+<td><code>other</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>$Recycle.Bin</code></td>
+<td>user (own SID folder)</td>
+<td>Staging (GALLIUM, menuPass, BackdoorDiplomacy); a fake <code>RECYCLE.BIN</code> on USB (Mustang Panda); 3 other mentions are wiping or discovery</td>
+<td>7 / 7</td>
+<td>8 / 0</td>
+<td><code>other</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Startup (<code>…\Start Menu\Programs\Startup</code>, per user and ProgramData)</td>
+<td>user / admin</td>
+<td>T1547.001, T1547.009</td>
+<td>3 / 3</td>
+<td>17 / 1</td>
+<td><code>appdata</code> / <code>programdata</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>Windows\System32\Tasks</code>, <code>Windows\Tasks</code></td>
+<td>admin / any user (<code>Windows\Tasks</code>)</td>
+<td>T1053.005 task files; drop folder</td>
+<td>0 / 0</td>
+<td>23 / 2</td>
+<td><code>windows</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>Windows\System32\drivers</code>, <code>.sys</code> elsewhere</td>
+<td>admin</td>
+<td>Drivers; masquerade</td>
+<td>1 / 1</td>
+<td>2 / 0</td>
+<td><code>windows</code></td>
+<td>— (<code>.sys</code> not in the baseline-binary rule)</td>
+</tr>
+<tr>
+<td>User-writable <code>C:\Windows</code> subfolders (<code>Tracing</code>, <code>Registration\CRMLog</code>, <code>spool\drivers\color</code>, <code>MachineKeys</code>, …)</td>
+<td>any user (per the list)</td>
+<td>Drop and run where allow-lists trust <code>C:\Windows</code></td>
+<td>0 / 0</td>
+<td>3–5 / 0–1 each</td>
+<td><code>windows</code></td>
+<td><code>outside_baseline_windows_binary</code> (high; <code>.exe</code>/<code>.dll</code>)</td>
+</tr>
+<tr>
+<td>Rarely written <code>C:\Windows</code> subfolders (<code>Fonts</code>, <code>IME</code>, <code>Help</code>, <code>addins</code>, <code>debug</code>)</td>
+<td>admin</td>
+<td>Staging in <code>debug</code> (Leviathan); masquerade</td>
+<td>1 / 1</td>
+<td>3–8 / 0</td>
+<td><code>windows</code></td>
+<td>same</td>
+</tr>
+<tr>
+<td>Mock folders (<code>C:\Windows \</code>, <code>C:\Program Files \</code>)</td>
+<td>admin</td>
+<td>UAC bypass, DLL search order (T1574)</td>
+<td>0 / 0</td>
+<td>3 / 1</td>
+<td><code>other</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>C:\</code> root (<code>C:\Intel</code>, <code>C:\temp</code>, <code>C:\program.exe</code>)</td>
+<td>any user can create folders</td>
+<td>Tool folders, unquoted service path (T1574.009)</td>
+<td>0 / 0</td>
+<td>8 / 2</td>
+<td><code>other</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>Users\&lt;u&gt;\Downloads</code>, <code>Desktop</code></td>
+<td>user</td>
+<td>Initial access, ransom notes</td>
+<td>3 + 2 / 5</td>
+<td>31 + 39 / 0</td>
+<td><code>downloads</code>, <code>desktop</code></td>
+<td><code>double_extension</code> (medium)</td>
+</tr>
+<tr>
+<td><code>inetpub\wwwroot</code>, Exchange <code>aspnet_client</code>/<code>FrontEnd</code></td>
+<td>admin / service</td>
+<td>Web shells (T1505.003)</td>
+<td>2 / 1</td>
+<td>11 / 1</td>
+<td><code>other</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>NTDS</code>, <code>System32\config</code> copies</td>
+<td>admin</td>
+<td>Credential theft (T1003.003 ×16)</td>
+<td>27 / 20</td>
+<td>16 / 3</td>
+<td>the copy's folder</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>winevt\Logs</code>, <code>Prefetch</code></td>
+<td>admin</td>
+<td>Trace removal (T1070)</td>
+<td>2 / 2</td>
+<td>2 / 1</td>
+<td><code>windows</code></td>
+<td><code>event_log_deleted</code> (high), <code>prefetch_deleted</code> (medium)</td>
+</tr>
+<tr>
+<td><code>SYSVOL</code>, <code>NETLOGON</code> (DC)</td>
+<td>domain admin</td>
+<td>Deployment by GPO (T1484.001)</td>
+<td>0 / 0</td>
+<td>5 / 0</td>
+<td><code>windows</code> / <code>other</code></td>
+<td>— (Server out of MVP)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Scheduled Task and Startup abuse is common, yet procedure texts rarely name the folder; low counts there say little.</p>
+<h3 id="user-writable-folders-under-cwindows-public-list-not-measured">User-writable folders under <code>C:\Windows</code> (public list, not measured)</h3>
+<p><code>Tasks</code>, <code>Temp</code>, <code>tracing</code>, <code>Registration\CRMLog</code>, <code>System32\FxsTmp</code>, <code>System32\com\dmp</code>, <code>System32\Microsoft\Crypto\RSA\MachineKeys</code>, <code>System32\spool\PRINTERS</code>, <code>System32\spool\SERVERS</code>, <code>System32\spool\drivers\color</code>, <code>System32\Tasks\Microsoft\Windows\SyncCenter</code>, <code>System32\Tasks_Migrated</code>, <code>SysWOW64\FxsTmp</code>, <code>SysWOW64\com\dmp</code>, <code>SysWOW64\Tasks\Microsoft\Windows\SyncCenter</code>, <code>SysWOW64\Tasks\Microsoft\Windows\PLA\System</code>.</p>
+<p>mozu has no DACL fact, so it cannot check this list. Check it by hand on a baseline VM (<code>icacls</code>) if a decision depends on it.</p>
+<h2 id="candidates">Candidates</h2>
+<p>Gate as <a href="detection-gaps.md#gate-for-a-new-rule">detection-gaps.md § Gate</a> (G1 prevalence, G2 not already detected, G3 separable, G4 sample, G5 right layer). No candidate has a level: ADR 0016 sets it from the measurement.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Candidate</th>
+<th>Facts today</th>
+<th>A match shows / does not show</th>
+<th>Normal cases to measure</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F1</td>
+<td>Executable, script or <code>.lnk</code> in a Startup folder, outside the baseline</td>
+<td><code>TargetFilename</code>, <code>baseline_outside</code></td>
+<td>A file there / not its target, nor that it ran. SigmaHQ's loadable rule omits <code>.exe</code> and <code>.lnk</code></td>
+<td>Vendor <code>.lnk</code> (Teams, OneDrive, VPN clients)</td>
+<td><strong class="tag hold">Measure</strong></td>
+</tr>
+<tr>
+<td>F2</td>
+<td>Task file under <code>Windows\System32\Tasks\</code>, outside the baseline</td>
+<td><code>TargetFilename</code>, <code>baseline_outside</code>; only USN rows carry <code>UtcTime</code></td>
+<td>A task file exists (or, with a USN-only condition, was created) / not its trigger, action or command</td>
+<td>Updater tasks (Google, Edge, Adobe, OneDrive)</td>
+<td><strong class="tag hold">Measure</strong>; first show with a regression test that a rule can select USN-created rows only, else word it "exists"</td>
+</tr>
+<tr>
+<td>F3</td>
+<td><code>.sys</code> outside the baseline (outside-baseline driver candidate)</td>
+<td><code>TargetFilename</code>, <code>baseline_outside</code></td>
+<td>A driver-like file the baseline lacks / not vulnerability, signer, load, or use in defense evasion. Not a BYOVD detection</td>
+<td>Hardware, AV, VPN and backup drivers</td>
+<td><strong class="tag hold">Measure</strong></td>
+</tr>
+<tr>
+<td>F4</td>
+<td>Executable, script or archive under <code>C:\PerfLogs\</code></td>
+<td><code>TargetFilename</code></td>
+<td>A file there</td>
+<td>Unknown; PerfLogs content on used hosts</td>
+<td><strong class="tag hold">Measure</strong> SigmaHQ <code>file_event_win_perflogs_susp_files</code> through mozu's loader and a regression sample</td>
+</tr>
+<tr>
+<td>F5</td>
+<td>File directly under <code>$Recycle.Bin\&lt;SID&gt;\</code> whose name does not start with <code>$R</code>/<code>$I</code> and is not <code>desktop.ini</code></td>
+<td><code>TargetFilename</code> (regex)</td>
+<td>A file Explorer did not name / not who wrote it</td>
+<td>Files under recycled folders (<code>$R…\&lt;original names&gt;</code>, excluded by "directly under"), applications writing there, Windows versions, migrations</td>
+<td><strong class="tag hold">Measure</strong></td>
+</tr>
+<tr>
+<td>F6</td>
+<td>Path with a folder name ending in a space or dot</td>
+<td><code>TargetFilename</code> (regex) on <strong>files</strong> under such a folder</td>
+<td>Normal Win32 name handling strips trailing ASCII spaces and dots, but NTFS can hold such names / an empty folder is invisible (directories are not emitted)</td>
+<td>Unknown</td>
+<td><strong class="tag reuse">Facts limit</strong>: measure the file form; an empty folder needs a directory fact (new plan item)</td>
+</tr>
+<tr>
+<td>F7</td>
+<td>Executable or script directly in <code>C:\ProgramData\</code> or <code>C:\</code> (files in subfolders excluded)</td>
+<td><code>TargetFilename</code> (regex, like <code>executable_in_users_root</code>)</td>
+<td>A file at that level</td>
+<td>Installers and agents that drop files at the root</td>
+<td><strong class="tag hold">Measure</strong></td>
+</tr>
+<tr>
+<td>F8</td>
+<td>Scripts (<code>.ps1</code>, <code>.bat</code>, <code>.vbs</code>, …) in user-writable <code>C:\Windows</code> subfolders</td>
+<td><code>TargetFilename</code>, <code>baseline_outside</code></td>
+<td>—</td>
+<td>—</td>
+<td><strong class="tag hold">Hold</strong>: an extension change to the existing rule is H5, after measurement</td>
+</tr>
+<tr>
+<td>F9</td>
+<td>Archive or <code>.dmp</code> in Temp/ProgramData/Public/PerfLogs, created then deleted</td>
+<td><code>file_event</code> + <code>file_delete</code>, <code>temporal_ordered</code></td>
+<td>—</td>
+<td>Backups, crash dumps</td>
+<td><strong class="tag hold">Hold</strong> for P4-8; threshold from normal data</td>
+</tr>
+<tr>
+<td>F10</td>
+<td>More system names in <code>system_binary_outside_system32</code> (<code>rundll32</code>, <code>dllhost</code>, <code>conhost</code>, <code>taskhostw</code>, <code>spoolsv</code>, <code>explorer</code>)</td>
+<td><code>TargetFilename</code></td>
+<td>—</td>
+<td>Each name's normal locations</td>
+<td><strong class="tag hold">Measure</strong> before an H5 change</td>
+</tr>
+</tbody>
+</table></div>
+<p>Per candidate, record on the 12 local hosts: matching files, parent directory, extension, <code>$MFT</code> or USN origin and USN operation; then confirm on a regression sample (G4).</p>
+<h3 id="sigmahq-rules-for-neighboring-cases-f11-split">SigmaHQ rules for neighboring cases (F11, split)</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Case</th>
+<th>SigmaHQ rule(s)</th>
+<th>Static check</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ntds.dit</code>, SAM and hive copies</td>
+<td><code>file_event_win_sam_dump</code> (high), <code>file_event_win_ntds_exfil_tools</code> (high), <code>file_event_win_hktl_hivenightmare_file_exports</code> (high), <code>file_event_win_ntds_dit_creation</code> (low)</td>
+<td>loadable</td>
+<td>Not run through mozu's loader or a test event yet</td>
+</tr>
+<tr>
+<td>LSASS dumps</td>
+<td><code>file_event_win_lsass_default_dump_file_names</code> (high)</td>
+<td>loadable</td>
+<td>Same</td>
+</tr>
+<tr>
+<td>Default GPO folder writes</td>
+<td><code>file_event_win_susp_default_gpo_dir_write</code> (medium)</td>
+<td>loadable</td>
+<td>Same; Server is out of MVP</td>
+</tr>
+<tr>
+<td>Web shells</td>
+<td><code>file_event_win_webshell_creation_detect</code></td>
+<td>not loadable (<code>Image</code>)</td>
+<td><strong class="tag new">Not covered</strong> today; own rule "later" (detection-gaps.md)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Out of reach (no fact): accessibility-binary replacement (<code>sethc.exe</code>) needs a data-overwrite category on baseline files; Defender exclusions are registry; SigmaHQ's Office <code>XLSTART</code>/Word <code>STARTUP</code> rules need <code>Image</code> except <code>office_addin_persistence</code>.</p>
+<h2 id="effect-on-existing-features">Effect on existing features</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Finding</th>
+<th>Suggestion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>folder</code> categories</td>
+<td>The most-mentioned folders have a category; <code>PerfLogs</code>, <code>$Recycle.Bin</code>, <code>C:\</code> root and mock folders fall in <code>other</code>, Startup in <code>appdata</code>/<code>programdata</code></td>
+<td>No new category: rules match paths, the search covers the rest</td>
+</tr>
+<tr>
+<td>Privilege grouping (product.md §6)</td>
+<td>Path ≠ permission; DACLs are outside every planned item (P4-11 is owner SID only)</td>
+<td>Remove in P4-15 as planned</td>
+</tr>
+<tr>
+<td>P4-15 Outside-baseline by directory</td>
+<td>New top-level folders in <code>ProgramData</code>, <code>C:\</code> and <code>Program Files</code> are a tool footprint</td>
+<td>Keep; include <code>C:\</code> root folders in the list</td>
+</tr>
+<tr>
+<td><code>outside_baseline_windows_binary</code></td>
+<td>Does not cover <code>.sys</code> or scripts</td>
+<td>F3/F8 after measurement (H5)</td>
+</tr>
+<tr>
+<td><code>executable_in_temp</code> / deleted (low)</td>
+<td>Temp is named most and is noisy</td>
+<td>Keep <code>low</code>; F9-style correlations add value</td>
+</tr>
+<tr>
+<td><code>double_extension</code> (medium)</td>
+<td>Overlaps SigmaHQ <code>file_event_win_susp_double_extension</code> (high, statically loadable), but SigmaHQ is not shipped (Phase 2)</td>
+<td>Keep</td>
+</tr>
+<tr>
+<td><code>file_change</code> category</td>
+<td>USN <code>BASIC_INFO_CHANGE</code> is emitted as Sigma <code>file_change</code>; no own rule uses it and both SigmaHQ <code>file_change</code> rules need <code>Image</code> or <code>PreviousCreationUtcTime</code> (0 load). Sigma's <code>file_change</code> means Sysmon EID 2 (creation time changed), a narrower event</td>
+<td>Stop emitting it (plan P2-18)</td>
+</tr>
+<tr>
+<td><code>public_executable</code> + <code>public_script_or_archive</code></td>
+<td>One folder, two rules split by extension; SigmaHQ has one</td>
+<td>Merge candidate for P4-P (listed there)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="for-comparison-with-the-codex-survey">For comparison with the Codex survey</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Check</th>
+<th>This survey</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Folders listed</td>
+<td>20 rows; 16 user-writable <code>C:\Windows</code> subfolders (public list)</td>
+</tr>
+<tr>
+<td>ATT&amp;CK mentions (top)</td>
+<td>user Temp 50, Roaming 31, NTDS/config copies 27, ProgramData 22, Public 19, <code>Windows\Temp</code> 17</td>
+</tr>
+<tr>
+<td>Sigma rules naming a folder (top)</td>
+<td><code>Users\Public</code> 103, <code>Windows\Temp</code> 93, user Temp 87, <code>PerfLogs</code> 63</td>
+</tr>
+<tr>
+<td>SigmaHQ Windows rules statically loadable</td>
+<td>93 (88 <code>rules/</code>, 5 <code>rules-threat-hunting/</code>)</td>
+</tr>
+<tr>
+<td>Outcome</td>
+<td>0 new rules; 7 measurement candidates (F1–F7, F6 with a facts limit); F8–F10 held or measured first</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="caveats">Caveats</h2>
+<ul>
+<li>ATT&amp;CK and Sigma counts measure reporting and rule writing, not prevalence.</li>
+<li>SigmaHQ <code>file_event</code> rules assume a creation by a process; here every <code>$MFT</code> file is a <code>file_event</code>, so loadable rules also fire on old files (detection-gaps.md).</li>
+<li>Nothing here has been run on the 12 local hosts or an attack corpus.</li>
+<li>Default ACLs come from Microsoft documentation and one public list; mozu cannot verify them.</li>
+</ul>
+</main></body></html>
