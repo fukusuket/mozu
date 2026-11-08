@@ -1800,21 +1800,18 @@ fn a_usn_rename_matches_a_file_rename_rule_on_both_names() -> TestResult {
 }
 
 #[test]
-fn a_usn_basic_info_change_matches_a_file_change_rule() -> TestResult {
+fn a_file_change_rule_is_skipped_as_not_emitted() -> TestResult {
+    let test = "a_file_change_rule_is_skipped_as_not_emitted";
     let rule = "logsource:\n  product: windows\n  category: file_change\ndetection:\n  sel:\n    TargetFilename|endswith: '.exe'\n  condition: sel\n";
-    let events = [
-        (40, 0x8000_8000, "x.exe"), // BASIC_INFO_CHANGE | CLOSE
-        (40, 0x8000_0002, "x.exe"), // DATA_EXTEND | CLOSE: near miss
-    ];
+    let events = [(40, 0x8000_8000, "x.exe")]; // BASIC_INFO_CHANGE | CLOSE
 
-    let hits = usn_rule_hits(
-        "a_usn_basic_info_change_matches_a_file_change_rule",
-        rule,
-        &events,
-        None,
-    )?;
+    let hits = usn_rule_hits(test, rule, &events, None)?;
 
-    assert_eq!(hits, [HIT, ""]);
+    assert_eq!(hits, [""]);
+    assert_eq!(
+        std::fs::read_to_string(scratch(test)?.join("out.skipped-rules.csv"))?,
+        "file,id,title,reason\nrules/rule.yml,usn-rule,USN rule,logsource not emitted: category=file_change\n"
+    );
     Ok(())
 }
 

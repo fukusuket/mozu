@@ -70,7 +70,7 @@ mozu analyze -i '$MFT' --usn '$J' --rules testdata/rules --rules ~/sigma/rules/w
 | Supported | Values |
 |---|---|
 | Fields | `TargetFilename`, `SourceFilename`, `CreationUtcTime`, `FnCreationUtcTime`, `SiCreatedBeforeFnCreated`, `UtcTime` |
-| Logsources | `file_event`, `file_rename`, `file_change`, `file_delete`, `create_stream_hash`, `service: baseline_outside` |
+| Logsources | `file_event`, `file_rename`, `file_delete`, `create_stream_hash`, `service: baseline_outside` |
 
 Rules that cannot match are skipped and listed with the reason in `*.skipped-rules.csv` / `.jsonl` ([reasons](architecture.md#baseline-and-sigma)).
 

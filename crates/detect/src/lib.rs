@@ -13,7 +13,6 @@ pub const EMITTED: sigma::Emitted = sigma::Emitted {
         "file_event",
         "file_delete",
         "file_rename",
-        "file_change",
         "create_stream_hash",
     ],
     services: &["baseline_outside"],
@@ -110,7 +109,6 @@ pub fn usn_events(
     [
         (FILE_CREATE, "file_event"),
         (RENAME_NEW_NAME, "file_rename"),
-        (BASIC_INFO_CHANGE, "file_change"),
         (FILE_DELETE, "file_delete"),
     ]
     .into_iter()
@@ -139,7 +137,6 @@ pub fn usn_events(
 const FILE_CREATE: u32 = 0x0000_0100;
 const FILE_DELETE: u32 = 0x0000_0200;
 const RENAME_NEW_NAME: u32 = 0x0000_2000;
-const BASIC_INFO_CHANGE: u32 = 0x0000_8000;
 const CLOSE: u32 = 0x8000_0000;
 /// `FILE_ATTRIBUTE_DIRECTORY` (winnt.h).
 const FILE_ATTRIBUTE_DIRECTORY: u32 = 0x10;
@@ -262,20 +259,8 @@ mod tests {
     }
 
     #[test]
-    fn a_closed_basic_info_change_is_a_file_change_but_a_data_write_is_not() {
-        let events = usn_events(&usn(0x8000 | CLOSE), r"\x.exe", None, None);
-
-        assert_eq!(
-            shown(events),
-            [(
-                "file_change",
-                None,
-                vec![
-                    ("TargetFilename", r"C:\x.exe".to_string()),
-                    ("UtcTime", "2024-02-29 12:34:56.123".to_string()),
-                ]
-            )]
-        );
+    fn a_closed_basic_info_change_or_data_write_gives_no_event() {
+        assert!(usn_events(&usn(0x8000 | CLOSE), r"\x.exe", None, None).is_empty());
         assert!(usn_events(&usn(0x2 | CLOSE), r"\x.exe", None, None).is_empty());
     }
 
@@ -287,10 +272,7 @@ mod tests {
             .map(|e| e.category)
             .collect();
 
-        assert_eq!(
-            categories,
-            ["file_event", "file_rename", "file_change", "file_delete"]
-        );
+        assert_eq!(categories, ["file_event", "file_rename", "file_delete"]);
     }
 
     #[test]
@@ -348,7 +330,7 @@ mod tests {
             }
         }
         let categories: Vec<&str> = events.iter().map(|e| e.category).collect();
-        assert_eq!(categories.len(), 5);
+        assert_eq!(categories.len(), 4);
         assert!(
             events
                 .iter()
