@@ -1800,6 +1800,35 @@ fn a_usn_rename_matches_a_file_rename_rule_on_both_names() -> TestResult {
 }
 
 #[test]
+fn a_rule_can_select_usn_created_rows_with_utctime_exists() -> TestResult {
+    let dir = scratch("a_rule_can_select_usn_created_rows_with_utctime_exists")?;
+    let rules = dir.join("rules");
+    std::fs::create_dir_all(&rules)?;
+    std::fs::write(
+        rules.join("rule.yml"),
+        "title: Created\nid: created\nlevel: high\nlogsource:\n  product: windows\n  category: file_event\ndetection:\n  sel:\n    TargetFilename|endswith: '\\$MFT'\n    UtcTime|exists: true\n  condition: sel\n",
+    )?;
+    // Control: the same selection without `UtcTime|exists` matches the `$MFT` row too.
+    std::fs::write(
+        rules.join("control.yml"),
+        "title: Any\nid: any\nlevel: low\nlogsource:\n  product: windows\n  category: file_event\ndetection:\n  sel:\n    TargetFilename|endswith: '\\$MFT'\n  condition: sel\n",
+    )?;
+    // The same file as an `$MFT` entry (no `UtcTime`) and as a USN FILE_CREATE | CLOSE.
+    let events = [(0, 5, 0x8000_0100, "$MFT")];
+
+    let usn_rows = usn_hits(&dir, usn_volume_mft(), &events, &rules, &[])?;
+    let mft_rows: Vec<String> = csv_rows(&std::fs::read_to_string(dir.join("out.csv"))?)
+        .into_iter()
+        .filter(|r| r[11] == "mft" && r[3] == "$MFT")
+        .map(|r| r[7].clone())
+        .collect();
+
+    assert_eq!(usn_rows, ["high:created;low:any"]);
+    assert_eq!(mft_rows, ["low:any"]);
+    Ok(())
+}
+
+#[test]
 fn a_file_change_rule_is_skipped_as_not_emitted() -> TestResult {
     let test = "a_file_change_rule_is_skipped_as_not_emitted";
     let rule = "logsource:\n  product: windows\n  category: file_change\ndetection:\n  sel:\n    TargetFilename|endswith: '.exe'\n  condition: sel\n";
