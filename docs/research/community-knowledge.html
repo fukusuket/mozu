@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Community Knowledge Survey</title>
+<style>
+:root{--bg:#fbfbfa;--fg:#1c1f24;--mut:#5b6270;--line:#dfe2e6;--head:#eef1f6;--acc:#012551;--code:#f1f2f4;
+--new:#0b6b3a;--newbg:#e3f4ea;--reuse:#1f4f99;--reusebg:#e5edfa;--hold:#8a5a00;--holdbg:#fbf0d9}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#16181c;--fg:#e4e6ea;--mut:#9aa1ad;--line:#2e333b;--head:#1f2530;--acc:#9fb8e8;--code:#23272e;
+--new:#7fd6a4;--newbg:#16321f;--reuse:#9fc0f5;--reusebg:#18263d;--hold:#f0c56b;--holdbg:#36290e}}
+:root[data-theme="dark"]{--bg:#16181c;--fg:#e4e6ea;--mut:#9aa1ad;--line:#2e333b;--head:#1f2530;--acc:#9fb8e8;--code:#23272e;
+--new:#7fd6a4;--newbg:#16321f;--reuse:#9fc0f5;--reusebg:#18263d;--hold:#f0c56b;--holdbg:#36290e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,-apple-system,"Segoe UI","Hiragino Sans","Yu Gothic UI",Meiryo,sans-serif}
+main{max-width:1180px;margin:0 auto;padding:24px 16px 64px}
+nav{position:sticky;top:0;z-index:1;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 16px;display:flex;gap:16px;flex-wrap:wrap;font-size:13px}
+nav a{color:var(--mut);text-decoration:none} nav a:hover{color:var(--acc)}
+h1{color:var(--acc);font-size:28px;margin:8px 0 4px} h2{margin-top:40px;border-bottom:2px solid var(--acc);padding-bottom:4px;scroll-margin-top:48px}
+h3{margin-top:28px} a{color:var(--acc)}
+code{background:var(--code);padding:1px 4px;border-radius:4px;font-size:.88em;overflow-wrap:anywhere}
+.tw{overflow-x:auto;margin:12px 0;border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{text-align:left;vertical-align:top;padding:6px 10px;border-bottom:1px solid var(--line)}
+th{background:var(--head);position:sticky;top:0} tr:last-child td{border-bottom:0}
+ol li{margin:6px 0}
+.tag{display:inline-block;padding:0 6px;border-radius:4px;font-size:12px;white-space:nowrap}
+.new{color:var(--new);background:var(--newbg)} .reuse{color:var(--reuse);background:var(--reusebg)} .hold{color:var(--hold);background:var(--holdbg)}
+@media (max-width:640px){body{font-size:14px} h1{font-size:22px}}
+</style></head>
+<body><nav><a href="#constraints-that-decide-use">Constraints that decide use</a><a href="#verdict-per-source">Verdict per source</a><a href="#detail-and-expected-effect">Detail and expected effect</a><a href="#recommendation">Recommendation</a><a href="#caveats">Caveats</a></nav><main>
+<h1 id="community-knowledge-licenses-and-expected-effect">Community knowledge: licenses and expected effect</h1>
+<p>Surveyed 2026-11-07; F3 wording aligned with the revised abused-folders.md the same day. Goal: for each community dataset beyond Sigma and ATT&amp;CK, state whether mozu may use it under its license and decisions, and what it would add. Follows <a href="abused-folders.md">abused-folders.md</a>. Japanese: <a href="community-knowledge.ja.md">community-knowledge.ja.md</a>.</p>
+<h2 id="constraints-that-decide-use">Constraints that decide use</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../adr/0001-license.md">ADR 0001</a></td>
+<td>Code AGPL-3.0-only; rules DRL 1.1; dependencies AGPL-compatible</td>
+</tr>
+<tr>
+<td><a href="../adr/0006-gpl-reference-data.md">ADR 0006</a></td>
+<td>GPL-3.0 data (LOLBAS, HijackLibs, winbindex) ships as data with the AGPL code, is matched at runtime and becomes <strong>facts</strong> and <code>service: unexpected_location</code>; never DRL rule content</td>
+</tr>
+<tr>
+<td><a href="../adr/0019-generic-rules-only.md">ADR 0019</a></td>
+<td>Rules list no product or tool names and are not generated from third-party data. This overrides ADR 0006's "LOLDrivers may become DRL rules"</td>
+</tr>
+<tr>
+<td>Inputs</td>
+<td>Only <code>$MFT</code>, <code>$J</code>, <code>$Boot</code>, <code>$SDS</code>: names, paths, sizes, times, ADS names. <strong>No hashes, signatures, content or process data</strong></td>
+</tr>
+<tr>
+<td>No network</td>
+<td>Data is pinned and shipped; never fetched at analysis time</td>
+</tr>
+</tbody>
+</table></div>
+<p>So a dataset can enter mozu in one of four ways:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Way</th>
+<th>Meaning</th>
+<th>Decision needed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong class="tag reuse">Data</strong></td>
+<td>Shipped with the binary, matched at runtime → fact / logsource; rules stay generic</td>
+<td>H2 per dataset (ADR 0006 pattern); <code>NOTICE</code> + license text</td>
+</tr>
+<tr>
+<td><strong class="tag reuse">Dev</strong></td>
+<td>Used only for tests and measurement, not shipped</td>
+<td>Test data rules; no runtime dependency</td>
+</tr>
+<tr>
+<td><strong class="tag hold">Reference</strong></td>
+<td>Read to design rules, extension lists or texts; nothing copied</td>
+<td>None</td>
+</tr>
+<tr>
+<td><strong>No</strong></td>
+<td>License, content or availability rules it out</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="verdict-per-source">Verdict per source</h2>
+<p>License from the GitHub API (<code>license.spdx_id</code>, <code>LICENSE</code> read where it was <code>NOASSERTION</code>), 2026-11-07. Counts from the published feeds or repository trees on the same day.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Source</th>
+<th>License</th>
+<th>Last push</th>
+<th>Use</th>
+<th>Expected effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/wietze/HijackLibs">HijackLibs</a></td>
+<td>GPL-3.0</td>
+<td>2026-10-28</td>
+<td><strong class="tag reuse">Data</strong> (ADR 0006 already decides it)</td>
+<td><strong class="tag new">High</strong></td>
+</tr>
+<tr>
+<td><a href="https://github.com/magicsword-io/LOLDrivers">LOLDrivers</a></td>
+<td>Apache-2.0</td>
+<td>2026-11-02</td>
+<td><strong class="tag reuse">Data</strong> (fact; not rules, ADR 0019)</td>
+<td><strong class="tag new">Medium–high</strong></td>
+</tr>
+<tr>
+<td><a href="https://github.com/redcanaryco/atomic-red-team">Atomic Red Team</a></td>
+<td>MIT</td>
+<td>2026-11-06</td>
+<td><strong class="tag reuse">Dev</strong> (G4 regression samples)</td>
+<td><strong class="tag new">High</strong> (measurement)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/BushidoUK/Ransomware-Tool-Matrix">Ransomware Tool Matrix</a></td>
+<td>CC-BY-4.0</td>
+<td>2026-08-29</td>
+<td><strong class="tag reuse">Dev</strong> (evaluation set)</td>
+<td><strong class="tag new">High</strong> (measurement)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/ThreatLabz/ransomware_notes">ThreatLabz ransomware_notes</a></td>
+<td>MIT</td>
+<td>2026-08-13</td>
+<td><strong class="tag reuse">Dev</strong> (P4-9 thresholds)</td>
+<td><strong class="tag new">Medium–high</strong></td>
+</tr>
+<tr>
+<td><a href="https://github.com/LOLBAS-Project/LOLBAS">LOLBAS</a></td>
+<td>GPL-3.0</td>
+<td>2026-09-26</td>
+<td><strong class="tag reuse">Data</strong> (ADR 0006)</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><a href="https://github.com/magicsword-io/LOLRMM">LOLRMM</a></td>
+<td>Apache-2.0</td>
+<td>2026-11-05</td>
+<td><strong class="tag reuse">Data</strong>, detail view only (concept-review.md)</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><a href="https://github.com/EricZimmerman/KapeFiles">KapeFiles</a></td>
+<td>MIT</td>
+<td>2026-11-05</td>
+<td><strong class="tag hold">Reference</strong> now; data for a follow-up manifest later</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td><a href="https://github.com/ForensicArtifacts/artifacts">ForensicArtifacts</a></td>
+<td>Apache-2.0</td>
+<td>2026-11-01</td>
+<td><strong class="tag hold">Reference</strong> (follow-up manifest)</td>
+<td>Low–medium</td>
+</tr>
+<tr>
+<td><a href="https://github.com/m417z/winbindex">winbindex</a></td>
+<td>GPL-3.0</td>
+<td>2026-11-06</td>
+<td><strong class="tag reuse">Data</strong> possible (ADR 0006); hold</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>NIST NSRL RDS</td>
+<td>U.S. government work; redistribution terms not retrieved</td>
+<td>quarterly</td>
+<td>Hold</td>
+<td>Unknown (see below)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/persistence-info/persistence-info.github.io">persistence-info</a></td>
+<td>GPL-3.0</td>
+<td>2023-12-19</td>
+<td><strong class="tag hold">Reference</strong></td>
+<td>Low</td>
+</tr>
+<tr>
+<td><a href="https://github.com/splunk/security_content">Splunk security_content</a></td>
+<td>Apache-2.0</td>
+<td>2026-11-05</td>
+<td><strong class="tag hold">Reference</strong></td>
+<td>Low</td>
+</tr>
+<tr>
+<td><a href="https://github.com/elastic/detection-rules">Elastic detection-rules</a></td>
+<td>Elastic License 2.0</td>
+<td>2026-11-06</td>
+<td><strong class="tag hold">Reference only, copy nothing</strong></td>
+<td>Low</td>
+</tr>
+<tr>
+<td><a href="https://github.com/mttaggart/wtfbins">WTFBins</a></td>
+<td>MIT</td>
+<td>2025-03-30</td>
+<td>Reference</td>
+<td>Low</td>
+</tr>
+<tr>
+<td><a href="https://github.com/LOLAPPS-Project/LOLAPPS">LOLAPPS</a></td>
+<td>GPL-3.0</td>
+<td>2025-02-19</td>
+<td>No (stale; LOLBAS covers the pattern)</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>Microsoft vulnerable driver blocklist</td>
+<td>Download Center terms, no open license</td>
+<td>quarterly</td>
+<td>No (LOLDrivers instead)</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="https://github.com/JMousqueton/ransomware.live">ransomware.live</a></td>
+<td>Unlicense</td>
+<td>2026-07-20</td>
+<td>No (victim and leak-site data, no file facts)</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="https://github.com/The-DFIR-Report/Sigma-Rules">The DFIR Report Sigma-Rules</a></td>
+<td>GPL-3.0</td>
+<td>2026-07-08</td>
+<td>No (repository holds only <code>LICENSE</code> and <code>README.md</code>)</td>
+<td>—</td>
+</tr>
+<tr>
+<td>filesec.io</td>
+<td>—</td>
+<td>—</td>
+<td>No (DNS failure 2026-11-07, no repository found)</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p>License compatibility: GPL-3.0 combines with AGPL-3.0 (GPLv3 §13); Apache-2.0, MIT and CC-BY-4.0 are one-way compatible with (A)GPL-3.0 and need attribution in <code>NOTICE</code>. Elastic License 2.0 is not open source and adds use restrictions, so its text and rule logic are not copied into AGPL code or DRL rules.</p>
+<h2 id="detail-and-expected-effect">Detail and expected effect</h2>
+<h3 id="data-candidates">Data candidates</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Content (2026-11-07)</th>
+<th>Usable from NTFS metadata</th>
+<th>Fact it would add</th>
+<th>Effect and why</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HijackLibs</td>
+<td>627 DLLs; 597 with expected locations (428 in System32/SysWOW64); 1,907 side-loading, 459 environment-variable, 20 phantom, 17 search-order executable pairs</td>
+<td>Name and path: all</td>
+<td><code>known hijackable DLL</code> + outside expected location → <code>service: unexpected_location</code>; optionally "the vulnerable executable is in the same folder"</td>
+<td><strong class="tag new">High</strong>: DLL side-loading drops a signed executable and a DLL into ProgramData, AppData, Temp or Public, where <code>outside_baseline_windows_binary</code> (only <code>C:\Windows</code>) does not look. A generic rule (<code>unexpected_location</code> + <code>.dll</code>) adds no names to rules</td>
+<td>471 of 627 are Microsoft DLLs; legitimate apps bundle some names → combine with <code>baseline_outside</code>; measure on 12 hosts</td>
+</tr>
+<tr>
+<td>LOLDrivers</td>
+<td>713 drivers (588 vulnerable, 125 malicious); 2,430 samples carry only hashes; file names are in <code>Tags</code>: 647 unique, 31 of them hash-like (<code>driver_&lt;hex&gt;.sys</code>)</td>
+<td>Names only (no hashes here)</td>
+<td><code>known vulnerable driver name</code> on a <code>.sys</code></td>
+<td><strong class="tag new">Medium–high</strong>: narrows abused-folders.md F3 (outside-baseline driver candidates) to names the catalog lists. Driver abuse for defense evasion is reported before encryption (Defense Evasion is 24 of 225 tools in the Ransomware Tool Matrix)</td>
+<td>A name match is not BYOVD: it does not show the version, signer, load or use. A renamed driver is missed; a patched driver with the same name still matches → fact, never a finding on its own</td>
+</tr>
+<tr>
+<td>LOLBAS</td>
+<td>245 entries, 613 expected paths (227 System32/SysWOW64, 80 other <code>C:\Windows</code>, 282 Program Files, 24 other)</td>
+<td>Name and path: all</td>
+<td><code>known LOLBin</code> + outside expected path</td>
+<td><strong>Medium</strong>: generalizes <code>system_binary_outside_system32</code> from 6 names to 245; a copied LOLBin outside its path is a masquerade signal</td>
+<td>Execution is invisible; renamed copies are missed; already decided in ADR 0006</td>
+</tr>
+<tr>
+<td>LOLRMM</td>
+<td>358 tools; 318 with installation paths (846 bare names, 234 Program Files, 46 ProgramData, 35 AppData, 186 other); 111 tools with 845 disk artifacts</td>
+<td>Names and paths</td>
+<td><code>catalog match</code> in the detail view of an outside-baseline directory (P4-15)</td>
+<td><strong>Medium</strong>: RMM is the largest ransomware tool category (42 tools); helps a non-expert recognize "AnyDesk folder"</td>
+<td>ADR 0019 removed 307 product rules; data only, not findings</td>
+</tr>
+<tr>
+<td>winbindex</td>
+<td>Version and path history of Microsoft binaries</td>
+<td>Names and paths</td>
+<td>Microsoft binary outside its known paths</td>
+<td><strong>Low</strong>: the per-build baseline already answers this for the host's build</td>
+<td>Large; useful only if baselines miss builds (P4-5 nearest-build fallback)</td>
+</tr>
+<tr>
+<td>NSRL RDS</td>
+<td>RDSv3 SQLite; very large (NIST warns); file rows carry name, size and hashes, no paths</td>
+<td>Name + size (<code>$MFT</code> has size)</td>
+<td><code>known software file (name and size)</code></td>
+<td>Unknown: could reduce third-party noise among outside-baseline files (product.md P5), but name + size is weak and the data is huge</td>
+<td>Terms not retrieved; compare first with P4-4 normalization</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="dev-and-reference">Dev and reference</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Content</th>
+<th>Effect and why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Atomic Red Team</td>
+<td>353 techniques. Windows tests: T1547.001 21, T1053.005 14, T1003.003 11, T1574.001 7, T1070.004 7, T1543.003 6, T1564.001 5, T1486 4, T1036.005 3, T1068 2, T1074.001 2, T1505.003 1</td>
+<td><strong class="tag new">High</strong> for measurement: G4 regression samples for abused-folders.md F1–F7 and P4-9 (run on the maintainer's VM, collect, keep the collection outside the repo)</td>
+</tr>
+<tr>
+<td>Ransomware Tool Matrix</td>
+<td>225 tools in 8 categories (RMM 42, credential theft 42, discovery 36, offsec 28, exfiltration 28, defense evasion 24, networking 15, LOLBAS 10); 13 tools used by ≥ 10 gangs</td>
+<td><strong class="tag new">High</strong> for measurement: a label set for P4-19 ("does the report show the footprint of the 13 tools used by ≥ 10 gangs?"); never rule content (ADR 0019)</td>
+</tr>
+<tr>
+<td>ThreatLabz ransomware_notes</td>
+<td>222 families, 335 note files with original names (<code>readme*</code> 35, <code>how*to*recover*</code> 12)</td>
+<td><strong class="tag new">Medium–high</strong>: tunes a generic P4-9 correlation "same new file name created in many directories within minutes" without listing note names</td>
+</tr>
+<tr>
+<td>KapeFiles</td>
+<td>427 targets (Apps 194, Windows 102, compound 36, browsers 31, antivirus 29)</td>
+<td><strong>Medium</strong>: maps a finding to the KAPE target to collect next (concept-review.md follow-up manifest); M2 already reads KAPE output</td>
+</tr>
+<tr>
+<td>ForensicArtifacts</td>
+<td>Artifact path definitions (<code>windows.yaml</code>, <code>webservers.yaml</code>, …); <code>windows_dll_hijacking.yaml</code> is from Windows 7</td>
+<td><strong>Low–medium</strong>: same role as KapeFiles for the manifest; its DLL list is covered by the baseline rule under <code>C:\Windows</code></td>
+</tr>
+<tr>
+<td>persistence-info</td>
+<td>44 entries, mostly registry; file-based: Startup folder, Task Scheduler, PowerShell profile, Recycle Bin, <code>wpbbin</code>, Windows Terminal profile</td>
+<td><strong>Low</strong>: confirms abused-folders.md F1/F2 and the PowerShell-profile rule; nothing else is visible in NTFS</td>
+</tr>
+<tr>
+<td>Splunk security_content</td>
+<td>2,204 detections (1,529 endpoint), SPL</td>
+<td><strong>Low</strong>: mostly process-based like Sigma; conversion cost</td>
+</tr>
+<tr>
+<td>Elastic detection-rules</td>
+<td>EQL/KQL</td>
+<td><strong>Low</strong>, and license forbids reuse beyond reading</td>
+</tr>
+<tr>
+<td>WTFBins</td>
+<td>48 entries of benign-but-noisy binaries</td>
+<td><strong>Low</strong>: process behavior, not file facts</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="recommendation">Recommendation</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Order</th>
+<th>Action</th>
+<th>Why</th>
+<th>Decision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>HijackLibs as <code>unexpected_location</code> data + one generic rule</td>
+<td>Already decided (ADR 0006); highest gain where the baseline rule does not look</td>
+<td>Plan item (H1); data import is H2</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Atomic Red Team samples for F1–F7 and P4-9</td>
+<td>No rule is accepted without G4; cheap</td>
+<td>Plan item; human runs the VM</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Ransomware Tool Matrix as a P4-19 label set</td>
+<td>Measures the product's own claim (≥ 80 % attack files shown) for the primary user's case</td>
+<td>Part of P4-19 ADR</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LOLDrivers names as a fact next to F3 candidates (after F3 is measured)</td>
+<td>Tells a listed driver name from other third-party drivers; Apache-2.0</td>
+<td>New ADR (data from a non-GPL source, ADR 0019 boundary)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>ThreatLabz notes for P4-9 thresholds</td>
+<td>Generic correlation, measured</td>
+<td>Within P4-9</td>
+</tr>
+<tr>
+<td>6</td>
+<td>LOLBAS, LOLRMM facts</td>
+<td>Detail-view value; not findings</td>
+<td>After P4-13</td>
+</tr>
+<tr>
+<td>—</td>
+<td>KapeFiles / ForensicArtifacts for a follow-up manifest</td>
+<td>Only if that manifest becomes a plan item</td>
+<td>Product need first</td>
+</tr>
+<tr>
+<td>—</td>
+<td>NSRL, winbindex</td>
+<td>Hold until P4-4/P4-5 numbers show residual noise</td>
+<td>Measurement first</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="caveats">Caveats</h2>
+<ul>
+<li>Licenses are as declared by each repository; datasets may include third-party content under other terms. Re-check at import (ADR 0006 handling).</li>
+<li>"Effect" is a judgment from counts and fit, not a measurement. Each Data item needs per-host counts on the 12 local hosts before a rule level is set (ADR 0016).</li>
+<li>Name-only matching is evadable by renaming; every catalog match is a fact shown next to findings, never a ranking (AGENTS.md).</li>
+<li>Feeds were downloaded once for counting (GET only) into a scratch directory and not committed.</li>
+</ul>
+</main></body></html>

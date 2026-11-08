@@ -1,0 +1,998 @@
+source,folder,id,name,category,level,loadable,technique
+attack,$Recycle.Bin,relationship--34b96e5d-1b2a-4ca5-89b5-7de398966bea,Mustang Panda,intrusion-set,,,T1564.001
+attack,$Recycle.Bin,relationship--3f95e9db-52a6-4dbe-b08f-5cfc15723d6a,DynoWiper,malware,,,T1679
+attack,$Recycle.Bin,relationship--76fbcff9-f756-47d7-8a86-8bb8dc748433,Embargo,malware,,,T1490
+attack,$Recycle.Bin,relationship--90f5c230-407d-45ba-85db-44cd3ecea06d,Vidar,malware,,,T1083
+attack,$Recycle.Bin,relationship--a68d8191-b374-4741-a249-1db3515d581b,GALLIUM,intrusion-set,,,T1074.001
+attack,$Recycle.Bin,relationship--bbd29878-c16a-45ee-9785-78550f080d83,menuPass,intrusion-set,,,T1074.001
+attack,$Recycle.Bin,relationship--c37f69b0-176a-483d-b75c-3b0c84e03276,BackdoorDiplomacy,intrusion-set,,,T1074.001
+attack,AppData\Local (other),relationship--04558d61-aa04-46b5-a65f-921011ac9621,APT19,intrusion-set,,,T1547.001
+attack,AppData\Local (other),relationship--1df7df54-c4c1-49f0-a0c3-11102db44f2c,Patchwork,intrusion-set,,,T1555.003
+attack,AppData\Local (other),relationship--67f1d68d-fe0f-4e65-8b2a-f614fda68e3c,NOKKI,malware,,,T1036.005
+attack,AppData\Local (other),relationship--87590696-bf1c-4d42-8ef7-851fb10d8053,Mafalda,malware,,,T1217
+attack,AppData\Local (other),relationship--c43ac3ee-be59-419e-8ea2-43c04923102f,Chimera,intrusion-set,,,T1114.002
+attack,AppData\Local (other),relationship--df207207-01b2-456b-9dc4-7afd5ffeeb46,Prikormka,malware,,,T1074.001
+attack,AppData\Local (other),relationship--ef10f1da-2388-4404-97aa-bcfa9bcd27ec,LODEINFO,malware,,,T1539
+attack,AppData\Local\Temp,relationship--08bf9136-b5a3-4f46-893a-3bd4f7911f91,LunarWeb,malware,,,T1059.003
+attack,AppData\Local\Temp,relationship--0c294d8b-2ee4-47ee-b9d8-8378d9d89ba1,Comnie,malware,,,T1007
+attack,AppData\Local\Temp,relationship--150e1b1c-a575-4542-a66e-c1646212744b,ComRAT,malware,,,T1564.005
+attack,AppData\Local\Temp,relationship--1b141c9e-a679-40c7-ad7b-ac40ac586471,admin@338,intrusion-set,,,T1016
+attack,AppData\Local\Temp,relationship--228e71e2-0e76-4020-a850-7a568412259b,Comnie,malware,,,T1119
+attack,AppData\Local\Temp,relationship--23a9b432-2d25-45a7-b75f-7496b26702f8,LODEINFO,malware,,,T1074.001
+attack,AppData\Local\Temp,relationship--291e908e-1d2e-4b29-a564-5a33149d1dbb,Epic,malware,,,T1083
+attack,AppData\Local\Temp,relationship--3426458d-9dcc-48b3-8bfc-24cf82377656,Mustang Panda,intrusion-set,,,T1678
+attack,AppData\Local\Temp,relationship--4da943df-a7dc-499f-a8b7-ca8d298d8ff6,admin@338,intrusion-set,,,T1036.005
+attack,AppData\Local\Temp,relationship--4f243ab6-812f-4fd3-9607-8d94409a94c1,Wizard Spider,intrusion-set,,,T1570
+attack,AppData\Local\Temp,relationship--58e22fa6-5925-40b7-9df6-4cda34892ea6,Emotet,malware,,,T1027.009
+attack,AppData\Local\Temp,relationship--5a1876a1-144f-4416-b9bf-6df819613962,PUNCHBUGGY,malware,,,T1036.005
+attack,AppData\Local\Temp,relationship--5c816fc0-c4e3-47ef-8193-ef88eabdfc7e,admin@338,intrusion-set,,,T1083
+attack,AppData\Local\Temp,relationship--5d397a8d-2195-440d-a0f5-bbf6c3e8f6e4,ADVSTORESHELL,malware,,,T1074.001
+attack,AppData\Local\Temp,relationship--5dbd040e-0433-42ca-8e03-b3741be31cb2,Cobalt Group,intrusion-set,,,T1218.003
+attack,AppData\Local\Temp,relationship--5f055076-79d1-44e8-95cb-43fc515df2f6,Lazarus Group,intrusion-set,,,T1074.001
+attack,AppData\Local\Temp,relationship--602d3c1d-6337-4134-9dc7-b1452f95b88f,Qilin,malware,,,T1021.002
+attack,AppData\Local\Temp,relationship--672c21b6-0a54-4b70-8ce0-591cc5a72622,Mustang Panda,intrusion-set,,,T1059.003
+attack,AppData\Local\Temp,relationship--6ecbd739-f0c0-4aff-858f-255e3afeee8f,MuddyWater,intrusion-set,,,T1074.001
+attack,AppData\Local\Temp,relationship--7d047513-5fbf-4d9e-8a5d-54317123e34c,admin@338,intrusion-set,,,T1069.001
+attack,AppData\Local\Temp,relationship--87999cb2-7565-465a-ad10-b585be2e3e3f,LightNeuron,malware,,,T1074.001
+attack,AppData\Local\Temp,relationship--8b6f5eed-f21e-41db-a858-32bb0d12e593,Operation Honeybee,campaign,,,T1082
+attack,AppData\Local\Temp,relationship--95ebe979-ec88-489d-ba9d-b4ac2f1f22db,MirrorStealer,malware,,,T1074.001
+attack,AppData\Local\Temp,relationship--9bb68fb7-931e-4d24-a042-c6545fb8167f,Juicy Mix,campaign,,,T1074.001
+attack,AppData\Local\Temp,relationship--9fef204f-163a-4c9d-b9b1-8a168074063a,admin@338,intrusion-set,,,T1049
+attack,AppData\Local\Temp,relationship--a30e2e98-d6c2-4eb1-b520-1b6757c88c47,SombRAT,malware,,,T1074.001
+attack,AppData\Local\Temp,relationship--a535c99e-66f2-47c9-aa25-352c90efd2ff,Kimsuky,intrusion-set,,,T1074.001
+attack,AppData\Local\Temp,relationship--a802d52a-01f4-44c8-b80d-d2c746e1e31d,ChChes,malware,,,T1083
+attack,AppData\Local\Temp,relationship--aaa5dc30-1195-4edd-881e-63934b9f8c4d,The Gentlemen Ransomware,malware,,,T1491.001
+attack,AppData\Local\Temp,relationship--b0ecee81-0bbe-4ab9-9618-b245656aabc4,WhisperGate,malware,,,T1134.002
+attack,AppData\Local\Temp,relationship--c1a5ba7a-659b-4ac2-90df-f3f74a3a8442,Rising Sun,malware,,,T1059.003
+attack,AppData\Local\Temp,relationship--c4962ae6-91e2-407d-9f42-aa0381574476,admin@338,intrusion-set,,,T1087.001
+attack,AppData\Local\Temp,relationship--c66dddb1-0003-4af8-9887-5642964e0fd0,Sagerunex,malware,,,T1074.001
+attack,AppData\Local\Temp,relationship--c93bb2b9-bd22-4e14-b884-2141168387b2,Pteranodon,malware,,,T1074.001
+attack,AppData\Local\Temp,relationship--cdd92791-3bc2-4a1f-89b4-3eced4aa667f,Kimsuky,intrusion-set,,,T1083
+attack,AppData\Local\Temp,relationship--d8c447e8-6581-47ca-98d6-44b262023669,NightClub,malware,,,T1074.001
+attack,AppData\Local\Temp,relationship--db8f1355-57f0-446d-a261-b168497b20c6,BADNEWS,malware,,,T1074.001
+attack,AppData\Local\Temp,relationship--dba52e3c-fb05-4001-9fa4-39d4cd673ad0,Kimsuky,intrusion-set,,,T1480.002
+attack,AppData\Local\Temp,relationship--deae71f8-d849-484f-b49d-757356e195c5,Proxysvc,malware,,,T1059.003
+attack,AppData\Local\Temp,relationship--df98db39-fdfd-463c-96b3-e9a8b049f316,Sandworm Team,intrusion-set,,,T1140
+attack,AppData\Local\Temp,relationship--e1034190-fc61-495d-9510-21ae85762173,Vidar,malware,,,T1036.005
+attack,AppData\Local\Temp,relationship--e169d920-59ab-4a07-928e-858b878fd7bc,Operation Honeybee,campaign,,,T1057
+attack,AppData\Local\Temp,relationship--e6e324d1-b775-48bb-ac9f-02fcc2428752,admin@338,intrusion-set,,,T1007
+attack,AppData\Local\Temp,relationship--e80f97df-4984-4e62-bba6-1333d4c2c977,Imminent Monitor,tool,,,T1083
+attack,AppData\Local\Temp,relationship--eb85fa2e-3c50-4130-9717-8688237fecbc,admin@338,intrusion-set,,,T1082
+attack,AppData\Local\Temp,relationship--ef651fd2-97e7-4471-a609-41f46003cf11,KOPILUWAK,malware,,,T1074.001
+attack,AppData\Local\Temp,relationship--f1e6b3b2-4502-44f6-8340-128a0e3126a6,OutSteel,malware,,,T1036.005
+attack,AppData\Local\Temp,relationship--f8c1f1e4-4580-4ec6-9bc0-6f24214dc273,ECCENTRICBANDWAGON,malware,,,T1074.001
+attack,AppData\Local\Temp,relationship--fa6292a2-c184-4bc9-a37f-0c1ac61e1135,Turla,intrusion-set,,,T1083
+attack,AppData\Local\Temp,relationship--fca5e5e4-e615-44d5-901e-225fccd329cc,LunarMail,malware,,,T1074.001
+attack,AppData\Roaming,relationship--035525fc-4549-4282-b85b-c7c07359124c,Kimsuky,intrusion-set,,,T1005
+attack,AppData\Roaming,relationship--0fd5d3bc-d736-43c0-b9ec-f1dcd95411a7,Elise,malware,,,T1036.005
+attack,AppData\Roaming,relationship--1efd302f-e162-4f68-a942-f5d14b642a78,ROAMINGHOUSE,malware,,,T1137.001
+attack,AppData\Roaming,relationship--22507af4-0701-4ebe-99b1-153cf803f829,WastedLocker,malware,,,T1564.001
+attack,AppData\Roaming,relationship--259b878f-147e-443b-8360-aabc00cf6d73,HTTPBrowser,malware,,,T1547.001
+attack,AppData\Roaming,relationship--25d44b9e-3645-4fe7-96b0-3c2c31b90ac0,ThreatNeedle,malware,,,T1547.001
+attack,AppData\Roaming,relationship--3d16b34f-f58b-4469-a0ef-7585f88d6001,T9000,malware,,,T1546.010
+attack,AppData\Roaming,relationship--40dc38ff-1daf-4c3b-823d-377ae4d3a505,Bisonal,malware,,,T1137.006
+attack,AppData\Roaming,relationship--4b03f718-f89a-4652-b3be-5cbe4e0e044f,Ramsay,malware,,,T1074.001
+attack,AppData\Roaming,relationship--516fd2f8-a709-43f4-86e1-c753e28113e1,LitePower,malware,,,T1113
+attack,AppData\Roaming,relationship--538697e9-2dda-43cb-ba43-208402f62f9d,Raspberry Robin,malware,,,T1105
+attack,AppData\Roaming,relationship--5baa0187-f860-4ed2-8f29-bc6690009b8c,DarkGate,malware,,,T1005
+attack,AppData\Roaming,relationship--83384e31-d9c6-46a0-956f-ee28d7d0cb89,VBShower,malware,,,T1070.004
+attack,AppData\Roaming,relationship--842f8f4b-9d90-4533-850f-777f33ef8257,T9000,malware,,,T1123
+attack,AppData\Roaming,relationship--86b7bab7-a1d6-4820-be55-c379f3967f1a,Zebrocy,malware,,,T1083
+attack,AppData\Roaming,relationship--89006d46-811b-4ad7-9b27-cf9f563418a2,DarkGate,malware,,,T1105
+attack,AppData\Roaming,relationship--8c9728bd-f58c-4a78-8b4d-63e8fe8cce31,Lumma Stealer,malware,,,T1074.001
+attack,AppData\Roaming,relationship--bc7382dc-b2d0-4bd3-9e7d-f49cf17e7fc1,InnaputRAT,malware,,,T1547.001
+attack,AppData\Roaming,relationship--c93bb2b9-bd22-4e14-b884-2141168387b2,Pteranodon,malware,,,T1074.001
+attack,AppData\Roaming,relationship--cd07e694-b95b-4797-b2da-63704b4e8939,SQLRat,malware,,,T1053.005
+attack,AppData\Roaming,relationship--cf72062c-b62f-4127-b7e3-ac3f941a9599,Bumblebee,malware,,,T1053.005
+attack,AppData\Roaming,relationship--d0c8b03f-7c57-4156-bc5e-cd0c45327ef3,Pillowmint,malware,,,T1070.004
+attack,AppData\Roaming,relationship--decc0aea-70d2-42b8-8529-3049b9f5937f,Confucius,intrusion-set,,,T1547.001
+attack,AppData\Roaming,relationship--e08fbaf9-0efe-41b1-99f7-ec61f38b175c,Mis-Type,malware,,,T1074.001
+attack,AppData\Roaming,relationship--e10a8253-29d9-438b-bf10-3167d4f85fe8,XLoader,malware,,,T1547.001
+attack,AppData\Roaming,relationship--e15a2065-49a7-435f-b9ad-b45c4906aa74,Dragonfly,intrusion-set,,,T1074.001
+attack,AppData\Roaming,relationship--e58abef6-2089-4f55-b5ee-9fc24378b52f,RogueRobin,malware,,,T1059.001
+attack,AppData\Roaming,relationship--e5a2a20c-1ef7-49a9-a9fa-2b89231793b8,T9000,malware,,,T1125
+attack,AppData\Roaming,relationship--eefb1822-dbcc-4919-8c76-f5ca0c371bf0,DarkGate,malware,,,T1561.001
+attack,AppData\Roaming,relationship--f5d2b140-1267-405b-8085-e02c135504f9,SharpDisco,malware,,,T1083
+attack,AppData\Roaming,relationship--f696324d-7fb4-44ca-82dd-3385b55fbb80,Elise,malware,,,T1547.001
+attack,Desktop,relationship--6bbefe61-008f-4298-8a9b-364c51ba7c20,Qilin,malware,,,T1112
+attack,Desktop,relationship--8bec8f38-d820-43f5-a86a-63f3bda0ab86,Vidar,malware,,,T1070.004
+attack,Downloads,relationship--42ca6477-eae6-4423-8153-a1e0662f3fe5,LP-Notes,malware,,,T1074.001
+attack,Downloads,relationship--5d972f64-4c81-43ce-ba08-2c791bd78287,Lucifer,malware,,,T1053.005
+attack,Downloads,relationship--f8c1f1e4-4580-4ec6-9bc0-6f24214dc273,ECCENTRICBANDWAGON,malware,,,T1074.001
+attack,Exchange web,relationship--cdef12f4-7353-4edc-90d7-f6f7f7a13e7d,Moses Staff,intrusion-set,,,T1105
+attack,NTDS,relationship--095c33ca-c1fa-4a8c-9b1d-01c277140e6d,APT28 Nearest Neighbor Campaign,campaign,,,T1003.003
+attack,NTDS,relationship--0f5dd1a0-fde3-4194-8cd4-03c2e77479f5,Operation MidnightEclipse,campaign,,,T1003.003
+attack,NTDS,relationship--18d36fff-42e8-4b33-b747-9b898a594eb2,esentutl,tool,,,T1006
+attack,NTDS,relationship--1c4654e5-eac8-41e1-8da9-f88cadc6cc20,Scattered Spider,intrusion-set,,,T1003.003
+attack,NTDS,relationship--1eb80cf7-9da4-4aae-b609-497908849f28,2025 Poland Wiper Attacks,campaign,,,T1006
+attack,NTDS,relationship--20384b7e-e720-44ed-9aea-7f6857ce18c1,Volt Typhoon,intrusion-set,,,T1036.005
+attack,NTDS,relationship--21b87986-57d0-45a7-9a42-f3e7803cf337,Volt Typhoon,intrusion-set,,,T1036.008
+attack,NTDS,relationship--3d6d5bc0-2160-4152-9a4b-b2f19a8768b4,Volt Typhoon,intrusion-set,,,T1560.001
+attack,NTDS,relationship--47f8da55-c38f-4cec-b1c6-241ecb3dd8b8,FIN13,intrusion-set,,,T1003.003
+attack,NTDS,relationship--4faa4943-e54e-420d-a391-350ef629e766,esentutl,tool,,,T1003.003
+attack,NTDS,relationship--64abef3c-d453-4782-b084-25f684b3f7ae,Chimera,intrusion-set,,,T1003.003
+attack,NTDS,relationship--6d0fb103-d6f6-4259-a62f-296735020176,Impacket,tool,,,T1003.003
+attack,NTDS,relationship--8b8e829b-9f29-4677-8f22-f63b6c49a115,Medusa Group,intrusion-set,,,T1003.003
+attack,NTDS,relationship--94175b7b-a332-4e38-9d7b-3b900825bb3a,Cutting Edge,campaign,,,T1003.003
+attack,NTDS,relationship--a1e10048-626c-4e64-9bdb-fd576be8c19f,Wizard Spider,intrusion-set,,,T1003.003
+attack,NTDS,relationship--a291d185-31c8-4458-a3fc-9af617af28d9,Dragonfly,intrusion-set,,,T1003.003
+attack,NTDS,relationship--a4b332b2-1cad-4403-a101-4203238ffdbf,APT41,intrusion-set,,,T1003.003
+attack,NTDS,relationship--b6da41e9-9925-4b83-b9a7-d29509b852de,Mustang Panda,intrusion-set,,,T1003.003
+attack,NTDS,relationship--c1d557cf-646d-4cac-bd2a-20889431372f,Scattered Spider,intrusion-set,,,T1006
+attack,NTDS,relationship--cef68296-665f-49ed-8a30-c91f8c00096f,FIN6,intrusion-set,,,T1110.002
+attack,NTDS,relationship--d1197689-ff2e-4a0e-ad1e-69bb14c8822d,HAFNIUM,intrusion-set,,,T1003.003
+attack,NTDS,relationship--d63bfe4b-634b-4702-953a-7865ef564dce,MirrorFace,intrusion-set,,,T1003.003
+attack,NTDS,relationship--ed919b5f-3437-4955-96a0-8e1370adf7d1,2025 Poland Wiper Attacks,campaign,,,T1003.003
+attack,NTDS,relationship--fa9c04cc-50a4-4867-bb43-60df581818b0,APT28 Nearest Neighbor Campaign,campaign,,,T1006
+attack,NTDS,relationship--fbeb5e6c-5574-4d41-add3-01efec419ae7,Volt Typhoon,intrusion-set,,,T1074.001
+attack,PerfLogs,relationship--97a62430-6a83-4ead-b8c7-ce47f5d0cac0,Wizard Spider,intrusion-set,,,T1074.001
+attack,PerfLogs,relationship--b7d36798-e9f2-4474-836e-80b100a561e6,Leviathan,intrusion-set,,,T1074.001
+attack,ProgramData,relationship--078fe5f7-91b4-4864-960a-24c64b14996e,Operation Dream Job,campaign,,,T1218.011
+attack,ProgramData,relationship--0bd9fd2b-e2f7-48f1-8988-31c041691585,Trojan.Karagany,malware,,,T1113
+attack,ProgramData,relationship--23b5fd51-bb47-4811-8a38-c768c8fa6b0e,Rifdoor,malware,,,T1027.001
+attack,ProgramData,relationship--4269342d-fd7b-4fc6-882f-5099da627c85,Tropic Trooper,intrusion-set,,,T1564.001
+attack,ProgramData,relationship--42cedca0-2faf-47db-a2da-c81b430ace60,FIN7,intrusion-set,,,T1564.001
+attack,ProgramData,relationship--4dcb70d9-017b-44b8-a13c-fab275c5bc56,C0015,campaign,,,T1074.001
+attack,ProgramData,relationship--52d12577-199c-41a6-92d6-28d26c023aea,Rifdoor,malware,,,T1547.001
+attack,ProgramData,relationship--600e55f7-1a72-4289-9c4c-b66798a58776,RustyWater,malware,,,T1547.001
+attack,ProgramData,relationship--6b9d6a84-b73e-4fb3-ad86-64b5832056d4,RainyDay,malware,,,T1074.001
+attack,ProgramData,relationship--757936cb-468c-4b60-a996-8089c77cea62,APT28 Nearest Neighbor Campaign,campaign,,,T1074.001
+attack,ProgramData,relationship--7e3afacc-85c0-49a3-ae44-0a57c7ee0427,CLAIMLOADER,malware,,,T1036.005
+attack,ProgramData,relationship--8bec8f38-d820-43f5-a86a-63f3bda0ab86,Vidar,malware,,,T1070.004
+attack,ProgramData,relationship--91e4cb6a-abe6-46e0-8730-b80ba1cca16f,ANDROMEDA,malware,,,T1547.001
+attack,ProgramData,relationship--93adaeae-7fa2-4510-b377-19b82969ff3e,The Gentlemen Ransomware,malware,,,T1070.004
+attack,ProgramData,relationship--959bda8e-6c64-4048-9c34-f8ccd64066e8,LoFiSe,malware,,,T1074.001
+attack,ProgramData,relationship--a370ba06-f0e0-49e7-a1dd-508700403bed,The Gentlemen Ransomware,malware,,,T1074.001
+attack,ProgramData,relationship--add011d8-6cd3-4ae5-af51-e52ce81e277a,OilRig,intrusion-set,,,T1036.005
+attack,ProgramData,relationship--af6d4d8e-32ac-4066-a22f-0596cb7d0476,CLAIMLOADER,malware,,,T1053.005
+attack,ProgramData,relationship--b149adfe-547f-4cd4-af4a-ea7018a203c1,Trojan.Karagany,malware,,,T1003
+attack,ProgramData,relationship--bc838675-63af-45c5-9a30-081b5f5ac0d7,POWERSOURCE,malware,,,T1564.004
+attack,ProgramData,relationship--c469874c-492d-4975-abc1-1668fc65a70a,LAMEHUG,malware,,,T1074.001
+attack,ProgramData,relationship--cc55ad3c-601b-4549-b080-adbde6b98629,APT38,intrusion-set,,,T1547.001
+attack,Startup,relationship--25d44b9e-3645-4fe7-96b0-3c2c31b90ac0,ThreatNeedle,malware,,,T1547.001
+attack,Startup,relationship--907df22e-fdfe-4b93-8b18-ebf66f83868c,S-Type,malware,,,T1547.009
+attack,Startup,relationship--decc0aea-70d2-42b8-8529-3049b9f5937f,Confucius,intrusion-set,,,T1547.001
+attack,System32\config,relationship--20cb38ca-5e2d-40eb-b104-c1e95ff2ec54,VOID MANTICORE,intrusion-set,,,T1047
+attack,System32\config,relationship--90f5c230-407d-45ba-85db-44cd3ecea06d,Vidar,malware,,,T1083
+attack,System32\drivers,relationship--3e79db26-a2ce-4233-a86c-5a97b10dd937,Sibot,malware,,,T1036.005
+attack,System32\wbem,relationship--cd38ce72-655d-40f5-afbc-5a9ad0624a6a,Meteor,malware,,,T1490
+attack,Users\Public,relationship--0ca1948b-476c-4ff5-a792-f3790250bdc1,APT3,intrusion-set,,,T1053.005
+attack,Users\Public,relationship--20cb38ca-5e2d-40eb-b104-c1e95ff2ec54,VOID MANTICORE,intrusion-set,,,T1047
+attack,Users\Public,relationship--27fe3870-1ce3-4f62-be7c-6da08d09643c,ccf32,malware,,,T1560.001
+attack,Users\Public,relationship--4269342d-fd7b-4fc6-882f-5099da627c85,Tropic Trooper,intrusion-set,,,T1564.001
+attack,Users\Public,relationship--42ca6477-eae6-4423-8153-a1e0662f3fe5,LP-Notes,malware,,,T1074.001
+attack,Users\Public,relationship--492ee8f7-6f00-43a9-ae9b-fbf57879c49e,WIRTE,intrusion-set,,,T1074.001
+attack,Users\Public,relationship--4cb2ba08-aebd-47f2-b1ea-9e28a2f64f77,PUBLOAD,malware,,,T1053.005
+attack,Users\Public,relationship--4df03f98-3c25-4772-8be5-cc1aaeff1cc9,APT5,intrusion-set,,,T1074.001
+attack,Users\Public,relationship--5cab4b98-b263-476d-a632-4deae44b45ba,DCSYNCER.SLICK,malware,,,T1005
+attack,Users\Public,relationship--5cba4a5e-c005-495d-9cd6-60794d9b3247,Ryuk,malware,,,T1036.005
+attack,Users\Public,relationship--614da3bc-3be9-408c-8154-8a121d4b8895,SharpDisco,malware,,,T1005
+attack,Users\Public,relationship--9b826389-8c99-4b4c-9da6-de41e4f29fc4,DEADEYE,malware,,,T1059.003
+attack,Users\Public,relationship--a2aaa018-7bcc-4ec1-b27e-c6672e390c32,Qilin,malware,,,T1547.001
+attack,Users\Public,relationship--be20956b-6103-4bfc-a7c4-7e61cbc8cbcd,PAKLOG,malware,,,T1074.001
+attack,Users\Public,relationship--c2fd10bb-db6f-4ea0-b63e-583c45eec56a,SIGHTGRAB,malware,,,T1074.001
+attack,Users\Public,relationship--c4d3d8d6-95a9-4d1d-bd51-ad736c0a4b41,Volt Typhoon,intrusion-set,,,T1070.004
+attack,Users\Public,relationship--cf3bdeb7-2728-4bae-a790-6aa2dbf766e8,DCSYNCER.SLICK,malware,,,T1074.001
+attack,Users\Public,relationship--eeb5eeab-3fa1-4670-a7ab-f6a8f7193be9,SharpDisco,malware,,,T1120
+attack,Users\Public,relationship--f02fafab-e905-48a4-953d-6238f740cc77,SharpDisco,malware,,,T1105
+attack,Windows\Prefetch,relationship--93adaeae-7fa2-4510-b377-19b82969ff3e,The Gentlemen Ransomware,malware,,,T1070.004
+attack,Windows\Temp,relationship--0032f447-1ab7-427d-b7ae-baa436dc2411,Operation Wocao,campaign,,,T1012
+attack,Windows\Temp,relationship--05f303b4-7582-45d1-af25-46250afc4d8f,ECCENTRICBANDWAGON,malware,,,T1070.004
+attack,Windows\Temp,relationship--1ddc8822-55de-4671-8a73-c95d6383016f,Chimera,intrusion-set,,,T1053.005
+attack,Windows\Temp,relationship--4e07996d-c9d9-49a8-9800-94daf69cd3b3,Kwampirs,malware,,,T1083
+attack,Windows\Temp,relationship--5a3333ef-b106-42db-b0bb-46b2ac7c21b2,Agrius,intrusion-set,,,T1074.001
+attack,Windows\Temp,relationship--7e26e90e-79b1-45ab-94dd-ea7b35cffbf8,Operation Wocao,campaign,,,T1070.004
+attack,Windows\Temp,relationship--87aaf244-2ecb-453e-87c0-836f9a26cc59,PowerLess,malware,,,T1074.001
+attack,Windows\Temp,relationship--9088b52e-8e07-4fd4-ac80-66df7f877adf,Bisonal,malware,,,T1218.011
+attack,Windows\Temp,relationship--959bda8e-6c64-4048-9c34-f8ccd64066e8,LoFiSe,malware,,,T1074.001
+attack,Windows\Temp,relationship--a8730dc5-9f3b-449d-8b17-f5a6638aaac4,Chimera,intrusion-set,,,T1114.001
+attack,Windows\Temp,relationship--acd3fcd8-3b5a-47e5-a9cf-92e0f6d3eb2f,2025 Poland Wiper Attacks,campaign,,,T1074.001
+attack,Windows\Temp,relationship--b0b07276-d3d9-47ea-9fdd-412ed00325d9,2025 Poland Wiper Attacks,campaign,,,T1113
+attack,Windows\Temp,relationship--b853cee3-a145-407f-83fe-dd52c4efbe2f,POWERSTATS,malware,,,T1053.005
+attack,Windows\Temp,relationship--be94a9ae-e54a-427e-8caa-36cea954abcb,SUNSPOT,malware,,,T1036.005
+attack,Windows\Temp,relationship--c890e6af-c827-4369-a0f7-fb351c6b6ec5,Mustang Panda,intrusion-set,,,T1074.001
+attack,Windows\Temp,relationship--eb63ea0a-1d2d-4d6a-9006-a60dacc035da,FIN13,intrusion-set,,,T1074.001
+attack,Windows\Temp,relationship--fbeb5e6c-5574-4d41-add3-01efec419ae7,Volt Typhoon,intrusion-set,,,T1074.001
+attack,Windows\debug,relationship--b7d36798-e9f2-4474-836e-80b100a561e6,Leviathan,intrusion-set,,,T1074.001
+attack,inetpub/wwwroot,relationship--cdef12f4-7353-4edc-90d7-f6f7f7a13e7d,Moses Staff,intrusion-set,,,T1105
+attack,winevt\Logs,relationship--c7fa894b-a6b9-47ba-83d4-596791518ba9,HermeticWiper,malware,,,T1685.005
+sigma,$Recycle.Bin,1cf465a1-2609-4c15-9b66-c32dbe4bfd67,rules/file_event_win_susp_legitimate_app_dropping_in_uncommon_location.yml,file_event,high,false,
+sigma,$Recycle.Bin,2ddef153-167b-4e89-86b6-757a9e65dcac,rules/proc_creation_win_bitsadmin_download_susp_targetfolder.yml,process_creation,high,false,
+sigma,$Recycle.Bin,416bc4a2-7217-4519-8dc7-c3271817f1d5,rules/image_load_win_susp_dbgcore_dbghelp_load.yml,image_load,high,false,
+sigma,$Recycle.Bin,9e8894c0-0ae0-11ef-9d85-1f2942bec57c,rules/registry_set_susp_shell_open_keys_modification_patterns.yml,registry_set,medium,false,
+sigma,$Recycle.Bin,9f5c1d59-33be-4e60-bcab-85d2f566effd,rules/proc_access_win_susp_dbgcore_dbghelp_load.yml,process_access,high,false,
+sigma,$Recycle.Bin,a35f5a72-f347-4e36-8895-9869b0d5fc6d,rules/proc_creation_win_netsh_fw_allow_program_in_susp_location.yml,process_creation,high,false,
+sigma,$Recycle.Bin,afe52666-401e-4a02-b4ff-5d128990b8cb,rules/proc_creation_win_rar_susp_greedy_compression.yml,process_creation,high,false,
+sigma,$Recycle.Bin,b7916c2a-fa2f-4795-9477-32b731f70f11,rules/registry_set_susp_reg_persist_explorer_run.yml,registry_set,high,false,
+sigma,AppData\Local (other),002bdb95-0cf1-46a6-9e08-d38c128a6127,rules/file_event_win_cscript_wscript_dropper.yml,file_event,high,false,
+sigma,AppData\Local (other),02ee49e2-e294-4d0f-9278-f5b3212fc588,rules/registry_set_susp_run_key_img_folder.yml,registry_set,high,false,
+sigma,AppData\Local (other),060d5ad4-3153-47bb-8382-43e5e29eda92,rules/image_load_susp_clickonce_unsigned_module_loaded.yml,image_load,medium,false,
+sigma,AppData\Local (other),1228c958-e64e-4e71-92ad-7d429f4138ba,rules/proc_creation_win_susp_script_exec_from_env_folder.yml,process_creation,high,false,
+sigma,AppData\Local (other),12b8e9f5-96b2-41e1-9a42-8c6779a5c184,rules/proc_creation_win_pdqdeploy_runner_susp_children.yml,process_creation,medium,false,
+sigma,AppData\Local (other),138d3531-8793-4f50-a2cd-f291b2863d78,rules/proc_creation_win_sc_service_path_modification.yml,process_creation,high,false,
+sigma,AppData\Local (other),17a1be64-8d88-40bf-b5ff-a4f7a50ebcc8,rules/proc_creation_win_susp_service_creation.yml,process_creation,high,false,
+sigma,AppData\Local (other),1908fcc1-1b92-4272-8214-0fbaf2fa5163,rules/file_event_win_iphlpapi_dll_sideloading.yml,file_event,high,true,
+sigma,AppData\Local (other),1c0e41cd-21bb-4433-9acc-4a2cd6367b9b,rules/proc_creation_win_schtasks_change.yml,process_creation,high,false,
+sigma,AppData\Local (other),1cf465a1-2609-4c15-9b66-c32dbe4bfd67,rules/file_event_win_susp_legitimate_app_dropping_in_uncommon_location.yml,file_event,high,false,
+sigma,AppData\Local (other),1dd05363-104e-4b4a-b963-196a534b03a1,rules/proc_creation_win_mofcomp_execution.yml,process_creation,high,false,
+sigma,AppData\Local (other),236d8e89-ed95-4789-a982-36f4643738ba,rules/proc_creation_win_vmware_toolbox_cmd_persistence_susp.yml,process_creation,high,false,
+sigma,AppData\Local (other),241d52b5-eee0-49d0-ac8a-8b9c15c7221c,rules-threat-hunting/proc_creation_win_dfsvc_child_processes.yml,process_creation,medium,false,
+sigma,AppData\Local (other),277dc340-0540-42e7-8efb-5ff460045e07,rules-threat-hunting/registry_set_service_image_path_user_controlled_folder.yml,registry_set,medium,false,
+sigma,AppData\Local (other),2ddef153-167b-4e89-86b6-757a9e65dcac,rules/proc_creation_win_bitsadmin_download_susp_targetfolder.yml,process_creation,high,false,
+sigma,AppData\Local (other),2f400434-01e1-416b-b52c-bb5bfbb9eb78,rules/file_event_win_wsl_binary_modification.yml,file_event,medium,false,
+sigma,AppData\Local (other),2f9356ae-bf43-41b8-b858-4496d83b2acb,rules/file_event_win_iso_file_mount.yml,file_event,high,true,
+sigma,AppData\Local (other),32b96012-7892-429e-b26c-ac2bf46066ff,rules/proc_creation_win_rundll32_shell32_susp_execution.yml,process_creation,high,false,
+sigma,AppData\Local (other),3c89a1e8-0fba-449e-8f1b-8409d6267ec8,rules/proc_creation_win_wmic_susp_process_creation.yml,process_creation,high,false,
+sigma,AppData\Local (other),407aecb1-e762-4acf-8c7b-d087bcff3bb6,rules/file_access_win_susp_credential_manager_access.yml,file_access,medium,false,
+sigma,AppData\Local (other),4e87b8e2-2ee9-4b2a-a715-4727d297ece0,rules/file_event_win_sam_dump.yml,file_event,high,true,
+sigma,AppData\Local (other),5b40a734-99b6-4b98-a1d0-1cea51a08ab2,rules/file_event_win_susp_system_interactive_powershell.yml,file_event,high,true,
+sigma,AppData\Local (other),67bc0e75-c0a9-4cfc-8754-84a505b63c04,rules/proc_creation_win_dfsvc_suspicious_child_processes.yml,process_creation,medium,false,
+sigma,AppData\Local (other),6902955a-01b7-432c-b32a-6f5f81d8f625,rules/file_event_win_lsass_shtinkering.yml,file_event,high,true,
+sigma,AppData\Local (other),6f1a11aa-4b8a-4b7f-9e13-4d3e4ff0e0d4,rules/proc_creation_win_wsl_kali_linux_usage.yml,process_creation,high,false,
+sigma,AppData\Local (other),790317c0-0a36-4a6a-a105-6e576bf99a14,rules/registry_set_persistence_com_hijacking_builtin.yml,registry_set,high,false,
+sigma,AppData\Local (other),805c55d9-31e6-4846-9878-c34c75054fe9,rules/file_event_win_mal_octopus_scanner.yml,file_event,high,true,
+sigma,AppData\Local (other),811f459f-9231-45d4-959a-0266c6311987,rules/proc_creation_win_bginfo_suspicious_child_process.yml,process_creation,high,false,
+sigma,AppData\Local (other),81325ce1-be01-4250-944f-b4789644556f,rules/proc_creation_win_schtasks_env_folder.yml,process_creation,medium,false,
+sigma,AppData\Local (other),8e0bb260-d4b2-4fff-bb8d-3f82118e6892,rules/proc_creation_win_cmd_redirection_susp_folder.yml,process_creation,medium,false,
+sigma,AppData\Local (other),91cb43db-302a-47e3-b3c8-7ede481e27bf,rules-threat-hunting/file_access_win_browsers_credential.yml,file_access,low,false,
+sigma,AppData\Local (other),9494479d-d994-40bf-a8b1-eea890237021,rules-threat-hunting/proc_creation_win_schtasks_creation_from_susp_parent.yml,process_creation,medium,false,
+sigma,AppData\Local (other),9b64de98-9db3-4033-bd7a-f51430105f00,rules/file_event_win_susp_windows_terminal_profile.yml,file_event,medium,false,
+sigma,AppData\Local (other),9c5037d1-c568-49b3-88c7-9846a5bdc2be,rules/registry_event_susp_download_run_key.yml,registry_event,high,false,
+sigma,AppData\Local (other),9ccba514-7cb6-4c5c-b377-700758f2f120,rules/proc_creation_win_aspnet_compiler_susp_child_process.yml,process_creation,high,false,
+sigma,AppData\Local (other),9e8894c0-0ae0-11ef-9d85-1f2942bec57c,rules/registry_set_susp_shell_open_keys_modification_patterns.yml,registry_set,medium,false,
+sigma,AppData\Local (other),9f50fe98-fe5c-4a2d-86c7-fad7f63ed622,rules/proc_creation_win_aspnet_compiler_susp_paths.yml,process_creation,high,false,
+sigma,AppData\Local (other),9fc3072c-dc8f-4bf7-b231-18950000fadd,rules/proc_creation_win_driverquery_recon.yml,process_creation,high,false,
+sigma,AppData\Local (other),a6a39bdb-935c-4f0a-ab77-35f4bbf44d33,rules/proc_creation_win_powershell_script_exec_from_temp_folder.yml,process_creation,medium,false,
+sigma,AppData\Local (other),b37998de-a70b-4f33-b219-ec36bf433dc0,rules/proc_creation_win_pua_pingcastle_script_parent.yml,process_creation,high,false,
+sigma,AppData\Local (other),c3edc6a5-d9d4-48d8-930e-aab518390917,rules/file_event_win_office_outlook_newform.yml,file_event,high,false,
+sigma,AppData\Local (other),c5c00f49-b3f9-45a6-997e-cfdecc6e1967,rules/proc_creation_win_schtasks_appdata_local_system.yml,process_creation,high,false,
+sigma,AppData\Local (other),c80e66d8-1780-48a9-b412-46663fd21ac0,rules/proc_creation_win_autorun_registry_modified_via_wmic.yml,process_creation,high,false,
+sigma,AppData\Local (other),cea72823-df4d-4567-950c-0b579eaf0846,rules/proc_creation_win_wscript_cscript_mshta_dropper.yml,process_creation,medium,false,
+sigma,AppData\Local (other),e32f92d1-523e-49c3-9374-bdb13b46a3ba,rules/proc_creation_win_mshta_susp_pattern.yml,process_creation,high,false,
+sigma,AppData\Local (other),efec536f-72e8-4656-8960-5e85d091345b,rules/proc_creation_win_attrib_system_susp_paths.yml,process_creation,high,false,
+sigma,AppData\Local (other),fa1a7e52-3d02-435b-81b8-00da14dd66c1,rules/proc_creation_win_diskshadow_script_mode_susp_location.yml,process_creation,medium,false,
+sigma,AppData\Local (other),fabb0e80-030c-4e3e-a104-d09676991ac3,rules/file_event_win_office_outlook_susp_file_creation_in_temp_dir.yml,file_event,high,true,
+sigma,AppData\Local (other),fc3e237f-2fef-406c-b90d-b3ae7e02fa8f,rules-threat-hunting/file_access_win_office_outlook_mail_credential.yml,file_access,low,false,
+sigma,AppData\Local\Temp,02ee49e2-e294-4d0f-9278-f5b3212fc588,rules/registry_set_susp_run_key_img_folder.yml,registry_set,high,false,
+sigma,AppData\Local\Temp,1228c958-e64e-4e71-92ad-7d429f4138ba,rules/proc_creation_win_susp_script_exec_from_env_folder.yml,process_creation,high,false,
+sigma,AppData\Local\Temp,155dbf56-e0a4-4dd0-8905-8a98705045e8,rules/file_event_win_uac_bypass_winsat.yml,file_event,high,true,
+sigma,AppData\Local\Temp,1dd05363-104e-4b4a-b963-196a534b03a1,rules/proc_creation_win_mofcomp_execution.yml,process_creation,high,false,
+sigma,AppData\Local\Temp,1e0e1a81-e79b-44bc-935b-ddb9c8006b3d,rules/proc_creation_win_powershell_cl_mutexverifiers.yml,process_creation,medium,false,
+sigma,AppData\Local\Temp,2267fe65-0681-42ad-9a6d-46553d3f3480,rules/proc_creation_win_wsl_child_processes_anomalies.yml,process_creation,medium,false,
+sigma,AppData\Local\Temp,2ddef153-167b-4e89-86b6-757a9e65dcac,rules/proc_creation_win_bitsadmin_download_susp_targetfolder.yml,process_creation,high,false,
+sigma,AppData\Local\Temp,2f9356ae-bf43-41b8-b858-4496d83b2acb,rules/file_event_win_iso_file_mount.yml,file_event,high,true,
+sigma,AppData\Local\Temp,32b96012-7892-429e-b26c-ac2bf46066ff,rules/proc_creation_win_rundll32_shell32_susp_execution.yml,process_creation,high,false,
+sigma,AppData\Local\Temp,39ed3c80-e6a1-431b-9df3-911ac53d08a7,rules/proc_creation_win_uac_bypass_ntfs_reparse_point.yml,process_creation,high,false,
+sigma,AppData\Local\Temp,3a734d25-df5c-4b99-8034-af1ddb5883a4,rules/win_security_susp_scheduled_task_creation.yml,security,high,false,
+sigma,AppData\Local\Temp,3b92a1d0-8d4b-4d28-a1b4-1e29d49a6a3e,rules-threat-hunting/image_load_dll_taskschd_by_process_in_potentially_suspicious_location.yml,image_load,low,false,
+sigma,AppData\Local\Temp,3c89a1e8-0fba-449e-8f1b-8409d6267ec8,rules/proc_creation_win_wmic_susp_process_creation.yml,process_creation,high,false,
+sigma,AppData\Local\Temp,3d2a2d59-929c-4b78-8c1a-145dfe9e07b1,rules/file_event_win_office_publisher_files_in_susp_locations.yml,file_event,medium,true,
+sigma,AppData\Local\Temp,3da70954-0f2c-4103-adff-b7440368f50e,rules/file_event_win_susp_procexplorer_driver_created_in_tmp_folder.yml,file_event,medium,false,
+sigma,AppData\Local\Temp,41504465-5e3a-4a5b-a5b4-2a0baadd4463,rules/pipe_created_sysinternals_psexec_default_pipe_susp_location.yml,pipe_created,medium,false,
+sigma,AppData\Local\Temp,41bb431f-56d8-4691-bb56-ed34e390906f,rules/file_event_win_uac_bypass_msconfig_gui.yml,file_event,high,true,
+sigma,AppData\Local\Temp,42205c73-75c8-4a63-9db1-e3782e06fda0,rules/registry_set_exploit_guard_susp_allowed_apps.yml,registry_set,high,false,
+sigma,AppData\Local\Temp,424273ea-7cf8-43a6-b712-375f925e481f,rules/win_taskscheduler_execution_from_susp_locations.yml,taskscheduler,medium,false,
+sigma,AppData\Local\Temp,4c55738d-72d8-490e-a2db-7969654e375f,rules-threat-hunting/file_event_win_webdav_tmpfile_creation.yml,file_event,medium,true,
+sigma,AppData\Local\Temp,5d756aee-ad3e-4306-ad95-cb1abec48de2,rules/file_event_win_gotoopener_artefact.yml,file_event,medium,true,
+sigma,AppData\Local\Temp,5e3cc4d8-3e68-43db-8656-eaaeefdec9cc,rules/proc_creation_win_powershell_invoke_webrequest_download.yml,process_creation,high,false,
+sigma,AppData\Local\Temp,5f6a601c-2ecb-498b-9c33-660362323afa,rules/proc_creation_win_powershell_import_cert_susp_locations.yml,process_creation,high,false,
+sigma,AppData\Local\Temp,614cf376-6651-47c4-9dcc-6b9527f749f4,rules/win_security_susp_scheduled_task_update.yml,security,high,false,
+sigma,AppData\Local\Temp,62e0298b-e994-4189-bc87-bc699aa62d97,rules/proc_creation_win_reg_import_from_suspicious_paths.yml,process_creation,medium,false,
+sigma,AppData\Local\Temp,631b22a4-70f4-4e2f-9ea8-42f84d9df6d8,rules/proc_creation_win_addinutil_suspicious_cmdline.yml,process_creation,high,false,
+sigma,AppData\Local\Temp,6597be7b-ac61-4ac8-bef4-d3ec88174853,rules/registry_set_uac_bypass_winsat.yml,registry_set,high,false,
+sigma,AppData\Local\Temp,68578b43-65df-4f81-9a9b-92f32711a951,rules/file_event_win_uac_bypass_wmp.yml,file_event,high,false,
+sigma,AppData\Local\Temp,69ca12af-119d-44ed-b50f-a47af0ebc364,rules/file_event_win_taskmgr_lsass_dump.yml,file_event,high,false,
+sigma,AppData\Local\Temp,6b65c28e-11f3-46cb-902a-68f2cafaf474,rules/proc_creation_win_odbcconf_exec_susp_locations.yml,process_creation,high,false,
+sigma,AppData\Local\Temp,6e22722b-dfb1-4508-a911-49ac840b40f8,rules/proc_creation_win_mstsc_run_local_rdp_file_susp_location.yml,process_creation,high,false,
+sigma,AppData\Local\Temp,6e8fe0a8-ba0b-4a93-8f9e-82657e7a5984,rules/image_load_susp_baaupdate_dll_load.yml,image_load,high,false,
+sigma,AppData\Local\Temp,6e90ae7a-7cd3-473f-a035-4ebb72d961da,rules/file_event_win_pcre_net_temp_file.yml,file_event,high,true,
+sigma,AppData\Local\Temp,707e097c-e20f-4f67-8807-1f72ff4500d6,rules/registry_set_persistence_app_paths.yml,registry_set,high,false,
+sigma,AppData\Local\Temp,71ff406e-b633-4989-96ec-bc49d825a412,rules/posh_pc_susp_zip_compress.yml,powershell-classic,medium,false,
+sigma,AppData\Local\Temp,760e75d8-c3b5-409b-a9bf-6130b4c4603f,rules/file_event_win_sed_file_creation.yml,file_event,medium,true,
+sigma,AppData\Local\Temp,790317c0-0a36-4a6a-a105-6e576bf99a14,rules/registry_set_persistence_com_hijacking_builtin.yml,registry_set,high,false,
+sigma,AppData\Local\Temp,7a01183d-71a2-46ad-ad5c-acd989ac1793,rules/proc_creation_win_uac_bypass_winsat.yml,process_creation,high,false,
+sigma,AppData\Local\Temp,7fd164ba-126a-4d9c-9392-0d4f7c243df0,rules/file_event_win_office_onenote_files_in_susp_locations.yml,file_event,medium,false,
+sigma,AppData\Local\Temp,7fff6773-2baa-46de-a24a-b6eec1aba2d1,rules/file_event_win_uac_bypass_ntfs_reparse_point.yml,file_event,high,true,
+sigma,AppData\Local\Temp,80fc36aa-945e-4181-89f2-2f907ab6775d,rules/proc_creation_win_uac_bypass_ieinstal.yml,process_creation,high,false,
+sigma,AppData\Local\Temp,8289bf8c-4aca-4f5a-9db3-dc3d7afe5c10,rules/win_security_mitigations_unsigned_dll_from_susp_location.yml,security-mitigations,high,false,
+sigma,AppData\Local\Temp,84232095-ecca-4015-b0d7-7726507ee793,rules/proc_creation_win_certoc_load_dll_susp_locations.yml,process_creation,high,false,
+sigma,AppData\Local\Temp,847def9e-924d-4e90-b7c4-5f581395a2b4,rules/file_event_win_hktl_quarkspw_filedump.yml,file_event,critical,true,
+sigma,AppData\Local\Temp,84b0a8f3-680b-4096-a45b-e9a89221727c,rules/image_load_dll_pcre_dotnet_dll_load.yml,image_load,high,false,
+sigma,AppData\Local\Temp,853e74f9-9392-4935-ad3b-2e8c040dae86,rules/proc_creation_win_uac_bypass_dismhost.yml,process_creation,high,false,
+sigma,AppData\Local\Temp,85a8e5ba-bd03-4bfb-bbfa-a4409a8f8b98,rules/proc_creation_win_powershell_zip_compress.yml,process_creation,medium,false,
+sigma,AppData\Local\Temp,8de89e52-f6e1-4b5b-afd1-41ecfa300d48,rules/proc_creation_win_windows_terminal_susp_children.yml,process_creation,medium,false,
+sigma,AppData\Local\Temp,8e0bb260-d4b2-4fff-bb8d-3f82118e6892,rules/proc_creation_win_cmd_redirection_susp_folder.yml,process_creation,medium,false,
+sigma,AppData\Local\Temp,90b63c33-2b97-4631-a011-ceb0f47b77c3,rules-threat-hunting/proc_creation_win_susp_execution_from_guid_folder_names.yml,process_creation,low,false,
+sigma,AppData\Local\Temp,93a19907-d4f9-4deb-9f91-aac4692776a6,rules/file_event_win_uac_bypass_dotnet_profiler.yml,file_event,high,true,
+sigma,AppData\Local\Temp,9525dc73-0327-438c-8c04-13c0e037e9da,rules/proc_creation_win_regsvr32_susp_exec_path_1.yml,process_creation,medium,false,
+sigma,AppData\Local\Temp,95724fc1-a258-4674-97db-a30351981c5a,rules-threat-hunting/proc_creation_win_susp_script_exec_from_compressed_parent.yml,process_creation,medium,false,
+sigma,AppData\Local\Temp,966315ef-c5e1-4767-ba25-fce9c8de3660,rules/registry_set_suspicious_env_variables.yml,registry_set,high,false,
+sigma,AppData\Local\Temp,9ccba514-7cb6-4c5c-b377-700758f2f120,rules/proc_creation_win_aspnet_compiler_susp_child_process.yml,process_creation,high,false,
+sigma,AppData\Local\Temp,9d8f9bb8-01af-4e15-a3a2-349071530530,rules/registry_set_ime_suspicious_paths.yml,registry_set,high,false,
+sigma,AppData\Local\Temp,9e2575e7-2cb9-4da1-adc8-ed94221dca5e,rules/win_firewall_as_add_rule_susp_folder.yml,firewall-as,high,false,
+sigma,AppData\Local\Temp,9e8894c0-0ae0-11ef-9d85-1f2942bec57c,rules/registry_set_susp_shell_open_keys_modification_patterns.yml,registry_set,medium,false,
+sigma,AppData\Local\Temp,9f107a84-532c-41af-b005-8d12a607639f,rules/proc_creation_win_expand_cabinet_files.yml,process_creation,medium,false,
+sigma,AppData\Local\Temp,9f50fe98-fe5c-4a2d-86c7-fad7f63ed622,rules/proc_creation_win_aspnet_compiler_susp_paths.yml,process_creation,high,false,
+sigma,AppData\Local\Temp,a35f5a72-f347-4e36-8895-9869b0d5fc6d,rules/proc_creation_win_netsh_fw_allow_program_in_susp_location.yml,process_creation,high,false,
+sigma,AppData\Local\Temp,a3ab73f1-bd46-4319-8f06-4b20d0617886,rules/win_defender_config_change_exploit_guard_tamper.yml,windefend,high,false,
+sigma,AppData\Local\Temp,a3f5c081-e75b-43a0-9f5b-51f26fe5dba2,rules/create_stream_hash_winget_susp_package_source.yml,create_stream_hash,high,false,
+sigma,AppData\Local\Temp,a6a39bdb-935c-4f0a-ab77-35f4bbf44d33,rules/proc_creation_win_powershell_script_exec_from_temp_folder.yml,process_creation,medium,false,
+sigma,AppData\Local\Temp,aa2efee7-34dd-446e-8a37-40790a66efd7,rules/proc_creation_win_susp_recon.yml,process_creation,medium,false,
+sigma,AppData\Local\Temp,ad92e3f9-7eb6-460e-96b1-582b0ccbb980,rules/proc_creation_win_uac_bypass_msconfig_gui.yml,process_creation,high,false,
+sigma,AppData\Local\Temp,b2b048b0-7857-4380-b0fb-d3f0ab820b71,rules/proc_creation_win_iexpress_susp_execution.yml,process_creation,high,false,
+sigma,AppData\Local\Temp,b7916c2a-fa2f-4795-9477-32b731f70f11,rules/registry_set_susp_reg_persist_explorer_run.yml,registry_set,high,false,
+sigma,AppData\Local\Temp,b7a3c9a3-09ea-4934-8864-6a32cacd98d9,rules/posh_ps_susp_zip_compress.yml,ps_script,medium,false,
+sigma,AppData\Local\Temp,bdd8157d-8e85-4397-bb82-f06cc9c71dbb,rules/file_event_win_uac_bypass_ieinstal.yml,file_event,high,false,
+sigma,AppData\Local\Temp,c0aac16a-b1e7-4330-bab0-3c27bb4987c7,rules/create_remote_thread_win_mstsc_susp_location.yml,create_remote_thread,high,false,
+sigma,AppData\Local\Temp,c74c0390-3e20-41fd-a69a-128f0275a5ea,rules/proc_creation_win_wusa_cab_files_extraction_from_susp_paths.yml,process_creation,high,false,
+sigma,AppData\Local\Temp,c80e66d8-1780-48a9-b412-46663fd21ac0,rules/proc_creation_win_autorun_registry_modified_via_wmic.yml,process_creation,high,false,
+sigma,AppData\Local\Temp,cc368ed0-2411-45dc-a222-510ace303cb2,rules/proc_creation_win_regasm_regsvcs_uncommon_location_execution.yml,process_creation,medium,false,
+sigma,AppData\Local\Temp,cea72823-df4d-4567-950c-0b579eaf0846,rules/proc_creation_win_wscript_cscript_mshta_dropper.yml,process_creation,medium,false,
+sigma,AppData\Local\Temp,daf7eb81-35fd-410d-9d7a-657837e602bb,rules/posh_pm_susp_zip_compress.yml,ps_module,medium,false,
+sigma,AppData\Local\Temp,dcaa3f04-70c3-427a-80b4-b870d73c94c4,rules/proc_creation_win_csc_susp_dynamic_compilation.yml,process_creation,medium,false,
+sigma,AppData\Local\Temp,e1e0b7d7-e10b-4ee4-ac49-a4bda05d320d,rules/proc_creation_win_gpg4win_susp_location.yml,process_creation,high,false,
+sigma,AppData\Local\Temp,e218595b-bbe7-4ee5-8a96-f32a24ad3468,rules/proc_creation_win_curl_susp_download.yml,process_creation,high,false,
+sigma,AppData\Local\Temp,e4d22291-f3d5-4b78-9a0c-a1fbaf32a6a4,rules/registry_set_odbc_driver_registered_susp.yml,registry_set,high,false,
+sigma,AppData\Local\Temp,e7b18879-676e-4a0e-ae18-27039185a8e7,rules/registry_set_netsh_help_dll_persistence_susp_location.yml,registry_set,high,false,
+sigma,AppData\Local\Temp,e8a95b5e-c891-46e2-b33a-93937d3abc31,rules/proc_creation_win_hh_susp_execution.yml,process_creation,high,false,
+sigma,AppData\Local\Temp,ef64fc9c-a45e-43cc-8fd8-7d75d73b4c99,rules/proc_creation_win_wusa_susp_parent_execution.yml,process_creation,high,false,
+sigma,AppData\Local\Temp,f26eb764-fd89-464b-85e2-dc4a8e6e77b8,rules/proc_creation_win_susp_electron_app_children.yml,process_creation,medium,false,
+sigma,AppData\Local\Temp,f2c64357-b1d2-41b7-849f-34d2682c0fad,rules/proc_creation_win_schtasks_susp_pattern.yml,process_creation,high,false,
+sigma,AppData\Local\Temp,fcc6d700-68d9-4241-9a1a-06874d621b06,rules/file_event_win_office_onenote_susp_dropped_files.yml,file_event,high,false,
+sigma,AppData\Local\Temp,fed85bf9-e075-4280-9159-fbe8a023d6fa,rules/file_event_win_advanced_ip_scanner.yml,file_event,medium,true,
+sigma,AppData\Roaming,002bdb95-0cf1-46a6-9e08-d38c128a6127,rules/file_event_win_cscript_wscript_dropper.yml,file_event,high,false,
+sigma,AppData\Roaming,02ee49e2-e294-4d0f-9278-f5b3212fc588,rules/registry_set_susp_run_key_img_folder.yml,registry_set,high,false,
+sigma,AppData\Roaming,0b9ad457-2554-44c1-82c2-d56a99c42377,rules/file_event_win_anydesk_artefact.yml,file_event,medium,true,
+sigma,AppData\Roaming,0bcfabcb-7929-47f4-93d6-b33fb67d34d1,rules/file_event_win_mal_adwind.yml,file_event,high,true,
+sigma,AppData\Roaming,1228c958-e64e-4e71-92ad-7d429f4138ba,rules/proc_creation_win_susp_script_exec_from_env_folder.yml,process_creation,high,false,
+sigma,AppData\Roaming,1ac8666b-046f-4201-8aba-1951aaec03a3,rules/proc_creation_win_cmd_http_appdata.yml,process_creation,medium,false,
+sigma,AppData\Roaming,1c0e41cd-21bb-4433-9acc-4a2cd6367b9b,rules/proc_creation_win_schtasks_change.yml,process_creation,high,false,
+sigma,AppData\Roaming,1cf465a1-2609-4c15-9b66-c32dbe4bfd67,rules/file_event_win_susp_legitimate_app_dropping_in_uncommon_location.yml,file_event,high,false,
+sigma,AppData\Roaming,1dd05363-104e-4b4a-b963-196a534b03a1,rules/proc_creation_win_mofcomp_execution.yml,process_creation,high,false,
+sigma,AppData\Roaming,277dc340-0540-42e7-8efb-5ff460045e07,rules-threat-hunting/registry_set_service_image_path_user_controlled_folder.yml,registry_set,medium,false,
+sigma,AppData\Roaming,2ddef153-167b-4e89-86b6-757a9e65dcac,rules/proc_creation_win_bitsadmin_download_susp_targetfolder.yml,process_creation,high,false,
+sigma,AppData\Roaming,32b96012-7892-429e-b26c-ac2bf46066ff,rules/proc_creation_win_rundll32_shell32_susp_execution.yml,process_creation,high,false,
+sigma,AppData\Roaming,3a734d25-df5c-4b99-8034-af1ddb5883a4,rules/win_security_susp_scheduled_task_creation.yml,security,high,false,
+sigma,AppData\Roaming,3c89a1e8-0fba-449e-8f1b-8409d6267ec8,rules/proc_creation_win_wmic_susp_process_creation.yml,process_creation,high,false,
+sigma,AppData\Roaming,407aecb1-e762-4acf-8c7b-d087bcff3bb6,rules/file_access_win_susp_credential_manager_access.yml,file_access,medium,false,
+sigma,AppData\Roaming,4e87b8e2-2ee9-4b2a-a715-4727d297ece0,rules/file_event_win_sam_dump.yml,file_event,high,true,
+sigma,AppData\Roaming,5a6b7c8d-9e0f-1a2b-3c4d-5e6f7a8b9c0d,rules/proc_creation_win_cmd_launched_with_hidden_start_flag.yml,process_creation,medium,false,
+sigma,AppData\Roaming,5b40a734-99b6-4b98-a1d0-1cea51a08ab2,rules/file_event_win_susp_system_interactive_powershell.yml,file_event,high,true,
+sigma,AppData\Roaming,5d6c375a-18ae-4952-b4f6-8b803f6c8555,rules/win_security_signal_sensitive_config_access.yml,security,medium,false,
+sigma,AppData\Roaming,5e3cc4d8-3e68-43db-8656-eaaeefdec9cc,rules/proc_creation_win_powershell_invoke_webrequest_download.yml,process_creation,high,false,
+sigma,AppData\Roaming,614cf376-6651-47c4-9dcc-6b9527f749f4,rules/win_security_susp_scheduled_task_update.yml,security,high,false,
+sigma,AppData\Roaming,62e0298b-e994-4189-bc87-bc699aa62d97,rules/proc_creation_win_reg_import_from_suspicious_paths.yml,process_creation,medium,false,
+sigma,AppData\Roaming,6b65c28e-11f3-46cb-902a-68f2cafaf474,rules/proc_creation_win_odbcconf_exec_susp_locations.yml,process_creation,high,false,
+sigma,AppData\Roaming,6e8fe0a8-ba0b-4a93-8f9e-82657e7a5984,rules/image_load_susp_baaupdate_dll_load.yml,image_load,high,false,
+sigma,AppData\Roaming,790317c0-0a36-4a6a-a105-6e576bf99a14,rules/registry_set_persistence_com_hijacking_builtin.yml,registry_set,high,false,
+sigma,AppData\Roaming,811f459f-9231-45d4-959a-0266c6311987,rules/proc_creation_win_bginfo_suspicious_child_process.yml,process_creation,high,false,
+sigma,AppData\Roaming,81325ce1-be01-4250-944f-b4789644556f,rules/proc_creation_win_schtasks_env_folder.yml,process_creation,medium,false,
+sigma,AppData\Roaming,82a6714f-4899-4f16-9c1e-9a333544d4c3,rules/proc_creation_win_certutil_encode_susp_location.yml,process_creation,high,false,
+sigma,AppData\Roaming,8e0bb260-d4b2-4fff-bb8d-3f82118e6892,rules/proc_creation_win_cmd_redirection_susp_folder.yml,process_creation,medium,false,
+sigma,AppData\Roaming,90b63c33-2b97-4631-a011-ceb0f47b77c3,rules-threat-hunting/proc_creation_win_susp_execution_from_guid_folder_names.yml,process_creation,low,false,
+sigma,AppData\Roaming,9494479d-d994-40bf-a8b1-eea890237021,rules-threat-hunting/proc_creation_win_schtasks_creation_from_susp_parent.yml,process_creation,medium,false,
+sigma,AppData\Roaming,9525dc73-0327-438c-8c04-13c0e037e9da,rules/proc_creation_win_regsvr32_susp_exec_path_1.yml,process_creation,medium,false,
+sigma,AppData\Roaming,9d8f9bb8-01af-4e15-a3a2-349071530530,rules/registry_set_ime_suspicious_paths.yml,registry_set,high,false,
+sigma,AppData\Roaming,9e8894c0-0ae0-11ef-9d85-1f2942bec57c,rules/registry_set_susp_shell_open_keys_modification_patterns.yml,registry_set,medium,false,
+sigma,AppData\Roaming,9f107a84-532c-41af-b005-8d12a607639f,rules/proc_creation_win_expand_cabinet_files.yml,process_creation,medium,false,
+sigma,AppData\Roaming,9f5c1d59-33be-4e60-bcab-85d2f566effd,rules/proc_access_win_susp_dbgcore_dbghelp_load.yml,process_access,high,false,
+sigma,AppData\Roaming,a6a39bdb-935c-4f0a-ab77-35f4bbf44d33,rules/proc_creation_win_powershell_script_exec_from_temp_folder.yml,process_creation,medium,false,
+sigma,AppData\Roaming,b37998de-a70b-4f33-b219-ec36bf433dc0,rules/proc_creation_win_pua_pingcastle_script_parent.yml,process_creation,high,false,
+sigma,AppData\Roaming,c80e66d8-1780-48a9-b412-46663fd21ac0,rules/proc_creation_win_autorun_registry_modified_via_wmic.yml,process_creation,high,false,
+sigma,AppData\Roaming,cea72823-df4d-4567-950c-0b579eaf0846,rules/proc_creation_win_wscript_cscript_mshta_dropper.yml,process_creation,medium,false,
+sigma,AppData\Roaming,e1e0b7d7-e10b-4ee4-ac49-a4bda05d320d,rules/proc_creation_win_gpg4win_susp_location.yml,process_creation,high,false,
+sigma,AppData\Roaming,e218595b-bbe7-4ee5-8a96-f32a24ad3468,rules/proc_creation_win_curl_susp_download.yml,process_creation,high,false,
+sigma,AppData\Roaming,e4d22291-f3d5-4b78-9a0c-a1fbaf32a6a4,rules/registry_set_odbc_driver_registered_susp.yml,registry_set,high,false,
+sigma,AppData\Roaming,f2c64357-b1d2-41b7-849f-34d2682c0fad,rules/proc_creation_win_schtasks_susp_pattern.yml,process_creation,high,false,
+sigma,AppData\Roaming,f41b0311-44f9-44f0-816d-dd45e39d4bc8,rules/file_access_win_susp_crypto_currency_wallets.yml,file_access,medium,false,
+sigma,AppData\Roaming,f99abdf0-6283-4e71-bd2b-b5c048a94743,rules/proc_creation_win_office_exec_from_trusted_locations.yml,process_creation,high,false,
+sigma,AppData\Roaming,fa1a7e52-3d02-435b-81b8-00da14dd66c1,rules/proc_creation_win_diskshadow_script_mode_susp_location.yml,process_creation,medium,false,
+sigma,C:\ root folders,2267fe65-0681-42ad-9a6d-46553d3f3480,rules/proc_creation_win_wsl_child_processes_anomalies.yml,process_creation,medium,false,
+sigma,C:\ root folders,3a734d25-df5c-4b99-8034-af1ddb5883a4,rules/win_security_susp_scheduled_task_creation.yml,security,high,false,
+sigma,C:\ root folders,3d2a2d59-929c-4b78-8c1a-145dfe9e07b1,rules/file_event_win_office_publisher_files_in_susp_locations.yml,file_event,medium,true,
+sigma,C:\ root folders,424273ea-7cf8-43a6-b712-375f925e481f,rules/win_taskscheduler_execution_from_susp_locations.yml,taskscheduler,medium,false,
+sigma,C:\ root folders,614cf376-6651-47c4-9dcc-6b9527f749f4,rules/win_security_susp_scheduled_task_update.yml,security,high,false,
+sigma,C:\ root folders,75e508f7-932d-4ebc-af77-269237a84ce1,rules/image_load_cmstp_load_dll_from_susp_location.yml,image_load,high,false,
+sigma,C:\ root folders,8c3c76ca-8f8b-4b1d-aaf3-81aebcd367c9,rules/file_event_win_creation_unquoted_service_path.yml,file_event,high,true,
+sigma,C:\ root folders,f35c5d71-b489-4e22-a115-f003df287317,rules/proc_creation_win_hktl_cobaltstrike_process_patterns.yml,process_creation,high,false,
+sigma,Desktop,138d3531-8793-4f50-a2cd-f291b2863d78,rules/proc_creation_win_sc_service_path_modification.yml,process_creation,high,false,
+sigma,Desktop,17a1be64-8d88-40bf-b5ff-a4f7a50ebcc8,rules/proc_creation_win_susp_service_creation.yml,process_creation,high,false,
+sigma,Desktop,1c0e41cd-21bb-4433-9acc-4a2cd6367b9b,rules/proc_creation_win_schtasks_change.yml,process_creation,high,false,
+sigma,Desktop,1cf465a1-2609-4c15-9b66-c32dbe4bfd67,rules/file_event_win_susp_legitimate_app_dropping_in_uncommon_location.yml,file_event,high,false,
+sigma,Desktop,2267fe65-0681-42ad-9a6d-46553d3f3480,rules/proc_creation_win_wsl_child_processes_anomalies.yml,process_creation,medium,false,
+sigma,Desktop,2ddef153-167b-4e89-86b6-757a9e65dcac,rules/proc_creation_win_bitsadmin_download_susp_targetfolder.yml,process_creation,high,false,
+sigma,Desktop,318557a5-150c-4c8d-b70e-a9910e199857,rules/file_event_win_msdt_susp_directories.yml,file_event,high,false,
+sigma,Desktop,3a734d25-df5c-4b99-8034-af1ddb5883a4,rules/win_security_susp_scheduled_task_creation.yml,security,high,false,
+sigma,Desktop,3b92a1d0-8d4b-4d28-a1b4-1e29d49a6a3e,rules-threat-hunting/image_load_dll_taskschd_by_process_in_potentially_suspicious_location.yml,image_load,low,false,
+sigma,Desktop,40b6e656-4e11-4c0c-8772-c1cc6dae34ce,rules/registry_set_scr_file_executed_by_rundll32.yml,registry_set,medium,false,
+sigma,Desktop,41504465-5e3a-4a5b-a5b4-2a0baadd4463,rules/pipe_created_sysinternals_psexec_default_pipe_susp_location.yml,pipe_created,medium,false,
+sigma,Desktop,42205c73-75c8-4a63-9db1-e3782e06fda0,rules/registry_set_exploit_guard_susp_allowed_apps.yml,registry_set,high,false,
+sigma,Desktop,424273ea-7cf8-43a6-b712-375f925e481f,rules/win_taskscheduler_execution_from_susp_locations.yml,taskscheduler,medium,false,
+sigma,Desktop,5cdeaf3d-1489-477c-95ab-c318559fc051,rules/win_appxdeployment_server_appx_package_in_staging_directory.yml,appxdeployment-server,high,false,
+sigma,Desktop,5e3cc4d8-3e68-43db-8656-eaaeefdec9cc,rules/proc_creation_win_powershell_invoke_webrequest_download.yml,process_creation,high,false,
+sigma,Desktop,5f6a601c-2ecb-498b-9c33-660362323afa,rules/proc_creation_win_powershell_import_cert_susp_locations.yml,process_creation,high,false,
+sigma,Desktop,614cf376-6651-47c4-9dcc-6b9527f749f4,rules/win_security_susp_scheduled_task_update.yml,security,high,false,
+sigma,Desktop,631b22a4-70f4-4e2f-9ea8-42f84d9df6d8,rules/proc_creation_win_addinutil_suspicious_cmdline.yml,process_creation,high,false,
+sigma,Desktop,67a6c006-3fbe-46a7-9074-2ba3b82c3000,rules/registry_event_modify_screensaver_binary_path.yml,registry_event,medium,false,
+sigma,Desktop,707e097c-e20f-4f67-8807-1f72ff4500d6,rules/registry_set_persistence_app_paths.yml,registry_set,high,false,
+sigma,Desktop,790317c0-0a36-4a6a-a105-6e576bf99a14,rules/registry_set_persistence_com_hijacking_builtin.yml,registry_set,high,false,
+sigma,Desktop,8289bf8c-4aca-4f5a-9db3-dc3d7afe5c10,rules/win_security_mitigations_unsigned_dll_from_susp_location.yml,security-mitigations,high,false,
+sigma,Desktop,82a6714f-4899-4f16-9c1e-9a333544d4c3,rules/proc_creation_win_certutil_encode_susp_location.yml,process_creation,high,false,
+sigma,Desktop,84232095-ecca-4015-b0d7-7726507ee793,rules/proc_creation_win_certoc_load_dll_susp_locations.yml,process_creation,high,false,
+sigma,Desktop,8823e85d-31d8-473e-b7f4-92da070f0fc6,rules/proc_creation_win_rundll32_susp_shellexec_ordinal_execution.yml,process_creation,high,false,
+sigma,Desktop,8de89e52-f6e1-4b5b-afd1-41ecfa300d48,rules/proc_creation_win_windows_terminal_susp_children.yml,process_creation,medium,false,
+sigma,Desktop,94dc4390-6b7c-4784-8ffc-335334404650,rules/win_esent_ntdsutil_abuse_susp_location.yml,application,medium,false,
+sigma,Desktop,9f5c1d59-33be-4e60-bcab-85d2f566effd,rules/proc_access_win_susp_dbgcore_dbghelp_load.yml,process_access,high,false,
+sigma,Desktop,a35f5a72-f347-4e36-8895-9869b0d5fc6d,rules/proc_creation_win_netsh_fw_allow_program_in_susp_location.yml,process_creation,high,false,
+sigma,Desktop,a3ab73f1-bd46-4319-8f06-4b20d0617886,rules/win_defender_config_change_exploit_guard_tamper.yml,windefend,high,false,
+sigma,Desktop,af4c4609-5755-42fe-8075-4effb49f5d44,rules/image_load_office_excel_xll_susp_load.yml,image_load,medium,false,
+sigma,Desktop,c2b86e67-b880-4eec-b045-50bc98ef4844,rules/proc_creation_win_hktl_lazagne.yml,process_creation,medium,false,
+sigma,Desktop,c5ac6a1e-9407-45f5-a0ce-ca9a0806a287,rules/posh_ps_susp_wallpaper.yml,ps_script,low,false,
+sigma,Desktop,c7c8aa1c-5aff-408e-828b-998e3620b341,rules/win_msi_install_from_susp_locations.yml,application,medium,false,
+sigma,Desktop,caf02a0a-1e1c-4552-9b48-5e070bd88d11,rules-threat-hunting/file_event_win_susp_desktop_txt.yml,file_event,medium,false,
+sigma,Desktop,d87bd452-6da1-456e-8155-7dc988157b7d,rules/proc_creation_win_rundll32_susp_shellexec_execution.yml,process_creation,high,false,
+sigma,Desktop,e218595b-bbe7-4ee5-8a96-f32a24ad3468,rules/proc_creation_win_curl_susp_download.yml,process_creation,high,false,
+sigma,Desktop,f59c3faf-50f3-464b-9f4c-1b67ab512d99,rules/registry_set_asep_reg_keys_modification_common.yml,registry_set,medium,false,
+sigma,Desktop,f8a56cb7-a363-44ed-a82f-5926bb44cd05,rules/win_bits_client_new_trasnfer_susp_local_folder.yml,bits-client,high,false,
+sigma,Downloads,0ea52357-cd59-4340-9981-c46c7e900428,rules/proc_creation_win_rundll32_udl_exec.yml,process_creation,medium,false,
+sigma,Downloads,138d3531-8793-4f50-a2cd-f291b2863d78,rules/proc_creation_win_sc_service_path_modification.yml,process_creation,high,false,
+sigma,Downloads,17a1be64-8d88-40bf-b5ff-a4f7a50ebcc8,rules/proc_creation_win_susp_service_creation.yml,process_creation,high,false,
+sigma,Downloads,1c0e41cd-21bb-4433-9acc-4a2cd6367b9b,rules/proc_creation_win_schtasks_change.yml,process_creation,high,false,
+sigma,Downloads,2267fe65-0681-42ad-9a6d-46553d3f3480,rules/proc_creation_win_wsl_child_processes_anomalies.yml,process_creation,medium,false,
+sigma,Downloads,3a734d25-df5c-4b99-8034-af1ddb5883a4,rules/win_security_susp_scheduled_task_creation.yml,security,high,false,
+sigma,Downloads,3b92a1d0-8d4b-4d28-a1b4-1e29d49a6a3e,rules-threat-hunting/image_load_dll_taskschd_by_process_in_potentially_suspicious_location.yml,image_load,low,false,
+sigma,Downloads,41504465-5e3a-4a5b-a5b4-2a0baadd4463,rules/pipe_created_sysinternals_psexec_default_pipe_susp_location.yml,pipe_created,medium,false,
+sigma,Downloads,424273ea-7cf8-43a6-b712-375f925e481f,rules/win_taskscheduler_execution_from_susp_locations.yml,taskscheduler,medium,false,
+sigma,Downloads,538c5851-8c03-4724-8ec4-623bc7aadaea,rules-threat-hunting/proc_creation_win_susp_open_html_file_from_download_folder.yml,process_creation,low,false,
+sigma,Downloads,5a6b7c8d-9e0f-1a2b-3c4d-5e6f7a8b9c0d,rules/proc_creation_win_cmd_launched_with_hidden_start_flag.yml,process_creation,medium,false,
+sigma,Downloads,5cdeaf3d-1489-477c-95ab-c318559fc051,rules/win_appxdeployment_server_appx_package_in_staging_directory.yml,appxdeployment-server,high,false,
+sigma,Downloads,5f6a601c-2ecb-498b-9c33-660362323afa,rules/proc_creation_win_powershell_import_cert_susp_locations.yml,process_creation,high,false,
+sigma,Downloads,614cf376-6651-47c4-9dcc-6b9527f749f4,rules/win_security_susp_scheduled_task_update.yml,security,high,false,
+sigma,Downloads,631b22a4-70f4-4e2f-9ea8-42f84d9df6d8,rules/proc_creation_win_addinutil_suspicious_cmdline.yml,process_creation,high,false,
+sigma,Downloads,6e22722b-dfb1-4508-a911-49ac840b40f8,rules/proc_creation_win_mstsc_run_local_rdp_file_susp_location.yml,process_creation,high,false,
+sigma,Downloads,707e097c-e20f-4f67-8807-1f72ff4500d6,rules/registry_set_persistence_app_paths.yml,registry_set,high,false,
+sigma,Downloads,790317c0-0a36-4a6a-a105-6e576bf99a14,rules/registry_set_persistence_com_hijacking_builtin.yml,registry_set,high,false,
+sigma,Downloads,8289bf8c-4aca-4f5a-9db3-dc3d7afe5c10,rules/win_security_mitigations_unsigned_dll_from_susp_location.yml,security-mitigations,high,false,
+sigma,Downloads,84232095-ecca-4015-b0d7-7726507ee793,rules/proc_creation_win_certoc_load_dll_susp_locations.yml,process_creation,high,false,
+sigma,Downloads,8de89e52-f6e1-4b5b-afd1-41ecfa300d48,rules/proc_creation_win_windows_terminal_susp_children.yml,process_creation,medium,false,
+sigma,Downloads,94dc4390-6b7c-4784-8ffc-335334404650,rules/win_esent_ntdsutil_abuse_susp_location.yml,application,medium,false,
+sigma,Downloads,9637e8a5-7131-4f7f-bdc7-2b05d8670c43,rules/proc_creation_win_susp_file_characteristics.yml,process_creation,medium,false,
+sigma,Downloads,9c5037d1-c568-49b3-88c7-9846a5bdc2be,rules/registry_event_susp_download_run_key.yml,registry_event,high,false,
+sigma,Downloads,9f5c1d59-33be-4e60-bcab-85d2f566effd,rules/proc_access_win_susp_dbgcore_dbghelp_load.yml,process_access,high,false,
+sigma,Downloads,a35f5a72-f347-4e36-8895-9869b0d5fc6d,rules/proc_creation_win_netsh_fw_allow_program_in_susp_location.yml,process_creation,high,false,
+sigma,Downloads,af4c4609-5755-42fe-8075-4effb49f5d44,rules/image_load_office_excel_xll_susp_load.yml,image_load,medium,false,
+sigma,Downloads,c2b86e67-b880-4eec-b045-50bc98ef4844,rules/proc_creation_win_hktl_lazagne.yml,process_creation,medium,false,
+sigma,Downloads,e8a95b5e-c891-46e2-b33a-93937d3abc31,rules/proc_creation_win_hh_susp_execution.yml,process_creation,high,false,
+sigma,Downloads,ef61af62-bc74-4f58-b49b-626448227652,rules/proc_creation_win_sysinternals_adexplorer_susp_execution.yml,process_creation,high,false,
+sigma,Downloads,efec536f-72e8-4656-8960-5e85d091345b,rules/proc_creation_win_attrib_system_susp_paths.yml,process_creation,high,false,
+sigma,Exchange web,bd1212e5-78da-431e-95fa-c58e3237a8e6,rules/file_event_win_exchange_webshell_drop.yml,file_event,high,false,
+sigma,MachineKeys,327ff235-94eb-4f06-b9de-aaee571324be,rules/proc_creation_win_regsvr32_susp_exec_path_2.yml,process_creation,high,false,
+sigma,MachineKeys,6b65c28e-11f3-46cb-902a-68f2cafaf474,rules/proc_creation_win_odbcconf_exec_susp_locations.yml,process_creation,high,false,
+sigma,MachineKeys,e4d22291-f3d5-4b78-9a0c-a1fbaf32a6a4,rules/registry_set_odbc_driver_registered_susp.yml,registry_set,high,false,
+sigma,Mock trailing-space folder,4ac47ed3-44c2-4b1f-9d51-bf46e8914126,rules/proc_creation_win_uac_bypass_trustedpath.yml,process_creation,critical,false,
+sigma,Mock trailing-space folder,7a01183d-71a2-46ad-ad5c-acd989ac1793,rules/proc_creation_win_uac_bypass_winsat.yml,process_creation,high,false,
+sigma,Mock trailing-space folder,b6f91281-20aa-446a-b986-38a92813a18f,rules/file_event_win_dll_sideloading_space_path.yml,file_event,high,true,
+sigma,NTDS,0b8baa3f-575c-46ee-8715-d6f28cc7d33c,rules/file_event_win_ntds_dit_creation.yml,file_event,low,true,
+sigma,NTDS,11b1ed55-154d-4e82-8ad7-83739298f720,rules/file_event_win_ntds_dit_uncommon_process.yml,file_event,high,false,
+sigma,NTDS,2fcda7e2-8c57-4904-86ac-37fc3157e09d,rules/proc_creation_win_print_dump_sensitive_files.yml,process_creation,high,false,
+sigma,NTDS,4e7050dd-e548-483f-b7d6-527ab4fa784d,rules/file_event_win_ntds_dit_uncommon_parent_process.yml,file_event,high,false,
+sigma,NTDS,84972c80-251c-4c3a-9079-4f00aad93938,rules/proc_creation_win_wbadmin_restore_sensitive_files.yml,process_creation,high,false,
+sigma,NTDS,8b93a509-1cb8-42e1-97aa-ee24224cdc15,rules/proc_creation_win_wbadmin_dump_sensitive_files.yml,process_creation,high,false,
+sigma,NTDS,8bc64091-6875-4881-aaf9-7bd25b5dda08,rules/proc_creation_win_susp_ntds.yml,process_creation,high,false,
+sigma,NTDS,910ab938-668b-401b-b08c-b596e80fdca5,rules/win_security_transf_files_with_cred_data_via_network_shares.yml,security,medium,false,
+sigma,NTDS,94dc4390-6b7c-4784-8ffc-335334404650,rules/win_esent_ntdsutil_abuse_susp_location.yml,application,medium,false,
+sigma,NTDS,b3503044-60ce-4bf4-bbcb-e3db98788823,rules/registry_event_susp_lsass_dll_load.yml,registry_event,high,false,
+sigma,NTDS,e6e88853-5f20-4c4a-8d26-cd469fd8d31f,rules/win_esent_ntdsutil_abuse.yml,application,medium,false,
+sigma,NTDS,e7be6119-fc37-43f0-ad4f-1f3f99be2f9f,rules/proc_creation_win_esentutl_sensitive_file_copy.yml,process_creation,high,false,
+sigma,NTDS,f57f8d16-1f39-4dcb-a604-6c73d9b54b3d,rules/proc_creation_win_susp_sensitive_file_access_shadowcopy.yml,process_creation,high,false,
+sigma,PerfLogs,002bdb95-0cf1-46a6-9e08-d38c128a6127,rules/file_event_win_cscript_wscript_dropper.yml,file_event,high,false,
+sigma,PerfLogs,11b1ed55-154d-4e82-8ad7-83739298f720,rules/file_event_win_ntds_dit_uncommon_process.yml,file_event,high,false,
+sigma,PerfLogs,1228c958-e64e-4e71-92ad-7d429f4138ba,rules/proc_creation_win_susp_script_exec_from_env_folder.yml,process_creation,high,false,
+sigma,PerfLogs,1277f594-a7d1-4f28-a2d3-73af5cbeab43,rules/file_event_win_shell_write_susp_directory.yml,file_event,high,false,
+sigma,PerfLogs,1c0e41cd-21bb-4433-9acc-4a2cd6367b9b,rules/proc_creation_win_schtasks_change.yml,process_creation,high,false,
+sigma,PerfLogs,1d61f71d-59d2-479e-9562-4ff5f4ead16b,rules/win_system_service_install_susp.yml,system,high,false,
+sigma,PerfLogs,236d8e89-ed95-4789-a982-36f4643738ba,rules/proc_creation_win_vmware_toolbox_cmd_persistence_susp.yml,process_creation,high,false,
+sigma,PerfLogs,318557a5-150c-4c8d-b70e-a9910e199857,rules/file_event_win_msdt_susp_directories.yml,file_event,high,false,
+sigma,PerfLogs,327ff235-94eb-4f06-b9de-aaee571324be,rules/proc_creation_win_regsvr32_susp_exec_path_2.yml,process_creation,high,false,
+sigma,PerfLogs,3a734d25-df5c-4b99-8034-af1ddb5883a4,rules/win_security_susp_scheduled_task_creation.yml,security,high,false,
+sigma,PerfLogs,3dfd06d2-eaf4-4532-9555-68aca59f57c4,rules/proc_creation_win_susp_execution_path.yml,process_creation,high,false,
+sigma,PerfLogs,40aa399c-7b02-4715-8e5f-73572b493f33,rules/proc_creation_win_wget_download_susp_locations.yml,process_creation,high,false,
+sigma,PerfLogs,416bc4a2-7217-4519-8dc7-c3271817f1d5,rules/image_load_win_susp_dbgcore_dbghelp_load.yml,image_load,high,false,
+sigma,PerfLogs,42205c73-75c8-4a63-9db1-e3782e06fda0,rules/registry_set_exploit_guard_susp_allowed_apps.yml,registry_set,high,false,
+sigma,PerfLogs,4e7050dd-e548-483f-b7d6-527ab4fa784d,rules/file_event_win_ntds_dit_uncommon_parent_process.yml,file_event,high,false,
+sigma,PerfLogs,4e87b8e2-2ee9-4b2a-a715-4727d297ece0,rules/file_event_win_sam_dump.yml,file_event,high,true,
+sigma,PerfLogs,5a6b7c8d-9e0f-1a2b-3c4d-5e6f7a8b9c0d,rules/proc_creation_win_cmd_launched_with_hidden_start_flag.yml,process_creation,medium,false,
+sigma,PerfLogs,5cdeaf3d-1489-477c-95ab-c318559fc051,rules/win_appxdeployment_server_appx_package_in_staging_directory.yml,appxdeployment-server,high,false,
+sigma,PerfLogs,5f6a601c-2ecb-498b-9c33-660362323afa,rules/proc_creation_win_powershell_import_cert_susp_locations.yml,process_creation,high,false,
+sigma,PerfLogs,614cf376-6651-47c4-9dcc-6b9527f749f4,rules/win_security_susp_scheduled_task_update.yml,security,high,false,
+sigma,PerfLogs,6b65c28e-11f3-46cb-902a-68f2cafaf474,rules/proc_creation_win_odbcconf_exec_susp_locations.yml,process_creation,high,false,
+sigma,PerfLogs,6e8fe0a8-ba0b-4a93-8f9e-82657e7a5984,rules/image_load_susp_baaupdate_dll_load.yml,image_load,high,false,
+sigma,PerfLogs,75e508f7-932d-4ebc-af77-269237a84ce1,rules/image_load_cmstp_load_dll_from_susp_location.yml,image_load,high,false,
+sigma,PerfLogs,790317c0-0a36-4a6a-a105-6e576bf99a14,rules/registry_set_persistence_com_hijacking_builtin.yml,registry_set,high,false,
+sigma,PerfLogs,799a5f48-0ac1-4e0f-9152-71d137d48c2a,rules/image_load_side_load_abused_dlls_susp_paths.yml,image_load,high,false,
+sigma,PerfLogs,7b434893-c57d-4f41-908d-6a17bf1ae98f,rules/net_connection_win_susp_initiated_uncommon_or_suspicious_locations.yml,network_connection,high,false,
+sigma,PerfLogs,811f459f-9231-45d4-959a-0266c6311987,rules/proc_creation_win_bginfo_suspicious_child_process.yml,process_creation,high,false,
+sigma,PerfLogs,8289bf8c-4aca-4f5a-9db3-dc3d7afe5c10,rules/win_security_mitigations_unsigned_dll_from_susp_location.yml,security-mitigations,high,false,
+sigma,PerfLogs,82a6714f-4899-4f16-9c1e-9a333544d4c3,rules/proc_creation_win_certutil_encode_susp_location.yml,process_creation,high,false,
+sigma,PerfLogs,883faa95-175a-4e22-8181-e5761aeb373c,rules/proc_creation_win_susp_service_dir.yml,process_creation,high,false,
+sigma,PerfLogs,8bc64091-6875-4881-aaf9-7bd25b5dda08,rules/proc_creation_win_susp_ntds.yml,process_creation,high,false,
+sigma,PerfLogs,94dc4390-6b7c-4784-8ffc-335334404650,rules/win_esent_ntdsutil_abuse_susp_location.yml,application,medium,false,
+sigma,PerfLogs,9d8f9bb8-01af-4e15-a3a2-349071530530,rules/registry_set_ime_suspicious_paths.yml,registry_set,high,false,
+sigma,PerfLogs,9e2575e7-2cb9-4da1-adc8-ed94221dca5e,rules/win_firewall_as_add_rule_susp_folder.yml,firewall-as,high,false,
+sigma,PerfLogs,9e8894c0-0ae0-11ef-9d85-1f2942bec57c,rules/registry_set_susp_shell_open_keys_modification_patterns.yml,registry_set,medium,false,
+sigma,PerfLogs,9e9a9002-56c4-40fd-9eff-e4b09bfa5f6c,rules/image_load_susp_dll_load_system_process.yml,image_load,medium,false,
+sigma,PerfLogs,9f107a84-532c-41af-b005-8d12a607639f,rules/proc_creation_win_expand_cabinet_files.yml,process_creation,medium,false,
+sigma,PerfLogs,9f5c1d59-33be-4e60-bcab-85d2f566effd,rules/proc_access_win_susp_dbgcore_dbghelp_load.yml,process_access,high,false,
+sigma,PerfLogs,a07f0359-4c90-4dc4-a681-8ffea40b4f47,rules/registry_set_creation_service_susp_folder.yml,registry_set,high,false,
+sigma,PerfLogs,a3ab73f1-bd46-4319-8f06-4b20d0617886,rules/win_defender_config_change_exploit_guard_tamper.yml,windefend,high,false,
+sigma,PerfLogs,af4c4609-5755-42fe-8075-4effb49f5d44,rules/image_load_office_excel_xll_susp_load.yml,image_load,medium,false,
+sigma,PerfLogs,afe52666-401e-4a02-b4ff-5d128990b8cb,rules/proc_creation_win_rar_susp_greedy_compression.yml,process_creation,high,false,
+sigma,PerfLogs,b37998de-a70b-4f33-b219-ec36bf433dc0,rules/proc_creation_win_pua_pingcastle_script_parent.yml,process_creation,high,false,
+sigma,PerfLogs,b48492dc-c5ef-4572-8dff-32bc241c15c8,rules/image_load_dll_rstrtmgr_suspicious_load.yml,image_load,high,false,
+sigma,PerfLogs,b730a276-6b63-41b8-bcf8-55930c8fc6ee,rules/proc_creation_win_csc_susp_parent.yml,process_creation,high,false,
+sigma,PerfLogs,bbb7e38c-0b41-4a11-b306-d2a457b7ac2b,rules/file_event_win_perflogs_susp_files.yml,file_event,medium,true,
+sigma,PerfLogs,c0aac16a-b1e7-4330-bab0-3c27bb4987c7,rules/create_remote_thread_win_mstsc_susp_location.yml,create_remote_thread,high,false,
+sigma,PerfLogs,c2b86e67-b880-4eec-b045-50bc98ef4844,rules/proc_creation_win_hktl_lazagne.yml,process_creation,medium,false,
+sigma,PerfLogs,c74c0390-3e20-41fd-a69a-128f0275a5ea,rules/proc_creation_win_wusa_cab_files_extraction_from_susp_paths.yml,process_creation,high,false,
+sigma,PerfLogs,c7c8aa1c-5aff-408e-828b-998e3620b341,rules/win_msi_install_from_susp_locations.yml,application,medium,false,
+sigma,PerfLogs,cc368ed0-2411-45dc-a222-510ace303cb2,rules/proc_creation_win_regasm_regsvcs_uncommon_location_execution.yml,process_creation,medium,false,
+sigma,PerfLogs,cea72823-df4d-4567-950c-0b579eaf0846,rules/proc_creation_win_wscript_cscript_mshta_dropper.yml,process_creation,medium,false,
+sigma,PerfLogs,dcaa3f04-70c3-427a-80b4-b870d73c94c4,rules/proc_creation_win_csc_susp_dynamic_compilation.yml,process_creation,medium,false,
+sigma,PerfLogs,e0f8ab85-0ac9-423b-a73a-81b3c7b1aa97,rules/net_connection_win_susp_file_sharing_domains_susp_folders.yml,network_connection,high,false,
+sigma,PerfLogs,e1e0b7d7-e10b-4ee4-ac49-a4bda05d320d,rules/proc_creation_win_gpg4win_susp_location.yml,process_creation,high,false,
+sigma,PerfLogs,e218595b-bbe7-4ee5-8a96-f32a24ad3468,rules/proc_creation_win_curl_susp_download.yml,process_creation,high,false,
+sigma,PerfLogs,e4d22291-f3d5-4b78-9a0c-a1fbaf32a6a4,rules/registry_set_odbc_driver_registered_susp.yml,registry_set,high,false,
+sigma,PerfLogs,e7b18879-676e-4a0e-ae18-27039185a8e7,rules/registry_set_netsh_help_dll_persistence_susp_location.yml,registry_set,high,false,
+sigma,PerfLogs,ef64fc9c-a45e-43cc-8fd8-7d75d73b4c99,rules/proc_creation_win_wusa_susp_parent_execution.yml,process_creation,high,false,
+sigma,PerfLogs,f8a56cb7-a363-44ed-a82f-5926bb44cd05,rules/win_bits_client_new_trasnfer_susp_local_folder.yml,bits-client,high,false,
+sigma,PerfLogs,f9999590-1f94-4a34-a91e-951e47bedefd,rules/proc_creation_win_provlaunch_susp_child_process.yml,process_creation,high,false,
+sigma,PerfLogs,fa34b441-961a-42fa-a100-ecc28c886725,rules-threat-hunting/proc_access_win_lsass_susp_source_process.yml,process_access,medium,false,
+sigma,PerfLogs,fb4e2211-6d08-426b-8e6f-0d4a161e3b1d,rules/image_load_clfs_load.yml,image_load,medium,false,
+sigma,ProgramData,002bdb95-0cf1-46a6-9e08-d38c128a6127,rules/file_event_win_cscript_wscript_dropper.yml,file_event,high,false,
+sigma,ProgramData,12b8e9f5-96b2-41e1-9a42-8c6779a5c184,rules/proc_creation_win_pdqdeploy_runner_susp_children.yml,process_creation,medium,false,
+sigma,ProgramData,1c0e41cd-21bb-4433-9acc-4a2cd6367b9b,rules/proc_creation_win_schtasks_change.yml,process_creation,high,false,
+sigma,ProgramData,1cf465a1-2609-4c15-9b66-c32dbe4bfd67,rules/file_event_win_susp_legitimate_app_dropping_in_uncommon_location.yml,file_event,high,false,
+sigma,ProgramData,277dc340-0540-42e7-8efb-5ff460045e07,rules-threat-hunting/registry_set_service_image_path_user_controlled_folder.yml,registry_set,medium,false,
+sigma,ProgramData,2ddef153-167b-4e89-86b6-757a9e65dcac,rules/proc_creation_win_bitsadmin_download_susp_targetfolder.yml,process_creation,high,false,
+sigma,ProgramData,318557a5-150c-4c8d-b70e-a9910e199857,rules/file_event_win_msdt_susp_directories.yml,file_event,high,false,
+sigma,ProgramData,3a734d25-df5c-4b99-8034-af1ddb5883a4,rules/win_security_susp_scheduled_task_creation.yml,security,high,false,
+sigma,ProgramData,3c89a1e8-0fba-449e-8f1b-8409d6267ec8,rules/proc_creation_win_wmic_susp_process_creation.yml,process_creation,high,false,
+sigma,ProgramData,407aecb1-e762-4acf-8c7b-d087bcff3bb6,rules/file_access_win_susp_credential_manager_access.yml,file_access,medium,false,
+sigma,ProgramData,438025f9-5856-4663-83f7-52f878a70a50,rules/proc_creation_win_office_susp_child_processes.yml,process_creation,high,false,
+sigma,ProgramData,4e87b8e2-2ee9-4b2a-a715-4727d297ece0,rules/file_event_win_sam_dump.yml,file_event,high,true,
+sigma,ProgramData,614cf376-6651-47c4-9dcc-6b9527f749f4,rules/win_security_susp_scheduled_task_update.yml,security,high,false,
+sigma,ProgramData,62e0298b-e994-4189-bc87-bc699aa62d97,rules/proc_creation_win_reg_import_from_suspicious_paths.yml,process_creation,medium,false,
+sigma,ProgramData,6b65c28e-11f3-46cb-902a-68f2cafaf474,rules/proc_creation_win_odbcconf_exec_susp_locations.yml,process_creation,high,false,
+sigma,ProgramData,6e8fe0a8-ba0b-4a93-8f9e-82657e7a5984,rules/image_load_susp_baaupdate_dll_load.yml,image_load,high,false,
+sigma,ProgramData,75e508f7-932d-4ebc-af77-269237a84ce1,rules/image_load_cmstp_load_dll_from_susp_location.yml,image_load,high,false,
+sigma,ProgramData,760e75d8-c3b5-409b-a9bf-6130b4c4603f,rules/file_event_win_sed_file_creation.yml,file_event,medium,true,
+sigma,ProgramData,8823e85d-31d8-473e-b7f4-92da070f0fc6,rules/proc_creation_win_rundll32_susp_shellexec_ordinal_execution.yml,process_creation,high,false,
+sigma,ProgramData,8a8379b8-780b-4dbf-b1e9-31c8d112fefb,rules/proc_creation_win_schtasks_folder_combos.yml,process_creation,high,false,
+sigma,ProgramData,8e0bb260-d4b2-4fff-bb8d-3f82118e6892,rules/proc_creation_win_cmd_redirection_susp_folder.yml,process_creation,medium,false,
+sigma,ProgramData,9525dc73-0327-438c-8c04-13c0e037e9da,rules/proc_creation_win_regsvr32_susp_exec_path_1.yml,process_creation,medium,false,
+sigma,ProgramData,b2b048b0-7857-4380-b0fb-d3f0ab820b71,rules/proc_creation_win_iexpress_susp_execution.yml,process_creation,high,false,
+sigma,ProgramData,b7916c2a-fa2f-4795-9477-32b731f70f11,rules/registry_set_susp_reg_persist_explorer_run.yml,registry_set,high,false,
+sigma,ProgramData,c27515df-97a9-4162-8a60-dc0eeb51b775,rules/proc_creation_win_office_onenote_susp_child_processes.yml,process_creation,high,false,
+sigma,ProgramData,c2b86e67-b880-4eec-b045-50bc98ef4844,rules/proc_creation_win_hktl_lazagne.yml,process_creation,medium,false,
+sigma,ProgramData,e218595b-bbe7-4ee5-8a96-f32a24ad3468,rules/proc_creation_win_curl_susp_download.yml,process_creation,high,false,
+sigma,ProgramData,e32f92d1-523e-49c3-9374-bdb13b46a3ba,rules/proc_creation_win_mshta_susp_pattern.yml,process_creation,high,false,
+sigma,ProgramData,e4d22291-f3d5-4b78-9a0c-a1fbaf32a6a4,rules/registry_set_odbc_driver_registered_susp.yml,registry_set,high,false,
+sigma,ProgramData,efec536f-72e8-4656-8960-5e85d091345b,rules/proc_creation_win_attrib_system_susp_paths.yml,process_creation,high,false,
+sigma,ProgramData,f26eb764-fd89-464b-85e2-dc4a8e6e77b8,rules/proc_creation_win_susp_electron_app_children.yml,process_creation,medium,false,
+sigma,ProgramData,f2c64357-b1d2-41b7-849f-34d2682c0fad,rules/proc_creation_win_schtasks_susp_pattern.yml,process_creation,high,false,
+sigma,ProgramData,fa1a7e52-3d02-435b-81b8-00da14dd66c1,rules/proc_creation_win_diskshadow_script_mode_susp_location.yml,process_creation,medium,false,
+sigma,Registration\CRMLog,327ff235-94eb-4f06-b9de-aaee571324be,rules/proc_creation_win_regsvr32_susp_exec_path_2.yml,process_creation,high,false,
+sigma,Registration\CRMLog,6b65c28e-11f3-46cb-902a-68f2cafaf474,rules/proc_creation_win_odbcconf_exec_susp_locations.yml,process_creation,high,false,
+sigma,Registration\CRMLog,e4d22291-f3d5-4b78-9a0c-a1fbaf32a6a4,rules/registry_set_odbc_driver_registered_susp.yml,registry_set,high,false,
+sigma,SYSVOL/NETLOGON,05f3c945-dcc8-4393-9f3d-af65077a8f86,rules/proc_creation_win_susp_sysvol_access.yml,process_creation,medium,false,
+sigma,SYSVOL/NETLOGON,8344c19f-a023-45ff-ad63-a01c5396aea0,rules-threat-hunting/file_access_win_susp_gpo_access_uncommon_process.yml,file_access,medium,false,
+sigma,SYSVOL/NETLOGON,855bc8b5-2ae8-402e-a9ed-b889e6df1900,rules/proc_creation_win_susp_copy_lateral_movement.yml,process_creation,medium,false,
+sigma,SYSVOL/NETLOGON,91a2c315-9ee6-4052-a853-6f6a8238f90d,rules/proc_creation_win_findstr_gpp_passwords.yml,process_creation,high,false,
+sigma,SYSVOL/NETLOGON,d51694fe-484a-46ac-92d6-969e76d60d10,rules/file_access_win_susp_gpo_files.yml,file_access,medium,false,
+sigma,Startup,002bdb95-0cf1-46a6-9e08-d38c128a6127,rules/file_event_win_cscript_wscript_dropper.yml,file_event,high,false,
+sigma,Startup,1228c958-e64e-4e71-92ad-7d429f4138ba,rules/proc_creation_win_susp_script_exec_from_env_folder.yml,process_creation,high,false,
+sigma,Startup,138d3531-8793-4f50-a2cd-f291b2863d78,rules/proc_creation_win_sc_service_path_modification.yml,process_creation,high,false,
+sigma,Startup,17a1be64-8d88-40bf-b5ff-a4f7a50ebcc8,rules/proc_creation_win_susp_service_creation.yml,process_creation,high,false,
+sigma,Startup,1cf465a1-2609-4c15-9b66-c32dbe4bfd67,rules/file_event_win_susp_legitimate_app_dropping_in_uncommon_location.yml,file_event,high,false,
+sigma,Startup,28208707-fe31-437f-9a7f-4b1108b94d2e,rules/file_event_win_susp_startup_folder_persistence.yml,file_event,high,true,
+sigma,Startup,2ddef153-167b-4e89-86b6-757a9e65dcac,rules/proc_creation_win_bitsadmin_download_susp_targetfolder.yml,process_creation,high,false,
+sigma,Startup,318557a5-150c-4c8d-b70e-a9910e199857,rules/file_event_win_msdt_susp_directories.yml,file_event,high,false,
+sigma,Startup,416bc4a2-7217-4519-8dc7-c3271817f1d5,rules/image_load_win_susp_dbgcore_dbghelp_load.yml,image_load,high,false,
+sigma,Startup,52753ea4-b3a0-4365-910d-36cff487b789,rules/file_event_win_tsclient_filewrite_startup.yml,file_event,high,false,
+sigma,Startup,74a2b37d-fea4-41e0-9ac7-c9fbcf1f60cc,rules/file_event_win_winrar_file_creation_in_startup_folder.yml,file_event,high,false,
+sigma,Startup,790317c0-0a36-4a6a-a105-6e576bf99a14,rules/registry_set_persistence_com_hijacking_builtin.yml,registry_set,high,false,
+sigma,Startup,92fa78e7-4d39-45f1-91a3-8b23f3f1088d,rules/file_event_win_powershell_startup_shortcuts.yml,file_event,high,false,
+sigma,Startup,9f5c1d59-33be-4e60-bcab-85d2f566effd,rules/proc_access_win_susp_dbgcore_dbghelp_load.yml,process_access,high,false,
+sigma,Startup,cc368ed0-2411-45dc-a222-510ace303cb2,rules/proc_creation_win_regasm_regsvcs_uncommon_location_execution.yml,process_creation,medium,false,
+sigma,Startup,cea72823-df4d-4567-950c-0b579eaf0846,rules/proc_creation_win_wscript_cscript_mshta_dropper.yml,process_creation,medium,false,
+sigma,Startup,d4e2745c-f0c6-4bde-a3ab-b553b3f693cc,rules/registry_set_disk_cleanup_handler_autorun_persistence.yml,registry_set,medium,false,
+sigma,System32\Tasks,15b75071-74cc-47e0-b4c6-b43744a62a2b,rules/proc_creation_win_rundll32_run_locations.yml,process_creation,medium,false,
+sigma,System32\Tasks,236d8e89-ed95-4789-a982-36f4643738ba,rules/proc_creation_win_vmware_toolbox_cmd_persistence_susp.yml,process_creation,high,false,
+sigma,System32\Tasks,327ff235-94eb-4f06-b9de-aaee571324be,rules/proc_creation_win_regsvr32_susp_exec_path_2.yml,process_creation,high,false,
+sigma,System32\Tasks,3dfd06d2-eaf4-4532-9555-68aca59f57c4,rules/proc_creation_win_susp_execution_path.yml,process_creation,high,false,
+sigma,System32\Tasks,438025f9-5856-4663-83f7-52f878a70a50,rules/proc_creation_win_office_susp_child_processes.yml,process_creation,high,false,
+sigma,System32\Tasks,6b65c28e-11f3-46cb-902a-68f2cafaf474,rules/proc_creation_win_odbcconf_exec_susp_locations.yml,process_creation,high,false,
+sigma,System32\Tasks,760e75d8-c3b5-409b-a9bf-6130b4c4603f,rules/file_event_win_sed_file_creation.yml,file_event,medium,true,
+sigma,System32\Tasks,7b434893-c57d-4f41-908d-6a17bf1ae98f,rules/net_connection_win_susp_initiated_uncommon_or_suspicious_locations.yml,network_connection,high,false,
+sigma,System32\Tasks,9ccba514-7cb6-4c5c-b377-700758f2f120,rules/proc_creation_win_aspnet_compiler_susp_child_process.yml,process_creation,high,false,
+sigma,System32\Tasks,9f50fe98-fe5c-4a2d-86c7-fad7f63ed622,rules/proc_creation_win_aspnet_compiler_susp_paths.yml,process_creation,high,false,
+sigma,System32\Tasks,a35f5a72-f347-4e36-8895-9869b0d5fc6d,rules/proc_creation_win_netsh_fw_allow_program_in_susp_location.yml,process_creation,high,false,
+sigma,System32\Tasks,a762e74f-4dce-477c-b023-4ed81df600f9,rules-threat-hunting/file_event_win_scheduled_task_creation.yml,file_event,low,true,
+sigma,System32\Tasks,b2b048b0-7857-4380-b0fb-d3f0ab820b71,rules/proc_creation_win_iexpress_susp_execution.yml,process_creation,high,false,
+sigma,System32\Tasks,c27515df-97a9-4162-8a60-dc0eeb51b775,rules/proc_creation_win_office_onenote_susp_child_processes.yml,process_creation,high,false,
+sigma,System32\Tasks,cc4e02ba-9c06-48e2-b09e-2500cace9ae0,rules/proc_creation_win_susp_task_folder_evasion.yml,process_creation,high,false,
+sigma,System32\Tasks,e0f8ab85-0ac9-423b-a73a-81b3c7b1aa97,rules/net_connection_win_susp_file_sharing_domains_susp_folders.yml,network_connection,high,false,
+sigma,System32\Tasks,e4d22291-f3d5-4b78-9a0c-a1fbaf32a6a4,rules/registry_set_odbc_driver_registered_susp.yml,registry_set,high,false,
+sigma,System32\Tasks,f9999590-1f94-4a34-a91e-951e47bedefd,rules/proc_creation_win_provlaunch_susp_child_process.yml,process_creation,high,false,
+sigma,System32\config,5b40a734-99b6-4b98-a1d0-1cea51a08ab2,rules/file_event_win_susp_system_interactive_powershell.yml,file_event,high,true,
+sigma,System32\config,6902955a-01b7-432c-b32a-6f5f81d8f625,rules/file_event_win_lsass_shtinkering.yml,file_event,high,true,
+sigma,System32\config,80e1f67a-4596-4351-98f5-a9c3efabac95,rules/file_event_win_susp_task_write.yml,file_event,high,false,
+sigma,System32\config,910ab938-668b-401b-b08c-b596e80fdca5,rules/win_security_transf_files_with_cred_data_via_network_shares.yml,security,medium,false,
+sigma,System32\drivers,059c5af9-5131-4d8d-92b2-de4ad6146712,rules/file_event_win_sysinternals_livekd_driver_susp_creation.yml,file_event,high,false,
+sigma,System32\drivers,16fe46bb-4f64-46aa-817d-ff7bec4a2352,rules/file_event_win_sysinternals_livekd_driver.yml,file_event,medium,false,
+sigma,System32\wbem,05936ce2-ee05-4dae-9d03-9a391cf2d2c6,rules/image_load_wmi_persistence_commandline_event_consumer.yml,image_load,high,false,
+sigma,System32\wbem,33f41cdd-35ac-4ba8-814b-c6a4244a1ad4,rules/file_event_win_wmi_persistence_script_event_consumer_write.yml,file_event,high,false,
+sigma,System32\wbem,6b98b92b-4f00-4f62-b4fe-4d1920215771,rules/image_load_side_load_non_existent_dlls.yml,image_load,high,false,
+sigma,System32\wbem,70e8e9b4-6a93-4cb7-8cde-da69502e7aff,rules/image_load_side_load_vmguestlib.yml,image_load,medium,false,
+sigma,System32\wbem,df6ecb8b-7822-4f4b-b412-08f524b4576c,rules/file_event_win_create_non_existent_dlls.yml,file_event,medium,true,
+sigma,System32\wbem,ec1d5e28-8f3b-4188-a6f8-6e8df81dc28e,rules/proc_creation_win_wmi_persistence_script_event_consumer.yml,process_creation,medium,false,
+sigma,System32\wbem,eca81e8d-09e1-4d04-8614-c91f44fd0519,rules/win_firewall_as_add_rule_wmiprvse.yml,firewall-as,medium,false,
+sigma,Users\Public,02ee49e2-e294-4d0f-9278-f5b3212fc588,rules/registry_set_susp_run_key_img_folder.yml,registry_set,high,false,
+sigma,Users\Public,1228c958-e64e-4e71-92ad-7d429f4138ba,rules/proc_creation_win_susp_script_exec_from_env_folder.yml,process_creation,high,false,
+sigma,Users\Public,1277f594-a7d1-4f28-a2d3-73af5cbeab43,rules/file_event_win_shell_write_susp_directory.yml,file_event,high,false,
+sigma,Users\Public,12b8e9f5-96b2-41e1-9a42-8c6779a5c184,rules/proc_creation_win_pdqdeploy_runner_susp_children.yml,process_creation,medium,false,
+sigma,Users\Public,1c0e41cd-21bb-4433-9acc-4a2cd6367b9b,rules/proc_creation_win_schtasks_change.yml,process_creation,high,false,
+sigma,Users\Public,1cf465a1-2609-4c15-9b66-c32dbe4bfd67,rules/file_event_win_susp_legitimate_app_dropping_in_uncommon_location.yml,file_event,high,false,
+sigma,Users\Public,1dd05363-104e-4b4a-b963-196a534b03a1,rules/proc_creation_win_mofcomp_execution.yml,process_creation,high,false,
+sigma,Users\Public,21f9162c-5f5d-4b01-89a8-b705bd7d10ab,rules/posh_ps_import_module_susp_dirs.yml,ps_script,medium,false,
+sigma,Users\Public,2267fe65-0681-42ad-9a6d-46553d3f3480,rules/proc_creation_win_wsl_child_processes_anomalies.yml,process_creation,medium,false,
+sigma,Users\Public,26481afe-db26-4228-b264-25a29fe6efc7,rules/win_system_service_install_uncommon.yml,system,medium,false,
+sigma,Users\Public,2ddef153-167b-4e89-86b6-757a9e65dcac,rules/proc_creation_win_bitsadmin_download_susp_targetfolder.yml,process_creation,high,false,
+sigma,Users\Public,318557a5-150c-4c8d-b70e-a9910e199857,rules/file_event_win_msdt_susp_directories.yml,file_event,high,false,
+sigma,Users\Public,32b96012-7892-429e-b26c-ac2bf46066ff,rules/proc_creation_win_rundll32_shell32_susp_execution.yml,process_creation,high,false,
+sigma,Users\Public,3a734d25-df5c-4b99-8034-af1ddb5883a4,rules/win_security_susp_scheduled_task_creation.yml,security,high,false,
+sigma,Users\Public,3b92a1d0-8d4b-4d28-a1b4-1e29d49a6a3e,rules-threat-hunting/image_load_dll_taskschd_by_process_in_potentially_suspicious_location.yml,image_load,low,false,
+sigma,Users\Public,3c89a1e8-0fba-449e-8f1b-8409d6267ec8,rules/proc_creation_win_wmic_susp_process_creation.yml,process_creation,high,false,
+sigma,Users\Public,3d2a2d59-929c-4b78-8c1a-145dfe9e07b1,rules/file_event_win_office_publisher_files_in_susp_locations.yml,file_event,medium,true,
+sigma,Users\Public,40aa399c-7b02-4715-8e5f-73572b493f33,rules/proc_creation_win_wget_download_susp_locations.yml,process_creation,high,false,
+sigma,Users\Public,41504465-5e3a-4a5b-a5b4-2a0baadd4463,rules/pipe_created_sysinternals_psexec_default_pipe_susp_location.yml,pipe_created,medium,false,
+sigma,Users\Public,416bc4a2-7217-4519-8dc7-c3271817f1d5,rules/image_load_win_susp_dbgcore_dbghelp_load.yml,image_load,high,false,
+sigma,Users\Public,42205c73-75c8-4a63-9db1-e3782e06fda0,rules/registry_set_exploit_guard_susp_allowed_apps.yml,registry_set,high,false,
+sigma,Users\Public,424273ea-7cf8-43a6-b712-375f925e481f,rules/win_taskscheduler_execution_from_susp_locations.yml,taskscheduler,medium,false,
+sigma,Users\Public,438025f9-5856-4663-83f7-52f878a70a50,rules/proc_creation_win_office_susp_child_processes.yml,process_creation,high,false,
+sigma,Users\Public,4e87b8e2-2ee9-4b2a-a715-4727d297ece0,rules/file_event_win_sam_dump.yml,file_event,high,true,
+sigma,Users\Public,4eec988f-7bf0-49f1-8675-1e6a510b3a2a,rules/registry_set_susp_pendingfilerenameoperations.yml,registry_set,medium,false,
+sigma,Users\Public,5a3164f2-b373-4152-93cf-090b13c12d27,rules/proc_creation_win_vscode_child_processes_anomalies.yml,process_creation,medium,false,
+sigma,Users\Public,5a6b7c8d-9e0f-1a2b-3c4d-5e6f7a8b9c0d,rules/proc_creation_win_cmd_launched_with_hidden_start_flag.yml,process_creation,medium,false,
+sigma,Users\Public,5cdeaf3d-1489-477c-95ab-c318559fc051,rules/win_appxdeployment_server_appx_package_in_staging_directory.yml,appxdeployment-server,high,false,
+sigma,Users\Public,5e3cc4d8-3e68-43db-8656-eaaeefdec9cc,rules/proc_creation_win_powershell_invoke_webrequest_download.yml,process_creation,high,false,
+sigma,Users\Public,5f6a601c-2ecb-498b-9c33-660362323afa,rules/proc_creation_win_powershell_import_cert_susp_locations.yml,process_creation,high,false,
+sigma,Users\Public,614cf376-6651-47c4-9dcc-6b9527f749f4,rules/win_security_susp_scheduled_task_update.yml,security,high,false,
+sigma,Users\Public,631b22a4-70f4-4e2f-9ea8-42f84d9df6d8,rules/proc_creation_win_addinutil_suspicious_cmdline.yml,process_creation,high,false,
+sigma,Users\Public,69bd9b97-2be2-41b6-9816-fb08757a4d1a,rules/proc_creation_win_susp_execution_from_public_folder_as_parent.yml,process_creation,high,false,
+sigma,Users\Public,6b65c28e-11f3-46cb-902a-68f2cafaf474,rules/proc_creation_win_odbcconf_exec_susp_locations.yml,process_creation,high,false,
+sigma,Users\Public,6e22722b-dfb1-4508-a911-49ac840b40f8,rules/proc_creation_win_mstsc_run_local_rdp_file_susp_location.yml,process_creation,high,false,
+sigma,Users\Public,6e8fe0a8-ba0b-4a93-8f9e-82657e7a5984,rules/image_load_susp_baaupdate_dll_load.yml,image_load,high,false,
+sigma,Users\Public,790317c0-0a36-4a6a-a105-6e576bf99a14,rules/registry_set_persistence_com_hijacking_builtin.yml,registry_set,high,false,
+sigma,Users\Public,799a5f48-0ac1-4e0f-9152-71d137d48c2a,rules/image_load_side_load_abused_dlls_susp_paths.yml,image_load,high,false,
+sigma,Users\Public,7b434893-c57d-4f41-908d-6a17bf1ae98f,rules/net_connection_win_susp_initiated_uncommon_or_suspicious_locations.yml,network_connection,high,false,
+sigma,Users\Public,7fd164ba-126a-4d9c-9392-0d4f7c243df0,rules/file_event_win_office_onenote_files_in_susp_locations.yml,file_event,medium,false,
+sigma,Users\Public,811f459f-9231-45d4-959a-0266c6311987,rules/proc_creation_win_bginfo_suspicious_child_process.yml,process_creation,high,false,
+sigma,Users\Public,81325ce1-be01-4250-944f-b4789644556f,rules/proc_creation_win_schtasks_env_folder.yml,process_creation,medium,false,
+sigma,Users\Public,8289bf8c-4aca-4f5a-9db3-dc3d7afe5c10,rules/win_security_mitigations_unsigned_dll_from_susp_location.yml,security-mitigations,high,false,
+sigma,Users\Public,82a6714f-4899-4f16-9c1e-9a333544d4c3,rules/proc_creation_win_certutil_encode_susp_location.yml,process_creation,high,false,
+sigma,Users\Public,84232095-ecca-4015-b0d7-7726507ee793,rules/proc_creation_win_certoc_load_dll_susp_locations.yml,process_creation,high,false,
+sigma,Users\Public,8823e85d-31d8-473e-b7f4-92da070f0fc6,rules/proc_creation_win_rundll32_susp_shellexec_ordinal_execution.yml,process_creation,high,false,
+sigma,Users\Public,883faa95-175a-4e22-8181-e5761aeb373c,rules/proc_creation_win_susp_service_dir.yml,process_creation,high,false,
+sigma,Users\Public,8de89e52-f6e1-4b5b-afd1-41ecfa300d48,rules/proc_creation_win_windows_terminal_susp_children.yml,process_creation,medium,false,
+sigma,Users\Public,8e0bb260-d4b2-4fff-bb8d-3f82118e6892,rules/proc_creation_win_cmd_redirection_susp_folder.yml,process_creation,medium,false,
+sigma,Users\Public,9494479d-d994-40bf-a8b1-eea890237021,rules-threat-hunting/proc_creation_win_schtasks_creation_from_susp_parent.yml,process_creation,medium,false,
+sigma,Users\Public,94dc4390-6b7c-4784-8ffc-335334404650,rules/win_esent_ntdsutil_abuse_susp_location.yml,application,medium,false,
+sigma,Users\Public,9525dc73-0327-438c-8c04-13c0e037e9da,rules/proc_creation_win_regsvr32_susp_exec_path_1.yml,process_creation,medium,false,
+sigma,Users\Public,966315ef-c5e1-4767-ba25-fce9c8de3660,rules/registry_set_suspicious_env_variables.yml,registry_set,high,false,
+sigma,Users\Public,9ccba514-7cb6-4c5c-b377-700758f2f120,rules/proc_creation_win_aspnet_compiler_susp_child_process.yml,process_creation,high,false,
+sigma,Users\Public,9d8f9bb8-01af-4e15-a3a2-349071530530,rules/registry_set_ime_suspicious_paths.yml,registry_set,high,false,
+sigma,Users\Public,9e2575e7-2cb9-4da1-adc8-ed94221dca5e,rules/win_firewall_as_add_rule_susp_folder.yml,firewall-as,high,false,
+sigma,Users\Public,9e8894c0-0ae0-11ef-9d85-1f2942bec57c,rules/registry_set_susp_shell_open_keys_modification_patterns.yml,registry_set,medium,false,
+sigma,Users\Public,9e9a9002-56c4-40fd-9eff-e4b09bfa5f6c,rules/image_load_susp_dll_load_system_process.yml,image_load,medium,false,
+sigma,Users\Public,9f107a84-532c-41af-b005-8d12a607639f,rules/proc_creation_win_expand_cabinet_files.yml,process_creation,medium,false,
+sigma,Users\Public,9f50fe98-fe5c-4a2d-86c7-fad7f63ed622,rules/proc_creation_win_aspnet_compiler_susp_paths.yml,process_creation,high,false,
+sigma,Users\Public,9f5c1d59-33be-4e60-bcab-85d2f566effd,rules/proc_access_win_susp_dbgcore_dbghelp_load.yml,process_access,high,false,
+sigma,Users\Public,9fc3072c-dc8f-4bf7-b231-18950000fadd,rules/proc_creation_win_driverquery_recon.yml,process_creation,high,false,
+sigma,Users\Public,a07f0359-4c90-4dc4-a681-8ffea40b4f47,rules/registry_set_creation_service_susp_folder.yml,registry_set,high,false,
+sigma,Users\Public,a35f5a72-f347-4e36-8895-9869b0d5fc6d,rules/proc_creation_win_netsh_fw_allow_program_in_susp_location.yml,process_creation,high,false,
+sigma,Users\Public,a3ab73f1-bd46-4319-8f06-4b20d0617886,rules/win_defender_config_change_exploit_guard_tamper.yml,windefend,high,false,
+sigma,Users\Public,af4c4609-5755-42fe-8075-4effb49f5d44,rules/image_load_office_excel_xll_susp_load.yml,image_load,medium,false,
+sigma,Users\Public,afe52666-401e-4a02-b4ff-5d128990b8cb,rules/proc_creation_win_rar_susp_greedy_compression.yml,process_creation,high,false,
+sigma,Users\Public,b37998de-a70b-4f33-b219-ec36bf433dc0,rules/proc_creation_win_pua_pingcastle_script_parent.yml,process_creation,high,false,
+sigma,Users\Public,b447f7de-1e53-4cbf-bfb4-f1f6d0b04e4e,rules/file_event_win_susp_public_folder_extension.yml,file_event,high,true,
+sigma,Users\Public,b48492dc-c5ef-4572-8dff-32bc241c15c8,rules/image_load_dll_rstrtmgr_suspicious_load.yml,image_load,high,false,
+sigma,Users\Public,b730a276-6b63-41b8-bcf8-55930c8fc6ee,rules/proc_creation_win_csc_susp_parent.yml,process_creation,high,false,
+sigma,Users\Public,b7916c2a-fa2f-4795-9477-32b731f70f11,rules/registry_set_susp_reg_persist_explorer_run.yml,registry_set,high,false,
+sigma,Users\Public,bcb03938-9f8b-487d-8d86-e480691e1d71,rules-threat-hunting/net_connection_win_susp_initaited_public_folder.yml,network_connection,medium,false,
+sigma,Users\Public,c0aac16a-b1e7-4330-bab0-3c27bb4987c7,rules/create_remote_thread_win_mstsc_susp_location.yml,create_remote_thread,high,false,
+sigma,Users\Public,c27515df-97a9-4162-8a60-dc0eeb51b775,rules/proc_creation_win_office_onenote_susp_child_processes.yml,process_creation,high,false,
+sigma,Users\Public,c2b86e67-b880-4eec-b045-50bc98ef4844,rules/proc_creation_win_hktl_lazagne.yml,process_creation,medium,false,
+sigma,Users\Public,c31364f7-8be6-4b77-8483-dd2b5a7b69a3,rules/proc_creation_win_powershell_import_module_susp_dirs.yml,process_creation,medium,false,
+sigma,Users\Public,c74c0390-3e20-41fd-a69a-128f0275a5ea,rules/proc_creation_win_wusa_cab_files_extraction_from_susp_paths.yml,process_creation,high,false,
+sigma,Users\Public,c7c8aa1c-5aff-408e-828b-998e3620b341,rules/win_msi_install_from_susp_locations.yml,application,medium,false,
+sigma,Users\Public,c80e66d8-1780-48a9-b412-46663fd21ac0,rules/proc_creation_win_autorun_registry_modified_via_wmic.yml,process_creation,high,false,
+sigma,Users\Public,cc368ed0-2411-45dc-a222-510ace303cb2,rules/proc_creation_win_regasm_regsvcs_uncommon_location_execution.yml,process_creation,medium,false,
+sigma,Users\Public,cea72823-df4d-4567-950c-0b579eaf0846,rules/proc_creation_win_wscript_cscript_mshta_dropper.yml,process_creation,medium,false,
+sigma,Users\Public,d4e2745c-f0c6-4bde-a3ab-b553b3f693cc,rules/registry_set_disk_cleanup_handler_autorun_persistence.yml,registry_set,medium,false,
+sigma,Users\Public,d87bd452-6da1-456e-8155-7dc988157b7d,rules/proc_creation_win_rundll32_susp_shellexec_execution.yml,process_creation,high,false,
+sigma,Users\Public,dcaa3f04-70c3-427a-80b4-b870d73c94c4,rules/proc_creation_win_csc_susp_dynamic_compilation.yml,process_creation,medium,false,
+sigma,Users\Public,e0f8ab85-0ac9-423b-a73a-81b3c7b1aa97,rules/net_connection_win_susp_file_sharing_domains_susp_folders.yml,network_connection,high,false,
+sigma,Users\Public,e1e0b7d7-e10b-4ee4-ac49-a4bda05d320d,rules/proc_creation_win_gpg4win_susp_location.yml,process_creation,high,false,
+sigma,Users\Public,e218595b-bbe7-4ee5-8a96-f32a24ad3468,rules/proc_creation_win_curl_susp_download.yml,process_creation,high,false,
+sigma,Users\Public,e32f92d1-523e-49c3-9374-bdb13b46a3ba,rules/proc_creation_win_mshta_susp_pattern.yml,process_creation,high,false,
+sigma,Users\Public,e4d22291-f3d5-4b78-9a0c-a1fbaf32a6a4,rules/registry_set_odbc_driver_registered_susp.yml,registry_set,high,false,
+sigma,Users\Public,e7b18879-676e-4a0e-ae18-27039185a8e7,rules/registry_set_netsh_help_dll_persistence_susp_location.yml,registry_set,high,false,
+sigma,Users\Public,e8a95b5e-c891-46e2-b33a-93937d3abc31,rules/proc_creation_win_hh_susp_execution.yml,process_creation,high,false,
+sigma,Users\Public,ef61af62-bc74-4f58-b49b-626448227652,rules/proc_creation_win_sysinternals_adexplorer_susp_execution.yml,process_creation,high,false,
+sigma,Users\Public,ef64fc9c-a45e-43cc-8fd8-7d75d73b4c99,rules/proc_creation_win_wusa_susp_parent_execution.yml,process_creation,high,false,
+sigma,Users\Public,efec536f-72e8-4656-8960-5e85d091345b,rules/proc_creation_win_attrib_system_susp_paths.yml,process_creation,high,false,
+sigma,Users\Public,f26eb764-fd89-464b-85e2-dc4a8e6e77b8,rules/proc_creation_win_susp_electron_app_children.yml,process_creation,medium,false,
+sigma,Users\Public,f2c64357-b1d2-41b7-849f-34d2682c0fad,rules/proc_creation_win_schtasks_susp_pattern.yml,process_creation,high,false,
+sigma,Users\Public,f8a56cb7-a363-44ed-a82f-5926bb44cd05,rules/win_bits_client_new_trasnfer_susp_local_folder.yml,bits-client,high,false,
+sigma,Users\Public,f9999590-1f94-4a34-a91e-951e47bedefd,rules/proc_creation_win_provlaunch_susp_child_process.yml,process_creation,high,false,
+sigma,Users\Public,fa1a7e52-3d02-435b-81b8-00da14dd66c1,rules/proc_creation_win_diskshadow_script_mode_susp_location.yml,process_creation,medium,false,
+sigma,Users\Public,fa34b441-961a-42fa-a100-ecc28c886725,rules-threat-hunting/proc_access_win_lsass_susp_source_process.yml,process_access,medium,false,
+sigma,Users\Public,fb4e2211-6d08-426b-8e6f-0d4a161e3b1d,rules/image_load_clfs_load.yml,image_load,medium,false,
+sigma,Users\Public,fb9d3ff7-7348-46ab-af8c-b55f5fbf39b4,rules/proc_creation_win_powershell_public_folder.yml,process_creation,high,false,
+sigma,Windows\Fonts,15b75071-74cc-47e0-b4c6-b43744a62a2b,rules/proc_creation_win_rundll32_run_locations.yml,process_creation,medium,false,
+sigma,Windows\Fonts,3dfd06d2-eaf4-4532-9555-68aca59f57c4,rules/proc_creation_win_susp_execution_path.yml,process_creation,high,false,
+sigma,Windows\Fonts,7b434893-c57d-4f41-908d-6a17bf1ae98f,rules/net_connection_win_susp_initiated_uncommon_or_suspicious_locations.yml,network_connection,high,false,
+sigma,Windows\Fonts,883faa95-175a-4e22-8181-e5761aeb373c,rules/proc_creation_win_susp_service_dir.yml,process_creation,high,false,
+sigma,Windows\Fonts,a35f5a72-f347-4e36-8895-9869b0d5fc6d,rules/proc_creation_win_netsh_fw_allow_program_in_susp_location.yml,process_creation,high,false,
+sigma,Windows\Fonts,ae9b0bd7-8888-4606-b444-0ed7410cb728,rules/proc_creation_win_susp_hiding_malware_in_fonts_folder.yml,process_creation,medium,false,
+sigma,Windows\Fonts,c2b86e67-b880-4eec-b045-50bc98ef4844,rules/proc_creation_win_hktl_lazagne.yml,process_creation,medium,false,
+sigma,Windows\Fonts,e0f8ab85-0ac9-423b-a73a-81b3c7b1aa97,rules/net_connection_win_susp_file_sharing_domains_susp_folders.yml,network_connection,high,false,
+sigma,Windows\Help,15b75071-74cc-47e0-b4c6-b43744a62a2b,rules/proc_creation_win_rundll32_run_locations.yml,process_creation,medium,false,
+sigma,Windows\Help,3dfd06d2-eaf4-4532-9555-68aca59f57c4,rules/proc_creation_win_susp_execution_path.yml,process_creation,high,false,
+sigma,Windows\Help,40aa399c-7b02-4715-8e5f-73572b493f33,rules/proc_creation_win_wget_download_susp_locations.yml,process_creation,high,false,
+sigma,Windows\Help,a35f5a72-f347-4e36-8895-9869b0d5fc6d,rules/proc_creation_win_netsh_fw_allow_program_in_susp_location.yml,process_creation,high,false,
+sigma,Windows\IME,3dfd06d2-eaf4-4532-9555-68aca59f57c4,rules/proc_creation_win_susp_execution_path.yml,process_creation,high,false,
+sigma,Windows\IME,7b434893-c57d-4f41-908d-6a17bf1ae98f,rules/net_connection_win_susp_initiated_uncommon_or_suspicious_locations.yml,network_connection,high,false,
+sigma,Windows\IME,883faa95-175a-4e22-8181-e5761aeb373c,rules/proc_creation_win_susp_service_dir.yml,process_creation,high,false,
+sigma,Windows\IME,c2b86e67-b880-4eec-b045-50bc98ef4844,rules/proc_creation_win_hktl_lazagne.yml,process_creation,medium,false,
+sigma,Windows\IME,e0f8ab85-0ac9-423b-a73a-81b3c7b1aa97,rules/net_connection_win_susp_file_sharing_domains_susp_folders.yml,network_connection,high,false,
+sigma,Windows\Prefetch,0a1f9d29-6465-4776-b091-7f43b26e4c89,rules/file_delete_win_delete_prefetch.yml,file_delete,high,false,
+sigma,Windows\Tasks,15b75071-74cc-47e0-b4c6-b43744a62a2b,rules/proc_creation_win_rundll32_run_locations.yml,process_creation,medium,false,
+sigma,Windows\Tasks,236d8e89-ed95-4789-a982-36f4643738ba,rules/proc_creation_win_vmware_toolbox_cmd_persistence_susp.yml,process_creation,high,false,
+sigma,Windows\Tasks,327ff235-94eb-4f06-b9de-aaee571324be,rules/proc_creation_win_regsvr32_susp_exec_path_2.yml,process_creation,high,false,
+sigma,Windows\Tasks,3dfd06d2-eaf4-4532-9555-68aca59f57c4,rules/proc_creation_win_susp_execution_path.yml,process_creation,high,false,
+sigma,Windows\Tasks,438025f9-5856-4663-83f7-52f878a70a50,rules/proc_creation_win_office_susp_child_processes.yml,process_creation,high,false,
+sigma,Windows\Tasks,6b65c28e-11f3-46cb-902a-68f2cafaf474,rules/proc_creation_win_odbcconf_exec_susp_locations.yml,process_creation,high,false,
+sigma,Windows\Tasks,6e22722b-dfb1-4508-a911-49ac840b40f8,rules/proc_creation_win_mstsc_run_local_rdp_file_susp_location.yml,process_creation,high,false,
+sigma,Windows\Tasks,760e75d8-c3b5-409b-a9bf-6130b4c4603f,rules/file_event_win_sed_file_creation.yml,file_event,medium,true,
+sigma,Windows\Tasks,7b434893-c57d-4f41-908d-6a17bf1ae98f,rules/net_connection_win_susp_initiated_uncommon_or_suspicious_locations.yml,network_connection,high,false,
+sigma,Windows\Tasks,84232095-ecca-4015-b0d7-7726507ee793,rules/proc_creation_win_certoc_load_dll_susp_locations.yml,process_creation,high,false,
+sigma,Windows\Tasks,9ccba514-7cb6-4c5c-b377-700758f2f120,rules/proc_creation_win_aspnet_compiler_susp_child_process.yml,process_creation,high,false,
+sigma,Windows\Tasks,9e2575e7-2cb9-4da1-adc8-ed94221dca5e,rules/win_firewall_as_add_rule_susp_folder.yml,firewall-as,high,false,
+sigma,Windows\Tasks,9f50fe98-fe5c-4a2d-86c7-fad7f63ed622,rules/proc_creation_win_aspnet_compiler_susp_paths.yml,process_creation,high,false,
+sigma,Windows\Tasks,a35f5a72-f347-4e36-8895-9869b0d5fc6d,rules/proc_creation_win_netsh_fw_allow_program_in_susp_location.yml,process_creation,high,false,
+sigma,Windows\Tasks,a762e74f-4dce-477c-b023-4ed81df600f9,rules-threat-hunting/file_event_win_scheduled_task_creation.yml,file_event,low,true,
+sigma,Windows\Tasks,af4c4609-5755-42fe-8075-4effb49f5d44,rules/image_load_office_excel_xll_susp_load.yml,image_load,medium,false,
+sigma,Windows\Tasks,b2b048b0-7857-4380-b0fb-d3f0ab820b71,rules/proc_creation_win_iexpress_susp_execution.yml,process_creation,high,false,
+sigma,Windows\Tasks,c0aac16a-b1e7-4330-bab0-3c27bb4987c7,rules/create_remote_thread_win_mstsc_susp_location.yml,create_remote_thread,high,false,
+sigma,Windows\Tasks,c27515df-97a9-4162-8a60-dc0eeb51b775,rules/proc_creation_win_office_onenote_susp_child_processes.yml,process_creation,high,false,
+sigma,Windows\Tasks,e0f8ab85-0ac9-423b-a73a-81b3c7b1aa97,rules/net_connection_win_susp_file_sharing_domains_susp_folders.yml,network_connection,high,false,
+sigma,Windows\Tasks,e4d22291-f3d5-4b78-9a0c-a1fbaf32a6a4,rules/registry_set_odbc_driver_registered_susp.yml,registry_set,high,false,
+sigma,Windows\Tasks,f9999590-1f94-4a34-a91e-951e47bedefd,rules/proc_creation_win_provlaunch_susp_child_process.yml,process_creation,high,false,
+sigma,Windows\Temp,002bdb95-0cf1-46a6-9e08-d38c128a6127,rules/file_event_win_cscript_wscript_dropper.yml,file_event,high,false,
+sigma,Windows\Temp,1277f594-a7d1-4f28-a2d3-73af5cbeab43,rules/file_event_win_shell_write_susp_directory.yml,file_event,high,false,
+sigma,Windows\Temp,12b8e9f5-96b2-41e1-9a42-8c6779a5c184,rules/proc_creation_win_pdqdeploy_runner_susp_children.yml,process_creation,medium,false,
+sigma,Windows\Temp,130c9e58-28ac-4f83-8574-0a4cc913b97e,rules/file_event_win_redmimicry_winnti_filedrop.yml,file_event,high,true,
+sigma,Windows\Temp,138d3531-8793-4f50-a2cd-f291b2863d78,rules/proc_creation_win_sc_service_path_modification.yml,process_creation,high,false,
+sigma,Windows\Temp,17a1be64-8d88-40bf-b5ff-a4f7a50ebcc8,rules/proc_creation_win_susp_service_creation.yml,process_creation,high,false,
+sigma,Windows\Temp,1c0e41cd-21bb-4433-9acc-4a2cd6367b9b,rules/proc_creation_win_schtasks_change.yml,process_creation,high,false,
+sigma,Windows\Temp,1dd05363-104e-4b4a-b963-196a534b03a1,rules/proc_creation_win_mofcomp_execution.yml,process_creation,high,false,
+sigma,Windows\Temp,1e0e1a81-e79b-44bc-935b-ddb9c8006b3d,rules/proc_creation_win_powershell_cl_mutexverifiers.yml,process_creation,medium,false,
+sigma,Windows\Temp,2267fe65-0681-42ad-9a6d-46553d3f3480,rules/proc_creation_win_wsl_child_processes_anomalies.yml,process_creation,medium,false,
+sigma,Windows\Temp,236d8e89-ed95-4789-a982-36f4643738ba,rules/proc_creation_win_vmware_toolbox_cmd_persistence_susp.yml,process_creation,high,false,
+sigma,Windows\Temp,26481afe-db26-4228-b264-25a29fe6efc7,rules/win_system_service_install_uncommon.yml,system,medium,false,
+sigma,Windows\Temp,3a734d25-df5c-4b99-8034-af1ddb5883a4,rules/win_security_susp_scheduled_task_creation.yml,security,high,false,
+sigma,Windows\Temp,3ab79e90-9fab-4cdf-a7b2-6522bc742adb,rules/file_event_win_hktl_krbrelay_remote_ioc.yml,file_event,high,true,
+sigma,Windows\Temp,3b92a1d0-8d4b-4d28-a1b4-1e29d49a6a3e,rules-threat-hunting/image_load_dll_taskschd_by_process_in_potentially_suspicious_location.yml,image_load,low,false,
+sigma,Windows\Temp,3c89a1e8-0fba-449e-8f1b-8409d6267ec8,rules/proc_creation_win_wmic_susp_process_creation.yml,process_creation,high,false,
+sigma,Windows\Temp,3d2a2d59-929c-4b78-8c1a-145dfe9e07b1,rules/file_event_win_office_publisher_files_in_susp_locations.yml,file_event,medium,true,
+sigma,Windows\Temp,40aa399c-7b02-4715-8e5f-73572b493f33,rules/proc_creation_win_wget_download_susp_locations.yml,process_creation,high,false,
+sigma,Windows\Temp,41504465-5e3a-4a5b-a5b4-2a0baadd4463,rules/pipe_created_sysinternals_psexec_default_pipe_susp_location.yml,pipe_created,medium,false,
+sigma,Windows\Temp,42205c73-75c8-4a63-9db1-e3782e06fda0,rules/registry_set_exploit_guard_susp_allowed_apps.yml,registry_set,high,false,
+sigma,Windows\Temp,424273ea-7cf8-43a6-b712-375f925e481f,rules/win_taskscheduler_execution_from_susp_locations.yml,taskscheduler,medium,false,
+sigma,Windows\Temp,438025f9-5856-4663-83f7-52f878a70a50,rules/proc_creation_win_office_susp_child_processes.yml,process_creation,high,false,
+sigma,Windows\Temp,5a3164f2-b373-4152-93cf-090b13c12d27,rules/proc_creation_win_vscode_child_processes_anomalies.yml,process_creation,medium,false,
+sigma,Windows\Temp,5a6b7c8d-9e0f-1a2b-3c4d-5e6f7a8b9c0d,rules/proc_creation_win_cmd_launched_with_hidden_start_flag.yml,process_creation,medium,false,
+sigma,Windows\Temp,5cdeaf3d-1489-477c-95ab-c318559fc051,rules/win_appxdeployment_server_appx_package_in_staging_directory.yml,appxdeployment-server,high,false,
+sigma,Windows\Temp,5f6a601c-2ecb-498b-9c33-660362323afa,rules/proc_creation_win_powershell_import_cert_susp_locations.yml,process_creation,high,false,
+sigma,Windows\Temp,614cf376-6651-47c4-9dcc-6b9527f749f4,rules/win_security_susp_scheduled_task_update.yml,security,high,false,
+sigma,Windows\Temp,62e0298b-e994-4189-bc87-bc699aa62d97,rules/proc_creation_win_reg_import_from_suspicious_paths.yml,process_creation,medium,false,
+sigma,Windows\Temp,631b22a4-70f4-4e2f-9ea8-42f84d9df6d8,rules/proc_creation_win_addinutil_suspicious_cmdline.yml,process_creation,high,false,
+sigma,Windows\Temp,6b65c28e-11f3-46cb-902a-68f2cafaf474,rules/proc_creation_win_odbcconf_exec_susp_locations.yml,process_creation,high,false,
+sigma,Windows\Temp,6e22722b-dfb1-4508-a911-49ac840b40f8,rules/proc_creation_win_mstsc_run_local_rdp_file_susp_location.yml,process_creation,high,false,
+sigma,Windows\Temp,6e8fe0a8-ba0b-4a93-8f9e-82657e7a5984,rules/image_load_susp_baaupdate_dll_load.yml,image_load,high,false,
+sigma,Windows\Temp,6ea858a8-ba71-4a12-b2cc-5d83312404c7,rules/file_event_win_hktl_hivenightmare_file_exports.yml,file_event,high,true,
+sigma,Windows\Temp,707e097c-e20f-4f67-8807-1f72ff4500d6,rules/registry_set_persistence_app_paths.yml,registry_set,high,false,
+sigma,Windows\Temp,71ff406e-b633-4989-96ec-bc49d825a412,rules/posh_pc_susp_zip_compress.yml,powershell-classic,medium,false,
+sigma,Windows\Temp,736ffa74-5f6f-44ca-94ef-1c0df4f51d2a,rules/file_event_win_hktl_crackmapexec_indicators.yml,file_event,high,true,
+sigma,Windows\Temp,75e508f7-932d-4ebc-af77-269237a84ce1,rules/image_load_cmstp_load_dll_from_susp_location.yml,image_load,high,false,
+sigma,Windows\Temp,760e75d8-c3b5-409b-a9bf-6130b4c4603f,rules/file_event_win_sed_file_creation.yml,file_event,medium,true,
+sigma,Windows\Temp,790317c0-0a36-4a6a-a105-6e576bf99a14,rules/registry_set_persistence_com_hijacking_builtin.yml,registry_set,high,false,
+sigma,Windows\Temp,799a5f48-0ac1-4e0f-9152-71d137d48c2a,rules/image_load_side_load_abused_dlls_susp_paths.yml,image_load,high,false,
+sigma,Windows\Temp,7b582f1a-b318-4c6a-bf4e-66fe49bf55a5,rules/proc_creation_win_remote_access_tools_screenconnect_remote_execution_susp.yml,process_creation,medium,false,
+sigma,Windows\Temp,7fd164ba-126a-4d9c-9392-0d4f7c243df0,rules/file_event_win_office_onenote_files_in_susp_locations.yml,file_event,medium,false,
+sigma,Windows\Temp,811f459f-9231-45d4-959a-0266c6311987,rules/proc_creation_win_bginfo_suspicious_child_process.yml,process_creation,high,false,
+sigma,Windows\Temp,8289bf8c-4aca-4f5a-9db3-dc3d7afe5c10,rules/win_security_mitigations_unsigned_dll_from_susp_location.yml,security-mitigations,high,false,
+sigma,Windows\Temp,82a6714f-4899-4f16-9c1e-9a333544d4c3,rules/proc_creation_win_certutil_encode_susp_location.yml,process_creation,high,false,
+sigma,Windows\Temp,84232095-ecca-4015-b0d7-7726507ee793,rules/proc_creation_win_certoc_load_dll_susp_locations.yml,process_creation,high,false,
+sigma,Windows\Temp,85a8e5ba-bd03-4bfb-bbfa-a4409a8f8b98,rules/proc_creation_win_powershell_zip_compress.yml,process_creation,medium,false,
+sigma,Windows\Temp,8de89e52-f6e1-4b5b-afd1-41ecfa300d48,rules/proc_creation_win_windows_terminal_susp_children.yml,process_creation,medium,false,
+sigma,Windows\Temp,8e0bb260-d4b2-4fff-bb8d-3f82118e6892,rules/proc_creation_win_cmd_redirection_susp_folder.yml,process_creation,medium,false,
+sigma,Windows\Temp,9494479d-d994-40bf-a8b1-eea890237021,rules-threat-hunting/proc_creation_win_schtasks_creation_from_susp_parent.yml,process_creation,medium,false,
+sigma,Windows\Temp,95022b85-ff2a-49fa-939a-d7b8f56eeb9b,rules/proc_creation_win_hktl_redmimicry_winnti_playbook.yml,process_creation,high,false,
+sigma,Windows\Temp,9525dc73-0327-438c-8c04-13c0e037e9da,rules/proc_creation_win_regsvr32_susp_exec_path_1.yml,process_creation,medium,false,
+sigma,Windows\Temp,9ccba514-7cb6-4c5c-b377-700758f2f120,rules/proc_creation_win_aspnet_compiler_susp_child_process.yml,process_creation,high,false,
+sigma,Windows\Temp,9d8f9bb8-01af-4e15-a3a2-349071530530,rules/registry_set_ime_suspicious_paths.yml,registry_set,high,false,
+sigma,Windows\Temp,9e2575e7-2cb9-4da1-adc8-ed94221dca5e,rules/win_firewall_as_add_rule_susp_folder.yml,firewall-as,high,false,
+sigma,Windows\Temp,9e8894c0-0ae0-11ef-9d85-1f2942bec57c,rules/registry_set_susp_shell_open_keys_modification_patterns.yml,registry_set,medium,false,
+sigma,Windows\Temp,9f107a84-532c-41af-b005-8d12a607639f,rules/proc_creation_win_expand_cabinet_files.yml,process_creation,medium,false,
+sigma,Windows\Temp,9f50fe98-fe5c-4a2d-86c7-fad7f63ed622,rules/proc_creation_win_aspnet_compiler_susp_paths.yml,process_creation,high,false,
+sigma,Windows\Temp,9f5c1d59-33be-4e60-bcab-85d2f566effd,rules/proc_access_win_susp_dbgcore_dbghelp_load.yml,process_access,high,false,
+sigma,Windows\Temp,9fc3072c-dc8f-4bf7-b231-18950000fadd,rules/proc_creation_win_driverquery_recon.yml,process_creation,high,false,
+sigma,Windows\Temp,a35f5a72-f347-4e36-8895-9869b0d5fc6d,rules/proc_creation_win_netsh_fw_allow_program_in_susp_location.yml,process_creation,high,false,
+sigma,Windows\Temp,a3ab73f1-bd46-4319-8f06-4b20d0617886,rules/win_defender_config_change_exploit_guard_tamper.yml,windefend,high,false,
+sigma,Windows\Temp,b2b048b0-7857-4380-b0fb-d3f0ab820b71,rules/proc_creation_win_iexpress_susp_execution.yml,process_creation,high,false,
+sigma,Windows\Temp,b37998de-a70b-4f33-b219-ec36bf433dc0,rules/proc_creation_win_pua_pingcastle_script_parent.yml,process_creation,high,false,
+sigma,Windows\Temp,b730a276-6b63-41b8-bcf8-55930c8fc6ee,rules/proc_creation_win_csc_susp_parent.yml,process_creation,high,false,
+sigma,Windows\Temp,b7916c2a-fa2f-4795-9477-32b731f70f11,rules/registry_set_susp_reg_persist_explorer_run.yml,registry_set,high,false,
+sigma,Windows\Temp,b7a3c9a3-09ea-4934-8864-6a32cacd98d9,rules/posh_ps_susp_zip_compress.yml,ps_script,medium,false,
+sigma,Windows\Temp,c0aac16a-b1e7-4330-bab0-3c27bb4987c7,rules/create_remote_thread_win_mstsc_susp_location.yml,create_remote_thread,high,false,
+sigma,Windows\Temp,c27515df-97a9-4162-8a60-dc0eeb51b775,rules/proc_creation_win_office_onenote_susp_child_processes.yml,process_creation,high,false,
+sigma,Windows\Temp,c2b86e67-b880-4eec-b045-50bc98ef4844,rules/proc_creation_win_hktl_lazagne.yml,process_creation,medium,false,
+sigma,Windows\Temp,c74c0390-3e20-41fd-a69a-128f0275a5ea,rules/proc_creation_win_wusa_cab_files_extraction_from_susp_paths.yml,process_creation,high,false,
+sigma,Windows\Temp,c7c8aa1c-5aff-408e-828b-998e3620b341,rules/win_msi_install_from_susp_locations.yml,application,medium,false,
+sigma,Windows\Temp,cc368ed0-2411-45dc-a222-510ace303cb2,rules/proc_creation_win_regasm_regsvcs_uncommon_location_execution.yml,process_creation,medium,false,
+sigma,Windows\Temp,cea72823-df4d-4567-950c-0b579eaf0846,rules/proc_creation_win_wscript_cscript_mshta_dropper.yml,process_creation,medium,false,
+sigma,Windows\Temp,d4e2745c-f0c6-4bde-a3ab-b553b3f693cc,rules/registry_set_disk_cleanup_handler_autorun_persistence.yml,registry_set,medium,false,
+sigma,Windows\Temp,daf7eb81-35fd-410d-9d7a-657837e602bb,rules/posh_pm_susp_zip_compress.yml,ps_module,medium,false,
+sigma,Windows\Temp,dcaa3f04-70c3-427a-80b4-b870d73c94c4,rules/proc_creation_win_csc_susp_dynamic_compilation.yml,process_creation,medium,false,
+sigma,Windows\Temp,e0f8ab85-0ac9-423b-a73a-81b3c7b1aa97,rules/net_connection_win_susp_file_sharing_domains_susp_folders.yml,network_connection,high,false,
+sigma,Windows\Temp,e1e0b7d7-e10b-4ee4-ac49-a4bda05d320d,rules/proc_creation_win_gpg4win_susp_location.yml,process_creation,high,false,
+sigma,Windows\Temp,e218595b-bbe7-4ee5-8a96-f32a24ad3468,rules/proc_creation_win_curl_susp_download.yml,process_creation,high,false,
+sigma,Windows\Temp,e32f92d1-523e-49c3-9374-bdb13b46a3ba,rules/proc_creation_win_mshta_susp_pattern.yml,process_creation,high,false,
+sigma,Windows\Temp,e4d22291-f3d5-4b78-9a0c-a1fbaf32a6a4,rules/registry_set_odbc_driver_registered_susp.yml,registry_set,high,false,
+sigma,Windows\Temp,e7b18879-676e-4a0e-ae18-27039185a8e7,rules/registry_set_netsh_help_dll_persistence_susp_location.yml,registry_set,high,false,
+sigma,Windows\Temp,e8a95b5e-c891-46e2-b33a-93937d3abc31,rules/proc_creation_win_hh_susp_execution.yml,process_creation,high,false,
+sigma,Windows\Temp,ef61af62-bc74-4f58-b49b-626448227652,rules/proc_creation_win_sysinternals_adexplorer_susp_execution.yml,process_creation,high,false,
+sigma,Windows\Temp,ef64fc9c-a45e-43cc-8fd8-7d75d73b4c99,rules/proc_creation_win_wusa_susp_parent_execution.yml,process_creation,high,false,
+sigma,Windows\Temp,efec536f-72e8-4656-8960-5e85d091345b,rules/proc_creation_win_attrib_system_susp_paths.yml,process_creation,high,false,
+sigma,Windows\Temp,f26307d8-14cd-47e3-a26b-4b4769f24af6,rules/proc_creation_win_hktl_crackmapexec_patterns.yml,process_creation,high,false,
+sigma,Windows\Temp,f26eb764-fd89-464b-85e2-dc4a8e6e77b8,rules/proc_creation_win_susp_electron_app_children.yml,process_creation,medium,false,
+sigma,Windows\Temp,f2c64357-b1d2-41b7-849f-34d2682c0fad,rules/proc_creation_win_schtasks_susp_pattern.yml,process_creation,high,false,
+sigma,Windows\Temp,f9999590-1f94-4a34-a91e-951e47bedefd,rules/proc_creation_win_provlaunch_susp_child_process.yml,process_creation,high,false,
+sigma,Windows\Temp,fa1a7e52-3d02-435b-81b8-00da14dd66c1,rules/proc_creation_win_diskshadow_script_mode_susp_location.yml,process_creation,medium,false,
+sigma,Windows\Temp,fb4e2211-6d08-426b-8e6f-0d4a161e3b1d,rules/image_load_clfs_load.yml,image_load,medium,false,
+sigma,Windows\Tracing,327ff235-94eb-4f06-b9de-aaee571324be,rules/proc_creation_win_regsvr32_susp_exec_path_2.yml,process_creation,high,false,
+sigma,Windows\Tracing,6b65c28e-11f3-46cb-902a-68f2cafaf474,rules/proc_creation_win_odbcconf_exec_susp_locations.yml,process_creation,high,false,
+sigma,Windows\Tracing,6e22722b-dfb1-4508-a911-49ac840b40f8,rules/proc_creation_win_mstsc_run_local_rdp_file_susp_location.yml,process_creation,high,false,
+sigma,Windows\Tracing,e4d22291-f3d5-4b78-9a0c-a1fbaf32a6a4,rules/registry_set_odbc_driver_registered_susp.yml,registry_set,high,false,
+sigma,Windows\addins,15b75071-74cc-47e0-b4c6-b43744a62a2b,rules/proc_creation_win_rundll32_run_locations.yml,process_creation,medium,false,
+sigma,Windows\addins,3dfd06d2-eaf4-4532-9555-68aca59f57c4,rules/proc_creation_win_susp_execution_path.yml,process_creation,high,false,
+sigma,Windows\addins,7b434893-c57d-4f41-908d-6a17bf1ae98f,rules/net_connection_win_susp_initiated_uncommon_or_suspicious_locations.yml,network_connection,high,false,
+sigma,Windows\addins,883faa95-175a-4e22-8181-e5761aeb373c,rules/proc_creation_win_susp_service_dir.yml,process_creation,high,false,
+sigma,Windows\addins,a35f5a72-f347-4e36-8895-9869b0d5fc6d,rules/proc_creation_win_netsh_fw_allow_program_in_susp_location.yml,process_creation,high,false,
+sigma,Windows\addins,c2b86e67-b880-4eec-b045-50bc98ef4844,rules/proc_creation_win_hktl_lazagne.yml,process_creation,medium,false,
+sigma,Windows\addins,e0f8ab85-0ac9-423b-a73a-81b3c7b1aa97,rules/net_connection_win_susp_file_sharing_domains_susp_folders.yml,network_connection,high,false,
+sigma,Windows\debug,15b75071-74cc-47e0-b4c6-b43744a62a2b,rules/proc_creation_win_rundll32_run_locations.yml,process_creation,medium,false,
+sigma,Windows\debug,3dfd06d2-eaf4-4532-9555-68aca59f57c4,rules/proc_creation_win_susp_execution_path.yml,process_creation,high,false,
+sigma,Windows\debug,a35f5a72-f347-4e36-8895-9869b0d5fc6d,rules/proc_creation_win_netsh_fw_allow_program_in_susp_location.yml,process_creation,high,false,
+sigma,inetpub/wwwroot,0649be4a-aeb0-45b0-b89e-7f1668f6d9c0,rules/proc_creation_win_iis_logs_deletion.yml,process_creation,medium,false,
+sigma,inetpub/wwwroot,1cf465a1-2609-4c15-9b66-c32dbe4bfd67,rules/file_event_win_susp_legitimate_app_dropping_in_uncommon_location.yml,file_event,high,false,
+sigma,inetpub/wwwroot,2ddef153-167b-4e89-86b6-757a9e65dcac,rules/proc_creation_win_bitsadmin_download_susp_targetfolder.yml,process_creation,high,false,
+sigma,inetpub/wwwroot,35efb964-e6a5-47ad-bbcd-19661854018d,rules-threat-hunting/proc_creation_win_susp_execution_path_webserver.yml,process_creation,medium,false,
+sigma,inetpub/wwwroot,39f1f9f2-9636-45de-98f6-a4046aa8e4b9,rules/file_event_win_webshell_creation_detect.yml,file_event,medium,false,
+sigma,inetpub/wwwroot,3eb8c339-a765-48cc-a150-4364c04652bf,rules/file_delete_win_delete_iis_access_logs.yml,file_delete,medium,true,
+sigma,inetpub/wwwroot,416bc4a2-7217-4519-8dc7-c3271817f1d5,rules/image_load_win_susp_dbgcore_dbghelp_load.yml,image_load,high,false,
+sigma,inetpub/wwwroot,5a6b7c8d-9e0f-1a2b-3c4d-5e6f7a8b9c0d,rules/proc_creation_win_cmd_launched_with_hidden_start_flag.yml,process_creation,medium,false,
+sigma,inetpub/wwwroot,9f5c1d59-33be-4e60-bcab-85d2f566effd,rules/proc_access_win_susp_dbgcore_dbghelp_load.yml,process_access,high,false,
+sigma,inetpub/wwwroot,bd1212e5-78da-431e-95fa-c58e3237a8e6,rules/file_event_win_exchange_webshell_drop.yml,file_event,high,false,
+sigma,spool\drivers\color,327ff235-94eb-4f06-b9de-aaee571324be,rules/proc_creation_win_regsvr32_susp_exec_path_2.yml,process_creation,high,false,
+sigma,spool\drivers\color,6b65c28e-11f3-46cb-902a-68f2cafaf474,rules/proc_creation_win_odbcconf_exec_susp_locations.yml,process_creation,high,false,
+sigma,spool\drivers\color,790317c0-0a36-4a6a-a105-6e576bf99a14,rules/registry_set_persistence_com_hijacking_builtin.yml,registry_set,high,false,
+sigma,spool\drivers\color,ce7066a6-508a-42d3-995b-2952c65dc2ce,rules/file_event_win_susp_spool_drivers_color_drop.yml,file_event,medium,true,
+sigma,spool\drivers\color,e4d22291-f3d5-4b78-9a0c-a1fbaf32a6a4,rules/registry_set_odbc_driver_registered_susp.yml,registry_set,high,false,
+sigma,winevt\Logs,63c779ba-f638-40a0-a593-ddd45e8b1ddc,rules/file_delete_win_delete_event_log_files.yml,file_delete,medium,true,
+sigma-loadable,,03f4ca17-de95-428d-a75a-4ee78b047256,rules/file_event_win_impacket_file_indicators.yml,file_event,high,true,
+sigma-loadable,,07a99744-56ac-40d2-97b7-2095967b0e03,rules/file_event_win_system32_local_folder_privilege_escalation.yml,file_event,high,true,
+sigma-loadable,,0b8baa3f-575c-46ee-8715-d6f28cc7d33c,rules/file_event_win_ntds_dit_creation.yml,file_event,low,true,
+sigma-loadable,,0b9ad457-2554-44c1-82c2-d56a99c42377,rules/file_event_win_anydesk_artefact.yml,file_event,medium,true,
+sigma-loadable,,0bcfabcb-7929-47f4-93d6-b33fb67d34d1,rules/file_event_win_mal_adwind.yml,file_event,high,true,
+sigma-loadable,,0c3fac91-5627-46e8-a6a8-a0d7b9b8ae1b,rules/file_event_win_susp_get_variable.yml,file_event,high,true,
+sigma-loadable,,130c9e58-28ac-4f83-8574-0a4cc913b97e,rules/file_event_win_redmimicry_winnti_filedrop.yml,file_event,high,true,
+sigma-loadable,,13c02350-4177-4e45-ac17-cf7ca628ff5e,rules/file_event_win_creation_system_dll_files.yml,file_event,medium,true,
+sigma-loadable,,155dbf56-e0a4-4dd0-8905-8a98705045e8,rules/file_event_win_uac_bypass_winsat.yml,file_event,high,true,
+sigma-loadable,,15904280-565c-4b73-9303-3291f964e7f9,rules/file_event_win_errorhandler_persistence.yml,file_event,medium,true,
+sigma-loadable,,162ab1e4-6874-4564-853c-53ec3ab8be01,rules/file_event_win_susp_teamviewer_remote_session.yml,file_event,medium,true,
+sigma-loadable,,1908fcc1-1b92-4272-8214-0fbaf2fa5163,rules/file_event_win_iphlpapi_dll_sideloading.yml,file_event,high,true,
+sigma-loadable,,259e5a6a-b8d2-4c38-86e2-26c5e651361d,rules/file_event_win_sysinternals_psexec_service.yml,file_event,low,true,
+sigma-loadable,,270185ff-5f50-4d6d-a27f-24c3b8c9fef8,rules/file_delete_win_delete_tomcat_logs.yml,file_delete,medium,true,
+sigma-loadable,,28208707-fe31-437f-9a7f-4b1108b94d2e,rules/file_event_win_susp_startup_folder_persistence.yml,file_event,high,true,
+sigma-loadable,,2f9356ae-bf43-41b8-b858-4496d83b2acb,rules/file_event_win_iso_file_mount.yml,file_event,high,true,
+sigma-loadable,,304afd73-55a5-4bb9-8c21-0b1fc84ea9e4,rules/file_event_win_sysinternals_psexec_service_key.yml,file_event,high,true,
+sigma-loadable,,34986307-b7f4-49be-92f3-e7a4d01ac5db,rules/file_event_win_rclone_config_files.yml,file_event,medium,true,
+sigma-loadable,,3a525307-d100-48ae-b3b9-0964699d7f97,rules-threat-hunting/file_event_win_dump_file_creation.yml,file_event,low,true,
+sigma-loadable,,3a8da4e0-36c1-40d2-8b29-b3e890d5172a,rules/file_event_win_ntds_exfil_tools.yml,file_event,high,true,
+sigma-loadable,,3a9fa2ec-30bc-4ebd-b49e-7c9cff225502,rules/file_event_win_susp_vscode_powershell_profile.yml,file_event,medium,true,
+sigma-loadable,,3ab79e90-9fab-4cdf-a7b2-6522bc742adb,rules/file_event_win_hktl_krbrelay_remote_ioc.yml,file_event,high,true,
+sigma-loadable,,3d0ed417-3d94-4963-a562-4a92c940656a,rules/file_event_win_susp_diagcab.yml,file_event,medium,true,
+sigma-loadable,,3d2a2d59-929c-4b78-8c1a-145dfe9e07b1,rules/file_event_win_office_publisher_files_in_susp_locations.yml,file_event,medium,true,
+sigma-loadable,,3eb8c339-a765-48cc-a150-4364c04652bf,rules/file_delete_win_delete_iis_access_logs.yml,file_delete,medium,true,
+sigma-loadable,,41bb431f-56d8-4691-bb56-ed34e390906f,rules/file_event_win_uac_bypass_msconfig_gui.yml,file_event,high,true,
+sigma-loadable,,4358e5a5-7542-4dcb-b9f3-87667371839b,rules/file_event_win_iso_file_recent.yml,file_event,medium,true,
+sigma-loadable,,4aafb0fa-bff5-4b9d-b99e-8093e659c65f,rules/file_event_win_writing_local_admin_share.yml,file_event,medium,true,
+sigma-loadable,,4c55738d-72d8-490e-a2db-7969654e375f,rules-threat-hunting/file_event_win_webdav_tmpfile_creation.yml,file_event,medium,true,
+sigma-loadable,,4e87b8e2-2ee9-4b2a-a715-4727d297ece0,rules/file_event_win_sam_dump.yml,file_event,high,true,
+sigma-loadable,,4f1707b1-b50b-45b4-b5a2-3978b5a5d0d6,rules/file_event_win_susp_homoglyph_filename.yml,file_event,medium,true,
+sigma-loadable,,5b40a734-99b6-4b98-a1d0-1cea51a08ab2,rules/file_event_win_susp_system_interactive_powershell.yml,file_event,high,true,
+sigma-loadable,,5d756aee-ad3e-4306-ad95-cb1abec48de2,rules/file_event_win_gotoopener_artefact.yml,file_event,medium,true,
+sigma-loadable,,5f87308a-0a5b-4623-ae15-d8fa1809bc60,rules/file_event_win_susp_default_gpo_dir_write.yml,file_event,medium,true,
+sigma-loadable,,62ed5b55-f991-406a-85d9-e8e8fdf18789,rules/file_event_win_uac_bypass_consent_comctl32.yml,file_event,high,true,
+sigma-loadable,,63c779ba-f638-40a0-a593-ddd45e8b1ddc,rules/file_delete_win_delete_event_log_files.yml,file_delete,medium,true,
+sigma-loadable,,65236ec7-ace0-4f0c-82fd-737b04fd4dcb,rules/file_event_win_create_evtx_non_common_locations.yml,file_event,medium,true,
+sigma-loadable,,6902955a-01b7-432c-b32a-6f5f81d8f625,rules/file_event_win_lsass_shtinkering.yml,file_event,high,true,
+sigma-loadable,,6c0ce3b6-85e2-49d4-9c3f-6e008ce9796e,rules/file_event_win_creation_deno.yml,file_event,low,true,
+sigma-loadable,,6ddab845-b1b8-49c2-bbf7-1a11967f64bc,rules/file_delete_win_sysinternals_sdelete_file_deletion.yml,file_delete,medium,true,
+sigma-loadable,,6e90ae7a-7cd3-473f-a035-4ebb72d961da,rules/file_event_win_pcre_net_temp_file.yml,file_event,high,true,
+sigma-loadable,,6ea858a8-ba71-4a12-b2cc-5d83312404c7,rules/file_event_win_hktl_hivenightmare_file_exports.yml,file_event,high,true,
+sigma-loadable,,736ffa74-5f6f-44ca-94ef-1c0df4f51d2a,rules/file_event_win_hktl_crackmapexec_indicators.yml,file_event,high,true,
+sigma-loadable,,74babdd6-a758-4549-9632-26535279e654,rules/file_event_win_susp_executable_creation.yml,file_event,high,true,
+sigma-loadable,,760e75d8-c3b5-409b-a9bf-6130b4c4603f,rules/file_event_win_sed_file_creation.yml,file_event,medium,true,
+sigma-loadable,,7892ec59-c5bb-496d-8968-e5d210ca3ac4,rules/file_event_win_susp_dpapi_backup_and_cert_export_ioc.yml,file_event,high,true,
+sigma-loadable,,7eac0a16-5832-4e81-865f-0268a6d19e4b,rules-threat-hunting/file_delete_win_zone_identifier_ads.yml,file_delete,low,true,
+sigma-loadable,,7eff1a7f-dd45-4c20-877a-f21e342a7611,rules/file_event_win_remcom_service.yml,file_event,medium,true,
+sigma-loadable,,7fff6773-2baa-46de-a24a-b6eec1aba2d1,rules/file_event_win_uac_bypass_ntfs_reparse_point.yml,file_event,high,true,
+sigma-loadable,,805c55d9-31e6-4846-9878-c34c75054fe9,rules/file_event_win_mal_octopus_scanner.yml,file_event,high,true,
+sigma-loadable,,814ddeca-3d31-4265-8e07-8cc54fb44903,rules/file_event_win_sysinternals_livekd_default_dump_name.yml,file_event,high,true,
+sigma-loadable,,847def9e-924d-4e90-b7c4-5f581395a2b4,rules/file_event_win_hktl_quarkspw_filedump.yml,file_event,critical,true,
+sigma-loadable,,8c3c76ca-8f8b-4b1d-aaf3-81aebcd367c9,rules/file_event_win_creation_unquoted_service_path.yml,file_event,high,true,
+sigma-loadable,,8d5aca11-22b3-4f22-b7ba-90e60533e1fb,rules/file_event_win_wmiexec_default_filename.yml,file_event,critical,true,
+sigma-loadable,,8e1cb247-6cf6-42fa-b440-3f27d57e9936,rules/file_event_win_office_addin_persistence.yml,file_event,high,true,
+sigma-loadable,,8fbf3271-1ef6-4e94-8210-03c2317947f6,rules/file_event_win_cred_dump_tools_dropped_files.yml,file_event,high,true,
+sigma-loadable,,93a19907-d4f9-4deb-9f91-aac4692776a6,rules/file_event_win_uac_bypass_dotnet_profiler.yml,file_event,high,true,
+sigma-loadable,,93d94efc-d7ad-4161-ad7d-1638c4f908d8,rules/file_event_win_hktl_dumpert.yml,file_event,critical,true,
+sigma-loadable,,9661ec9d-4439-4a7a-abed-d9be4ca43b6d,rules-threat-hunting/file_event_win_vscode_tunnel_indicators.yml,file_event,medium,true,
+sigma-loadable,,9711de76-5d4f-4c50-a94f-21e4e8f8384d,rules/file_event_win_install_teamviewer_desktop.yml,file_event,medium,true,
+sigma-loadable,,979baf41-ca44-4540-9d0c-4fcef3b5a3a4,rules/file_event_win_susp_right_to_left_override_extension_spoofing.yml,file_event,high,true,
+sigma-loadable,,9e099d99-44c2-42b6-a6d8-54c3545cab29,rules/file_event_win_hktl_mimikatz_files.yml,file_event,critical,true,
+sigma-loadable,,a55349d8-9588-4c5a-8e3b-1925fe2a4ffe,rules/file_delete_win_delete_exchange_powershell_logs.yml,file_delete,high,true,
+sigma-loadable,,a5a2d357-1ab8-4675-a967-ef9990a59391,rules/file_event_win_lsass_default_dump_file_names.yml,file_event,high,true,
+sigma-loadable,,a762e74f-4dce-477c-b023-4ed81df600f9,rules-threat-hunting/file_event_win_scheduled_task_creation.yml,file_event,low,true,
+sigma-loadable,,a7f3c891-2e4d-4b6a-9f8c-d5e2a1b04c73,rules/file_event_win_susp_registry_hive_file_creation.yml,file_event,high,true,
+sigma-loadable,,a8f866e1-bdd4-425e-a27a-37619238d9c7,rules/file_event_win_susp_hidden_dir_index_allocation.yml,file_event,medium,true,
+sigma-loadable,,b447f7de-1e53-4cbf-bfb4-f1f6d0b04e4e,rules/file_event_win_susp_public_folder_extension.yml,file_event,high,true,
+sigma-loadable,,b4926b47-a9d7-434c-b3a0-adc3fa0bd13e,rules/file_event_win_susp_double_extension.yml,file_event,high,true,
+sigma-loadable,,b5b78988-486d-4a80-b991-930eff3ff8bf,rules/file_event_win_susp_powershell_profile.yml,file_event,medium,true,
+sigma-loadable,,b6f91281-20aa-446a-b986-38a92813a18f,rules/file_event_win_dll_sideloading_space_path.yml,file_event,high,true,
+sigma-loadable,,bb09dd3e-2b78-4819-8e35-a7c1b874e449,rules/file_event_win_hktl_inveigh_artefacts.yml,file_event,critical,true,
+sigma-loadable,,bbb7e38c-0b41-4a11-b306-d2a457b7ac2b,rules/file_event_win_perflogs_susp_files.yml,file_event,medium,true,
+sigma-loadable,,c048f047-7e2a-4888-b302-55f509d4a91d,rules/file_event_win_new_scr_file.yml,file_event,medium,true,
+sigma-loadable,,cad1fe90-2406-44dc-bd03-59d0b58fe722,rules/file_event_win_hktl_nppspy.yml,file_event,high,true,
+sigma-loadable,,ce7066a6-508a-42d3-995b-2952c65dc2ce,rules/file_event_win_susp_spool_drivers_color_drop.yml,file_event,medium,true,
+sigma-loadable,,d353dac0-1b41-46c2-820c-d7d2561fc6ed,rules/file_event_win_winrm_awl_bypass.yml,file_event,medium,true,
+sigma-loadable,,d7b50671-d1ad-4871-aa60-5aa5b331fe04,rules/file_event_win_new_files_in_uncommon_appdata_folder.yml,file_event,high,true,
+sigma-loadable,,df6ecb8b-7822-4f4b-b412-08f524b4576c,rules/file_event_win_create_non_existent_dlls.yml,file_event,medium,true,
+sigma-loadable,,e074832a-eada-4fd7-94a1-10642b130e16,rules/file_event_win_hktl_safetykatz.yml,file_event,high,true,
+sigma-loadable,,e3f673b3-65d1-4d80-9146-466f8b63fa99,rules/file_rename_win_ransomware.yml,file_rename,medium,true,
+sigma-loadable,,e4a74e34-ecde-4aab-b2fb-9112dd01aed0,rules/file_event_win_csharp_compile_artefact.yml,file_event,low,true,
+sigma-loadable,,e8a52bbd-bced-459f-bd93-64db45ce7657,rules/file_event_win_powershell_module_susp_creation.yml,file_event,medium,true,
+sigma-loadable,,e94b9ddc-eec5-4bb8-8a58-b9dc5f4e185f,rules/file_event_win_wpbbin_persistence.yml,file_event,high,true,
+sigma-loadable,,ee63c85c-6d51-4d12-ad09-04e25877a947,rules/file_event_win_creation_new_shim_database.yml,file_event,medium,true,
+sigma-loadable,,f01d1f70-cd41-42ec-9c0b-26dd9c22bf29,rules/file_delete_win_delete_own_image.yml,file_delete,medium,true,
+sigma-loadable,,f0e2b768-5220-47dd-b891-d57b96fc0ec1,rules/file_event_win_csexec_service.yml,file_event,medium,true,
+sigma-loadable,,f331aa1f-8c53-4fc3-b083-cc159bc971cb,rules/file_event_win_powershell_exploit_scripts.yml,file_event,high,true,
+sigma-loadable,,f92a6f1e-a512-4a15-9735-da09e78d7273,rules/file_event_win_lolbin_gather_network_info_script_output.yml,file_event,medium,true,
+sigma-loadable,,fabb0e80-030c-4e3e-a104-d09676991ac3,rules/file_event_win_office_outlook_susp_file_creation_in_temp_dir.yml,file_event,high,true,
+sigma-loadable,,fec96f39-988b-4586-b746-b93d59fd1922,rules/file_event_win_remote_access_tools_screenconnect_artefact.yml,file_event,medium,true,
+sigma-loadable,,fed85bf9-e075-4280-9159-fbe8a023d6fa,rules/file_event_win_advanced_ip_scanner.yml,file_event,medium,true,
+sigma-loadable,,ff301988-c231-4bd0-834c-ac9d73b86586,rules/file_delete_win_delete_powershell_command_history.yml,file_delete,medium,true,

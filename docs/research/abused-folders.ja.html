@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>悪用フォルダ調査</title>
+<style>
+:root{--bg:#fbfbfa;--fg:#1c1f24;--mut:#5b6270;--line:#dfe2e6;--head:#eef1f6;--acc:#012551;--code:#f1f2f4;
+--new:#0b6b3a;--newbg:#e3f4ea;--reuse:#1f4f99;--reusebg:#e5edfa;--hold:#8a5a00;--holdbg:#fbf0d9}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#16181c;--fg:#e4e6ea;--mut:#9aa1ad;--line:#2e333b;--head:#1f2530;--acc:#9fb8e8;--code:#23272e;
+--new:#7fd6a4;--newbg:#16321f;--reuse:#9fc0f5;--reusebg:#18263d;--hold:#f0c56b;--holdbg:#36290e}}
+:root[data-theme="dark"]{--bg:#16181c;--fg:#e4e6ea;--mut:#9aa1ad;--line:#2e333b;--head:#1f2530;--acc:#9fb8e8;--code:#23272e;
+--new:#7fd6a4;--newbg:#16321f;--reuse:#9fc0f5;--reusebg:#18263d;--hold:#f0c56b;--holdbg:#36290e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,-apple-system,"Segoe UI","Hiragino Sans","Yu Gothic UI",Meiryo,sans-serif}
+main{max-width:1180px;margin:0 auto;padding:24px 16px 64px}
+nav{position:sticky;top:0;z-index:1;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 16px;display:flex;gap:16px;flex-wrap:wrap;font-size:13px}
+nav a{color:var(--mut);text-decoration:none} nav a:hover{color:var(--acc)}
+h1{color:var(--acc);font-size:28px;margin:8px 0 4px} h2{margin-top:40px;border-bottom:2px solid var(--acc);padding-bottom:4px;scroll-margin-top:48px}
+h3{margin-top:28px} a{color:var(--acc)}
+code{background:var(--code);padding:1px 4px;border-radius:4px;font-size:.88em;overflow-wrap:anywhere}
+.tw{overflow-x:auto;margin:12px 0;border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{text-align:left;vertical-align:top;padding:6px 10px;border-bottom:1px solid var(--line)}
+th{background:var(--head);position:sticky;top:0} tr:last-child td{border-bottom:0}
+ol li{margin:6px 0}
+.tag{display:inline-block;padding:0 6px;border-radius:4px;font-size:12px;white-space:nowrap}
+.new{color:var(--new);background:var(--newbg)} .reuse{color:var(--reuse);background:var(--reusebg)} .hold{color:var(--hold);background:var(--holdbg)}
+@media (max-width:640px){body{font-size:14px} h1{font-size:22px}}
+</style></head>
+<body><nav><a href="#_2">入力</a><a href="#mozu">mozu が現在出しているもの</a><a href="#_4">結論</a><a href="#_5">フォルダ一覧</a><a href="#_6">候補</a><a href="#_7">既存機能への影響</a><a href="#codex">Codex の調査との比較用</a><a href="#_8">注意点</a></nav><main>
+<h1 id="_1">攻撃に悪用されるフォルダ</h1>
+<p>調査日 2026-11-07。同日、別途のファクトチェック(リポジトリ外)を受けて改訂。目的: 侵害報告と検知ルールに名前が挙がる Windows のフォルダを洗い出し、mozu が現状そこで何を表現できるかを確認し、ルール見直し(P4-9)、P4-15、権限によるグループ分けの検討(product.md §6)に向けた測定候補を示す。HTML 版: <a href="abused-folders.ja.html">abused-folders.ja.html</a>。続く計画項目: P4-24(候補の測定)、P2-18(<code>file_change</code>)、P4-P の候補(Public の 2 ルールの統合)。英語版: <a href="abused-folders.md">abused-folders.md</a>。</p>
+<h2 id="_2">入力</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>出典</th>
+<th>バージョン</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ATT&amp;CK Enterprise(<code>mitre/cti</code>)</td>
+<td><code>50be388e93</code>(2026-10-13)</td>
+<td>言及数: 手順の説明文にフォルダ名が出てくる <code>uses</code> 関係</td>
+</tr>
+<tr>
+<td>SigmaHQ <code>rules</code>、<code>rules-threat-hunting</code>、<code>rules-emerging-threats</code>(<code>windows/</code> のみ)</td>
+<td><code>46da2482c</code>(2026-10-20)</td>
+<td>否定されていない selection でフォルダ名を使うルール。静的に読み込めるルール</td>
+</tr>
+<tr>
+<td><a href="https://github.com/api0cradle/UltimateAppLockerByPassList/blob/master/Generic-AppLockerbypasses.md">UltimateAppLockerByPassList</a></td>
+<td><code>master</code>(2026-11-07 参照)</td>
+<td><code>C:\Windows</code> 配下で一般ユーザーが書き込めると報告されているフォルダ</td>
+</tr>
+<tr>
+<td>mozu の <code>detect</code>(<code>crates/detect/src/lib.rs</code>)、自前ルール、<code>folder</code> 分類</td>
+<td><code>main</code> <code>acbedc2</code></td>
+<td>mozu が現在 Sigma に出しているもの(<a href="../architecture.md#folder">architecture.md § Folder</a>)</td>
+</tr>
+<tr>
+<td>ATT&amp;CK <a href="https://attack.mitre.org/techniques/T1074/001/">T1074.001</a></td>
+<td>v20</td>
+<td>ステージングの例(APT5 の <code>C:\Users\Public</code>、Leviathan の <code>C:\Windows\Debug</code> と <code>C:\PerfLogs</code>)</td>
+</tr>
+</tbody>
+</table></div>
+<p>以下の件数はすべて <a href="abused-folders-counts.csv">abused-folders-counts.csv</a> の行の集合として確認できる(列は <code>source,folder,id,name,category,level,loadable,technique</code>。<code>source</code> は <code>attack</code>、<code>sigma</code>、<code>sigma-loadable</code> のいずれか)。</p>
+<h3 id="_3">手法</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>手順</th>
+<th>決まり</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>フォルダの照合</td>
+<td>フォルダごとに小文字化した正規表現を 1 つ使う(例: <code>\\users\\public\\</code> または <code>%public%</code>)。ATT&amp;CK の文章では末尾の <code>\</code> を省略可とし、「Recycle Bin」にも一致させる</td>
+</tr>
+<tr>
+<td>Sigma の正の文字列</td>
+<td><code>condition</code> で <code>not</code> の後に<strong>だけ</strong>現れる selection を除いた、すべての selection の文字列(<code>not x</code>、<code>not 1 of x*</code>、<code>not all of x*</code>、<code>not (a or b)</code>)。両方で使われる selection は正として数える</td>
+</tr>
+<tr>
+<td>Sigma で読み込めるか(静的)</td>
+<td><code>logsource.category</code> が <code>file_event</code>、<code>file_delete</code>、<code>file_rename</code>、<code>create_stream_hash</code> のいずれかで、否定側も含むすべての selection のフィールドが mozu の出すもの(<code>TargetFilename</code>、<code>SourceFilename</code>、<code>CreationUtcTime</code>、<code>UtcTime</code>)だけであること</td>
+</tr>
+<tr>
+<td>ATT&amp;CK</td>
+<td>技術への <code>uses</code> 関係。revoked と deprecated の関係・技術は除外</td>
+</tr>
+</tbody>
+</table></div>
+<p>限界: condition の解析は上記の形だけを扱い、任意の入れ子は扱わない。相関ルールの文書は <code>detection</code> がないため除外される。「読み込める」は静的な判定で、mozu のローダーを通したものではない。<code>rules/</code> で読み込める 88 ルールは <a href="detection-gaps.md">detection-gaps.md</a> で desktop6 に対してローダーが数えた件数と同じだが、ルール単位で突き合わせてはいない。スクリプトはリポジトリの外にある。コミットするかは別の計画項目で判断する。</p>
+<h2 id="mozu">mozu が現在出しているもの</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>事実</th>
+<th>元</th>
+<th>ここで効く制約</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file_event</code>(<code>TargetFilename</code>、<code>CreationUtcTime</code>、<code>FnCreationUtcTime</code>、<code>SiCreatedBeforeFnCreated</code>)</td>
+<td>使用中のすべての <code>$MFT</code> ファイル</td>
+<td>存在するファイルであって、作成ではない</td>
+</tr>
+<tr>
+<td><code>file_event</code> / <code>file_rename</code> / <code>file_delete</code>(<code>TargetFilename</code>、<code>SourceFilename</code>、<code>UtcTime</code>)</td>
+<td>USN のクローズレコード</td>
+<td><code>UtcTime</code> を持つのは USN 由来のイベントだけ</td>
+</tr>
+<tr>
+<td><code>create_stream_hash</code></td>
+<td>名前付きの <code>$DATA</code> ストリーム</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>service: baseline_outside</code></td>
+<td>ベースラインの照合</td>
+<td>ベースラインが必要</td>
+</tr>
+<tr>
+<td><strong>ディレクトリ</strong></td>
+<td>—</td>
+<td><strong>出していない</strong>: <code>file_target</code> はディレクトリに <code>None</code> を返し(<code>crates/detect/src/lib.rs:82</code>)、USN のディレクトリのレコードも飛ばす(<code>:105</code>)。ルールからディレクトリが見えるのは、その配下のファイルのパスを通してだけ</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="_4">結論</h2>
+<ol>
+<li>ATT&amp;CK の手順の説明文で最も多く名前が挙がるフォルダ(ユーザーの Temp 50、<code>AppData\Roaming</code> 31、<code>ntds.dit</code> のコピー 25、ProgramData 22、<code>Users\Public</code> 19、<code>Windows\Temp</code> 17)は、すでに mozu の <code>folder</code> 分類があるか、パスのルールで届く。言及数は実際の攻撃頻度ではない。</li>
+<li>候補の多くは現在のファイルの事実で書ける。そのまま書けないものが 2 つある: フォルダ自体の名前が怪しいもの(F6)は、配下のファイルか新しいディレクトリの事実が要る。「存在する」ではなく「作成された」を言うには、USN の行だけが満たす条件が要る(F2)。</li>
+<li>イベントログを消されても残りうる永続化・改ざんの痕跡で、自前ルールがないものが 3 つある: Startup フォルダ(T1547.001)、<code>System32\Tasks</code> 配下のタスクファイル(T1053.005)、ベースラインにないドライバ。パスだけでは、タスクの動作、ショートカットのリンク先、ドライバの脆弱性、実行の有無は分からない。</li>
+<li>パスからは誰が書き込めるかは分からない: 公開リストでは <code>C:\Windows</code> 配下に一般ユーザーが書き込めるフォルダが 16 ある。権限によるグループ分けには DACL が要るが、P4-11 は owner SID だけが対象なので mozu では確認できない。P4-15 でグループ分けを削除する方針を支持する。</li>
+<li>SigmaHQ のフォルダ系ルールはほとんどが <code>process_creation</code>(<code>Image</code>)向け: <code>Users\Public</code> の 103 ルール中 57、<code>Windows\Temp</code> の 93 ルール中 54。静的に読み込めるのはフォルダごとに 0〜12 ルール。</li>
+<li>現時点で新しいルールは提案しない。F1〜F7 は測定候補で、レベルは測定後に ADR 0016 に従って決める。</li>
+</ol>
+<h2 id="_5">フォルダ一覧</h2>
+<p>書き込み = Microsoft の資料または上記の公開リストが報告する既定の書き込み権限で、測定値ではない。ATT&amp;CK = そのフォルダ名が出てくる手順の説明文(説明文の数 / グループ・ソフトウェア・キャンペーンの数)。Sigma = 否定されていない selection でそのフォルダ名を使うルール数 / うち静的に読み込める数。複数フォルダをまとめた行は、ルールと出典を重複なしで数えた。</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>フォルダ</th>
+<th>書き込み</th>
+<th>悪用(ATT&amp;CK の説明文またはルールの説明より)</th>
+<th>ATT&amp;CK</th>
+<th>Sigma</th>
+<th>mozu <code>folder</code></th>
+<th>自前ルール</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Users\&lt;u&gt;\AppData\Local\Temp</code></td>
+<td>ユーザー</td>
+<td>投下、ステージング(T1074.001 ×16)、偽装</td>
+<td>50 / 38</td>
+<td>87 / 12</td>
+<td><code>temp</code></td>
+<td><code>executable_in_temp</code>(low)、削除(low)</td>
+</tr>
+<tr>
+<td><code>Users\&lt;u&gt;\AppData\Roaming</code></td>
+<td>ユーザー</td>
+<td>Run キーのペイロード(T1547.001 ×6)、ステージング</td>
+<td>31 / 26</td>
+<td>47 / 4</td>
+<td><code>appdata</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>Users\&lt;u&gt;\AppData\Local</code>(その他)</td>
+<td>ユーザー</td>
+<td>サイドローディング、ブラウザのデータ</td>
+<td>7 / 7</td>
+<td>49 / 7</td>
+<td><code>appdata</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ProgramData</code>(直下と新しいサブフォルダ)</td>
+<td>全ユーザーが作成可</td>
+<td>ステージング、永続化、隠しファイル(T1564.001)、偽装</td>
+<td>22 / 18</td>
+<td>33 / 2</td>
+<td><code>programdata</code></td>
+<td>—(ProgramData 直下のルールは P1 で見送り)</td>
+</tr>
+<tr>
+<td><code>Users\Public</code></td>
+<td>全ユーザー</td>
+<td>ステージング(T1074.001 ×6)、ツール、タスクのペイロード</td>
+<td>19 / 16</td>
+<td>103 / 3</td>
+<td><code>public</code></td>
+<td><code>public_executable</code>、<code>public_script_or_archive</code>(medium)</td>
+</tr>
+<tr>
+<td><code>Windows\Temp</code></td>
+<td>全ユーザーが作成可</td>
+<td>ステージング、<code>ntds.dit</code> やハイブのコピー、後始末</td>
+<td>17 / 14</td>
+<td>93 / 6</td>
+<td><code>temp</code></td>
+<td><code>executable_in_temp</code>(low)、削除(low)</td>
+</tr>
+<tr>
+<td><code>PerfLogs</code></td>
+<td>未確認</td>
+<td>ステージング(Leviathan、Wizard Spider)</td>
+<td>2 / 2</td>
+<td>63 / 2</td>
+<td><code>other</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>$Recycle.Bin</code></td>
+<td>ユーザー(自分の SID のフォルダ)</td>
+<td>ステージング(GALLIUM、menuPass、BackdoorDiplomacy)。USB 上の偽の <code>RECYCLE.BIN</code>(Mustang Panda)。残り 3 件の言及は消去や探索</td>
+<td>7 / 7</td>
+<td>8 / 0</td>
+<td><code>other</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Startup(<code>…\Start Menu\Programs\Startup</code>、ユーザー別と ProgramData)</td>
+<td>ユーザー / 管理者</td>
+<td>T1547.001、T1547.009</td>
+<td>3 / 3</td>
+<td>17 / 1</td>
+<td><code>appdata</code> / <code>programdata</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>Windows\System32\Tasks</code>、<code>Windows\Tasks</code></td>
+<td>管理者 / 全ユーザー(<code>Windows\Tasks</code>)</td>
+<td>T1053.005 のタスクファイル、投下先</td>
+<td>0 / 0</td>
+<td>23 / 2</td>
+<td><code>windows</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>Windows\System32\drivers</code>、その他の場所の <code>.sys</code></td>
+<td>管理者</td>
+<td>ドライバ、偽装</td>
+<td>1 / 1</td>
+<td>2 / 0</td>
+<td><code>windows</code></td>
+<td>—(ベースライン外バイナリのルールは <code>.sys</code> を見ない)</td>
+</tr>
+<tr>
+<td>一般ユーザーが書ける <code>C:\Windows</code> 配下(<code>Tracing</code>、<code>Registration\CRMLog</code>、<code>spool\drivers\color</code>、<code>MachineKeys</code> など)</td>
+<td>全ユーザー(リストによる)</td>
+<td><code>C:\Windows</code> を信頼する許可リストを回避して投下・実行</td>
+<td>0 / 0</td>
+<td>各 3〜5 / 0〜1</td>
+<td><code>windows</code></td>
+<td><code>outside_baseline_windows_binary</code>(high、<code>.exe</code>/<code>.dll</code>)</td>
+</tr>
+<tr>
+<td>めったに書き込まれない <code>C:\Windows</code> 配下(<code>Fonts</code>、<code>IME</code>、<code>Help</code>、<code>addins</code>、<code>debug</code>)</td>
+<td>管理者</td>
+<td><code>debug</code> でのステージング(Leviathan)、偽装</td>
+<td>1 / 1</td>
+<td>3〜8 / 0</td>
+<td><code>windows</code></td>
+<td>同上</td>
+</tr>
+<tr>
+<td>偽フォルダ(<code>C:\Windows \</code>、<code>C:\Program Files \</code>)</td>
+<td>管理者</td>
+<td>UAC バイパス、DLL 検索順序(T1574)</td>
+<td>0 / 0</td>
+<td>3 / 1</td>
+<td><code>other</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>C:\</code> 直下(<code>C:\Intel</code>、<code>C:\temp</code>、<code>C:\program.exe</code>)</td>
+<td>全ユーザーがフォルダを作成可</td>
+<td>ツール置き場、引用符なしサービスパス(T1574.009)</td>
+<td>0 / 0</td>
+<td>8 / 2</td>
+<td><code>other</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>Users\&lt;u&gt;\Downloads</code>、<code>Desktop</code></td>
+<td>ユーザー</td>
+<td>初期侵入、身代金要求文</td>
+<td>3 + 2 / 5</td>
+<td>31 + 39 / 0</td>
+<td><code>downloads</code>、<code>desktop</code></td>
+<td><code>double_extension</code>(medium)</td>
+</tr>
+<tr>
+<td><code>inetpub\wwwroot</code>、Exchange の <code>aspnet_client</code>/<code>FrontEnd</code></td>
+<td>管理者 / サービス</td>
+<td>Web シェル(T1505.003)</td>
+<td>2 / 1</td>
+<td>11 / 1</td>
+<td><code>other</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>NTDS</code>、<code>System32\config</code> のコピー</td>
+<td>管理者</td>
+<td>認証情報の窃取(T1003.003 ×16)</td>
+<td>27 / 20</td>
+<td>16 / 3</td>
+<td>コピー先のフォルダ</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>winevt\Logs</code>、<code>Prefetch</code></td>
+<td>管理者</td>
+<td>痕跡の削除(T1070)</td>
+<td>2 / 2</td>
+<td>2 / 1</td>
+<td><code>windows</code></td>
+<td><code>event_log_deleted</code>(high)、<code>prefetch_deleted</code>(medium)</td>
+</tr>
+<tr>
+<td><code>SYSVOL</code>、<code>NETLOGON</code>(DC)</td>
+<td>ドメイン管理者</td>
+<td>GPO による展開(T1484.001)</td>
+<td>0 / 0</td>
+<td>5 / 0</td>
+<td><code>windows</code> / <code>other</code></td>
+<td>—(Server は MVP 外)</td>
+</tr>
+</tbody>
+</table></div>
+<p>スケジュールタスクや Startup の悪用はよくあるが、手順の説明文がフォルダ名まで書くことは少ないので、ここでの件数の少なさにはあまり意味がない。</p>
+<h3 id="cwindows"><code>C:\Windows</code> 配下で一般ユーザーが書き込めるフォルダ(公開リスト、未測定)</h3>
+<p><code>Tasks</code>、<code>Temp</code>、<code>tracing</code>、<code>Registration\CRMLog</code>、<code>System32\FxsTmp</code>、<code>System32\com\dmp</code>、<code>System32\Microsoft\Crypto\RSA\MachineKeys</code>、<code>System32\spool\PRINTERS</code>、<code>System32\spool\SERVERS</code>、<code>System32\spool\drivers\color</code>、<code>System32\Tasks\Microsoft\Windows\SyncCenter</code>、<code>System32\Tasks_Migrated</code>、<code>SysWOW64\FxsTmp</code>、<code>SysWOW64\com\dmp</code>、<code>SysWOW64\Tasks\Microsoft\Windows\SyncCenter</code>、<code>SysWOW64\Tasks\Microsoft\Windows\PLA\System</code>。</p>
+<p>mozu には DACL の事実がないため、このリストを確認できない。判断がこれに依存する場合は、ベースライン VM 上で手作業で確認する(<code>icacls</code>)。</p>
+<h2 id="_6">候補</h2>
+<p>判定基準は <a href="detection-gaps.md#gate-for-a-new-rule">detection-gaps.md § Gate</a> と同じ(G1 頻度、G2 既存ルールで未検知、G3 正常な管理作業と区別できる、G4 サンプルを用意できる、G5 適切なレイヤー)。どの候補にもレベルは付けない。測定結果から ADR 0016 に従って決める。</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>候補</th>
+<th>現在の事実</th>
+<th>一致して分かること / 分からないこと</th>
+<th>測定すべき正常なケース</th>
+<th>状態</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F1</td>
+<td>Startup フォルダにあるベースライン外の実行ファイル・スクリプト・<code>.lnk</code></td>
+<td><code>TargetFilename</code>、<code>baseline_outside</code></td>
+<td>そこにファイルがある / リンク先や実行の有無は分からない。読み込める SigmaHQ のルールは <code>.exe</code> と <code>.lnk</code> を含まない</td>
+<td>ベンダーの <code>.lnk</code>(Teams、OneDrive、VPN クライアント)</td>
+<td><strong class="tag hold">測定</strong></td>
+</tr>
+<tr>
+<td>F2</td>
+<td><code>Windows\System32\Tasks\</code> 配下にあるベースライン外のタスクファイル</td>
+<td><code>TargetFilename</code>、<code>baseline_outside</code>。<code>UtcTime</code> を持つのは USN の行だけ</td>
+<td>タスクファイルがある(USN のみの条件を付ければ、作成された) / トリガー、動作、コマンドは分からない</td>
+<td>更新ツールのタスク(Google、Edge、Adobe、OneDrive)</td>
+<td><strong class="tag hold">測定</strong>。まず USN で作成された行だけをルールで選べることを回帰テストで示す。示せなければ「存在する」と書く</td>
+</tr>
+<tr>
+<td>F3</td>
+<td>ベースライン外の <code>.sys</code>(ベースライン外ドライバの候補)</td>
+<td><code>TargetFilename</code>、<code>baseline_outside</code></td>
+<td>ベースラインにないドライバらしいファイル / 脆弱性、署名者、ロード、防御回避への利用は分からない。BYOVD の検知ではない</td>
+<td>ハードウェア、AV、VPN、バックアップ製品のドライバ</td>
+<td><strong class="tag hold">測定</strong></td>
+</tr>
+<tr>
+<td>F4</td>
+<td><code>C:\PerfLogs\</code> 配下の実行ファイル・スクリプト・アーカイブ</td>
+<td><code>TargetFilename</code></td>
+<td>そこにファイルがある</td>
+<td>不明。使用中のホストでの PerfLogs の中身</td>
+<td>SigmaHQ <code>file_event_win_perflogs_susp_files</code> を mozu のローダーと回帰サンプルで<strong class="tag hold">測定</strong></td>
+</tr>
+<tr>
+<td>F5</td>
+<td><code>$Recycle.Bin\&lt;SID&gt;\</code> の直下にあり、名前が <code>$R</code>/<code>$I</code> で始まらず <code>desktop.ini</code> でもないファイル</td>
+<td><code>TargetFilename</code>(正規表現)</td>
+<td>エクスプローラーが名付けていないファイルがある / 誰が書いたかは分からない</td>
+<td>ごみ箱に入れたフォルダ配下のファイル(<code>$R…\&lt;元の名前&gt;</code>。「直下」の条件で除外)、アプリによる書き込み、Windows のバージョン差、移行</td>
+<td><strong class="tag hold">測定</strong></td>
+</tr>
+<tr>
+<td>F6</td>
+<td>名前が空白またはドットで終わるフォルダを含むパス</td>
+<td>そのようなフォルダの配下の<strong>ファイル</strong>の <code>TargetFilename</code>(正規表現)</td>
+<td>通常の Win32 の名前処理では末尾の ASCII の空白・ドットは除去されるが、NTFS 上にはそのような名前を作れる / 空のフォルダは見えない(ディレクトリは出していない)</td>
+<td>不明</td>
+<td><strong class="tag reuse">事実の制約</strong>: ファイルの形で測定する。空のフォルダにはディレクトリの事実が要る(新しい計画項目)</td>
+</tr>
+<tr>
+<td>F7</td>
+<td><code>C:\ProgramData\</code> または <code>C:\</code> の直下の実行ファイル・スクリプト(サブフォルダ内のファイルは除く)</td>
+<td><code>TargetFilename</code>(正規表現、<code>executable_in_users_root</code> と同じ形)</td>
+<td>その階層にファイルがある</td>
+<td>直下にファイルを置くインストーラーやエージェント</td>
+<td><strong class="tag hold">測定</strong></td>
+</tr>
+<tr>
+<td>F8</td>
+<td>一般ユーザーが書ける <code>C:\Windows</code> 配下のスクリプト(<code>.ps1</code>、<code>.bat</code>、<code>.vbs</code> など)</td>
+<td><code>TargetFilename</code>、<code>baseline_outside</code></td>
+<td>—</td>
+<td>—</td>
+<td><strong class="tag hold">保留</strong>: 既存ルールの拡張子の変更は H5。測定の後で</td>
+</tr>
+<tr>
+<td>F9</td>
+<td>Temp/ProgramData/Public/PerfLogs で作成後に削除されたアーカイブや <code>.dmp</code></td>
+<td><code>file_event</code> + <code>file_delete</code>、<code>temporal_ordered</code></td>
+<td>—</td>
+<td>バックアップ、クラッシュダンプ</td>
+<td>P4-8 まで<strong class="tag hold">保留</strong>。しきい値は正常なデータから決める</td>
+</tr>
+<tr>
+<td>F10</td>
+<td><code>system_binary_outside_system32</code> へのシステム名の追加(<code>rundll32</code>、<code>dllhost</code>、<code>conhost</code>、<code>taskhostw</code>、<code>spoolsv</code>、<code>explorer</code>)</td>
+<td><code>TargetFilename</code></td>
+<td>—</td>
+<td>各名前の正常な場所</td>
+<td>H5 の変更の前に<strong class="tag hold">測定</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>候補ごとに手元の 12 台で記録する項目: 一致したファイル、親ディレクトリ、拡張子、<code>$MFT</code> 由来か USN 由来か、USN の操作。そのうえで回帰サンプル(G4)で確認する。</p>
+<h3 id="sigmahq-f11">隣接するケースの SigmaHQ ルール(F11 を分割)</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ケース</th>
+<th>SigmaHQ のルール</th>
+<th>静的な判定</th>
+<th>状態</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ntds.dit</code>、SAM、ハイブのコピー</td>
+<td><code>file_event_win_sam_dump</code>(high)、<code>file_event_win_ntds_exfil_tools</code>(high)、<code>file_event_win_hktl_hivenightmare_file_exports</code>(high)、<code>file_event_win_ntds_dit_creation</code>(low)</td>
+<td>読み込める</td>
+<td>mozu のローダーとテストイベントではまだ確認していない</td>
+</tr>
+<tr>
+<td>LSASS のダンプ</td>
+<td><code>file_event_win_lsass_default_dump_file_names</code>(high)</td>
+<td>読み込める</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>既定の GPO フォルダへの書き込み</td>
+<td><code>file_event_win_susp_default_gpo_dir_write</code>(medium)</td>
+<td>読み込める</td>
+<td>同上。Server は MVP 外</td>
+</tr>
+<tr>
+<td>Web シェル</td>
+<td><code>file_event_win_webshell_creation_detect</code></td>
+<td>読み込めない(<code>Image</code>)</td>
+<td>現状は<strong class="tag new">未カバー</strong>。自前ルールは「後で」(detection-gaps.md)</td>
+</tr>
+</tbody>
+</table></div>
+<p>範囲外(事実がない): ユーザー補助のバイナリの置き換え(<code>sethc.exe</code>)には、ベースラインのファイルに対するデータ上書きのカテゴリが要る。Defender の除外はレジストリにある。SigmaHQ の Office <code>XLSTART</code>/Word <code>STARTUP</code> のルールは、<code>office_addin_persistence</code> を除き <code>Image</code> が必要。</p>
+<h2 id="_7">既存機能への影響</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>機能</th>
+<th>調査結果</th>
+<th>提案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>folder</code> 分類</td>
+<td>最も多く名前が挙がるフォルダには分類がある。<code>PerfLogs</code>、<code>$Recycle.Bin</code>、<code>C:\</code> 直下、偽フォルダは <code>other</code>、Startup は <code>appdata</code>/<code>programdata</code> になる</td>
+<td>分類は追加しない。ルールはパスで照合でき、残りは検索で足りる</td>
+</tr>
+<tr>
+<td>権限によるグループ分け(product.md §6)</td>
+<td>パス ≠ 権限。DACL はどの計画項目にも含まれない(P4-11 は owner SID のみ)</td>
+<td>予定どおり P4-15 で削除</td>
+</tr>
+<tr>
+<td>P4-15 ベースライン外のファイルをディレクトリ単位で表示</td>
+<td><code>ProgramData</code>、<code>C:\</code>、<code>Program Files</code> に新しくできた最上位フォルダはツールの痕跡になる</td>
+<td>維持。<code>C:\</code> 直下のフォルダも一覧に含める</td>
+</tr>
+<tr>
+<td><code>outside_baseline_windows_binary</code></td>
+<td><code>.sys</code> とスクリプトを見ていない</td>
+<td>測定後に F3/F8(H5)</td>
+</tr>
+<tr>
+<td><code>executable_in_temp</code> / 削除(low)</td>
+<td>Temp は最も多く名前が挙がり、誤検知も多い</td>
+<td><code>low</code> のまま。F9 のような相関ルールで価値が出る</td>
+</tr>
+<tr>
+<td><code>double_extension</code>(medium)</td>
+<td>SigmaHQ の <code>file_event_win_susp_double_extension</code>(high、静的に読み込める)と重複するが、SigmaHQ は同梱しない(Phase 2)</td>
+<td>維持</td>
+</tr>
+<tr>
+<td><code>file_change</code> カテゴリ</td>
+<td>USN の <code>BASIC_INFO_CHANGE</code> を Sigma の <code>file_change</code> として出している。自前ルールは使っておらず、SigmaHQ の <code>file_change</code> ルール 2 本は <code>Image</code> か <code>PreviousCreationUtcTime</code> が必要で読み込めない。Sigma の <code>file_change</code> は Sysmon EID 2(作成日時の変更)で、より狭い意味</td>
+<td>出力をやめる(計画 P2-18)</td>
+</tr>
+<tr>
+<td><code>public_executable</code> + <code>public_script_or_archive</code></td>
+<td>同じフォルダを拡張子で 2 ルールに分けている。SigmaHQ は 1 ルール</td>
+<td>P4-P で統合候補(計画に記載)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="codex">Codex の調査との比較用</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>本調査</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>一覧にしたフォルダ</td>
+<td>20 行。一般ユーザーが書ける <code>C:\Windows</code> 配下は 16(公開リスト)</td>
+</tr>
+<tr>
+<td>ATT&amp;CK の言及数(上位)</td>
+<td>ユーザーの Temp 50、Roaming 31、NTDS/config のコピー 27、ProgramData 22、Public 19、<code>Windows\Temp</code> 17</td>
+</tr>
+<tr>
+<td>フォルダ名を使う Sigma ルール(上位)</td>
+<td><code>Users\Public</code> 103、<code>Windows\Temp</code> 93、ユーザーの Temp 87、<code>PerfLogs</code> 63</td>
+</tr>
+<tr>
+<td>静的に読み込める SigmaHQ の Windows ルール</td>
+<td>93(<code>rules/</code> 88、<code>rules-threat-hunting/</code> 5)</td>
+</tr>
+<tr>
+<td>結論</td>
+<td>新規ルール 0。測定候補 7(F1〜F7。F6 は事実の制約あり)。F8〜F10 は保留または先に測定</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="_8">注意点</h2>
+<ul>
+<li>ATT&amp;CK と Sigma の件数は報告やルール作成の多さを表し、実際の攻撃頻度ではない。</li>
+<li>SigmaHQ の <code>file_event</code> ルールはプロセスによる作成を前提とする。mozu では <code>$MFT</code> のすべてのファイルが <code>file_event</code> になるため、読み込めるルールは古いファイルでも発火する(detection-gaps.md)。</li>
+<li>ここに書いたことは、手元の 12 台でも攻撃コーパスでもまだ実行していない。</li>
+<li>既定の ACL は Microsoft の資料と 1 つの公開リストによる。mozu では確認できない。</li>
+</ul>
+</main></body></html>

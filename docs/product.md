@@ -109,7 +109,7 @@ If the window is not fully covered by USN, warn: "No USN data before 2026-09-25;
 |---|---|
 | Summary | Host, OS build, window, USN coverage, baseline used; labeled counts (critical, high, outside-baseline in window, deleted `.evtx`); key events; activity sparkline; "what this report cannot tell you" |
 | Findings | Level → time; filters by level, rule, window, facts |
-| Outside-baseline files | All outside-baseline files in the window, grouped by privilege needed to write there (admin/SYSTEM, any user, user profile) |
+| Outside-baseline files | All outside-baseline files in the window, grouped by top-most directory not in the baseline (P4-15) |
 | Timeline | USN events and MFT timestamps for findings and outside-baseline files |
 | File detail | Matched rules with condition and evidence; explanation, limits, recommended checks; USN lifecycle; `$SI`/`$FN` timestamps; raw record reference |
 

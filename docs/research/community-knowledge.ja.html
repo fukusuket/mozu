@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>コミュニティナレッジ調査</title>
+<style>
+:root{--bg:#fbfbfa;--fg:#1c1f24;--mut:#5b6270;--line:#dfe2e6;--head:#eef1f6;--acc:#012551;--code:#f1f2f4;
+--new:#0b6b3a;--newbg:#e3f4ea;--reuse:#1f4f99;--reusebg:#e5edfa;--hold:#8a5a00;--holdbg:#fbf0d9}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#16181c;--fg:#e4e6ea;--mut:#9aa1ad;--line:#2e333b;--head:#1f2530;--acc:#9fb8e8;--code:#23272e;
+--new:#7fd6a4;--newbg:#16321f;--reuse:#9fc0f5;--reusebg:#18263d;--hold:#f0c56b;--holdbg:#36290e}}
+:root[data-theme="dark"]{--bg:#16181c;--fg:#e4e6ea;--mut:#9aa1ad;--line:#2e333b;--head:#1f2530;--acc:#9fb8e8;--code:#23272e;
+--new:#7fd6a4;--newbg:#16321f;--reuse:#9fc0f5;--reusebg:#18263d;--hold:#f0c56b;--holdbg:#36290e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,-apple-system,"Segoe UI","Hiragino Sans","Yu Gothic UI",Meiryo,sans-serif}
+main{max-width:1180px;margin:0 auto;padding:24px 16px 64px}
+nav{position:sticky;top:0;z-index:1;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 16px;display:flex;gap:16px;flex-wrap:wrap;font-size:13px}
+nav a{color:var(--mut);text-decoration:none} nav a:hover{color:var(--acc)}
+h1{color:var(--acc);font-size:28px;margin:8px 0 4px} h2{margin-top:40px;border-bottom:2px solid var(--acc);padding-bottom:4px;scroll-margin-top:48px}
+h3{margin-top:28px} a{color:var(--acc)}
+code{background:var(--code);padding:1px 4px;border-radius:4px;font-size:.88em;overflow-wrap:anywhere}
+.tw{overflow-x:auto;margin:12px 0;border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{text-align:left;vertical-align:top;padding:6px 10px;border-bottom:1px solid var(--line)}
+th{background:var(--head);position:sticky;top:0} tr:last-child td{border-bottom:0}
+ol li{margin:6px 0}
+.tag{display:inline-block;padding:0 6px;border-radius:4px;font-size:12px;white-space:nowrap}
+.new{color:var(--new);background:var(--newbg)} .reuse{color:var(--reuse);background:var(--reusebg)} .hold{color:var(--hold);background:var(--holdbg)}
+@media (max-width:640px){body{font-size:14px} h1{font-size:22px}}
+</style></head>
+<body><nav><a href="#_2">利用可否を決める制約</a><a href="#_3">データセットごとの判定</a><a href="#_4">詳細と効果見込み</a><a href="#_7">推奨</a><a href="#_8">注意点</a></nav><main>
+<h1 id="_1">コミュニティナレッジ: ライセンスと効果見込み</h1>
+<p>調査日 2026-11-07。同日、改訂後の abused-folders.ja.md に合わせて F3 の記述を修正。目的: Sigma と ATT&amp;CK 以外のコミュニティのデータセットについて、mozu がライセンスと既存の決定のもとで使えるか、使うと何が得られるかを示す。<a href="abused-folders.ja.md">abused-folders.ja.md</a> の続き。英語版: <a href="community-knowledge.md">community-knowledge.md</a>。</p>
+<h2 id="_2">利用可否を決める制約</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>出典</th>
+<th>決まり</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../adr/0001-license.md">ADR 0001</a></td>
+<td>コードは AGPL-3.0-only、ルールは DRL 1.1、依存は AGPL と互換であること</td>
+</tr>
+<tr>
+<td><a href="../adr/0006-gpl-reference-data.md">ADR 0006</a></td>
+<td>GPL-3.0 のデータ(LOLBAS、HijackLibs、winbindex)は AGPL のコードと一緒にデータとして同梱し、実行時に照合して<strong>事実</strong>と <code>service: unexpected_location</code> にする。DRL ルールの中身には決して入れない</td>
+</tr>
+<tr>
+<td><a href="../adr/0019-generic-rules-only.md">ADR 0019</a></td>
+<td>ルールに製品名やツール名を並べない。サードパーティのデータからルールを生成しない。ADR 0006 の「LOLDrivers は DRL ルールにしてよい」より優先する</td>
+</tr>
+<tr>
+<td>入力</td>
+<td><code>$MFT</code>、<code>$J</code>、<code>$Boot</code>、<code>$SDS</code> のみ。分かるのは名前、パス、サイズ、時刻、ADS 名。<strong>ハッシュ、署名、内容、プロセスの情報はない</strong></td>
+</tr>
+<tr>
+<td>ネットワークなし</td>
+<td>データは固定して同梱する。解析時に取得しない</td>
+</tr>
+</tbody>
+</table></div>
+<p>このため、データセットが mozu に入る道は次の 4 つ:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>意味</th>
+<th>必要な判断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong class="tag reuse">データ</strong></td>
+<td>バイナリに同梱し、実行時に照合して事実・logsource にする。ルールは汎用のまま</td>
+<td>データセットごとに H2(ADR 0006 の型)。<code>NOTICE</code> とライセンス文</td>
+</tr>
+<tr>
+<td><strong class="tag reuse">開発用</strong></td>
+<td>テストと測定にだけ使い、同梱しない</td>
+<td>テストデータの決まりに従う。実行時の依存なし</td>
+</tr>
+<tr>
+<td><strong class="tag hold">参照</strong></td>
+<td>ルールや拡張子リスト、説明文の設計のために読む。何もコピーしない</td>
+<td>なし</td>
+</tr>
+<tr>
+<td><strong>不可</strong></td>
+<td>ライセンス、内容、入手性のいずれかで使えない</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="_3">データセットごとの判定</h2>
+<p>ライセンスは GitHub API(<code>license.spdx_id</code>。<code>NOASSERTION</code> の場合は <code>LICENSE</code> を読んだ)で 2026-11-07 に確認。件数は同日に公開フィードかリポジトリのツリーから数えた。</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>出典</th>
+<th>ライセンス</th>
+<th>最終更新</th>
+<th>使い方</th>
+<th>効果見込み</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/wietze/HijackLibs">HijackLibs</a></td>
+<td>GPL-3.0</td>
+<td>2026-10-28</td>
+<td><strong class="tag reuse">データ</strong>(ADR 0006 で決定済み)</td>
+<td><strong class="tag new">高</strong></td>
+</tr>
+<tr>
+<td><a href="https://github.com/magicsword-io/LOLDrivers">LOLDrivers</a></td>
+<td>Apache-2.0</td>
+<td>2026-11-02</td>
+<td><strong class="tag reuse">データ</strong>(事実として。ルールにはしない、ADR 0019)</td>
+<td><strong class="tag new">中〜高</strong></td>
+</tr>
+<tr>
+<td><a href="https://github.com/redcanaryco/atomic-red-team">Atomic Red Team</a></td>
+<td>MIT</td>
+<td>2026-11-06</td>
+<td><strong class="tag reuse">開発用</strong>(G4 の回帰サンプル)</td>
+<td><strong class="tag new">高</strong>(測定)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/BushidoUK/Ransomware-Tool-Matrix">Ransomware Tool Matrix</a></td>
+<td>CC-BY-4.0</td>
+<td>2026-08-29</td>
+<td><strong class="tag reuse">開発用</strong>(評価セット)</td>
+<td><strong class="tag new">高</strong>(測定)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/ThreatLabz/ransomware_notes">ThreatLabz ransomware_notes</a></td>
+<td>MIT</td>
+<td>2026-08-13</td>
+<td><strong class="tag reuse">開発用</strong>(P4-9 のしきい値)</td>
+<td><strong class="tag new">中〜高</strong></td>
+</tr>
+<tr>
+<td><a href="https://github.com/LOLBAS-Project/LOLBAS">LOLBAS</a></td>
+<td>GPL-3.0</td>
+<td>2026-09-26</td>
+<td><strong class="tag reuse">データ</strong>(ADR 0006)</td>
+<td>中</td>
+</tr>
+<tr>
+<td><a href="https://github.com/magicsword-io/LOLRMM">LOLRMM</a></td>
+<td>Apache-2.0</td>
+<td>2026-11-05</td>
+<td><strong class="tag reuse">データ</strong>、詳細表示のみ(concept-review.md)</td>
+<td>中</td>
+</tr>
+<tr>
+<td><a href="https://github.com/EricZimmerman/KapeFiles">KapeFiles</a></td>
+<td>MIT</td>
+<td>2026-11-05</td>
+<td>当面は<strong class="tag hold">参照</strong>。追加収集の一覧ができたらデータ</td>
+<td>中</td>
+</tr>
+<tr>
+<td><a href="https://github.com/ForensicArtifacts/artifacts">ForensicArtifacts</a></td>
+<td>Apache-2.0</td>
+<td>2026-11-01</td>
+<td><strong class="tag hold">参照</strong>(追加収集の一覧)</td>
+<td>低〜中</td>
+</tr>
+<tr>
+<td><a href="https://github.com/m417z/winbindex">winbindex</a></td>
+<td>GPL-3.0</td>
+<td>2026-11-06</td>
+<td><strong class="tag reuse">データ</strong>にできる(ADR 0006)が保留</td>
+<td>低</td>
+</tr>
+<tr>
+<td>NIST NSRL RDS</td>
+<td>米国政府の著作物。再配布条件は取得できず</td>
+<td>四半期ごと</td>
+<td>保留</td>
+<td>不明(後述)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/persistence-info/persistence-info.github.io">persistence-info</a></td>
+<td>GPL-3.0</td>
+<td>2023-12-19</td>
+<td><strong class="tag hold">参照</strong></td>
+<td>低</td>
+</tr>
+<tr>
+<td><a href="https://github.com/splunk/security_content">Splunk security_content</a></td>
+<td>Apache-2.0</td>
+<td>2026-11-05</td>
+<td><strong class="tag hold">参照</strong></td>
+<td>低</td>
+</tr>
+<tr>
+<td><a href="https://github.com/elastic/detection-rules">Elastic detection-rules</a></td>
+<td>Elastic License 2.0</td>
+<td>2026-11-06</td>
+<td><strong class="tag hold">参照のみ。何もコピーしない</strong></td>
+<td>低</td>
+</tr>
+<tr>
+<td><a href="https://github.com/mttaggart/wtfbins">WTFBins</a></td>
+<td>MIT</td>
+<td>2025-03-30</td>
+<td>参照</td>
+<td>低</td>
+</tr>
+<tr>
+<td><a href="https://github.com/LOLAPPS-Project/LOLAPPS">LOLAPPS</a></td>
+<td>GPL-3.0</td>
+<td>2025-02-19</td>
+<td>不可(更新停止。同じ型は LOLBAS で足りる)</td>
+<td>低</td>
+</tr>
+<tr>
+<td>Microsoft の脆弱ドライバ ブロックリスト</td>
+<td>ダウンロードセンターの条件で、オープンライセンスなし</td>
+<td>四半期ごと</td>
+<td>不可(代わりに LOLDrivers)</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="https://github.com/JMousqueton/ransomware.live">ransomware.live</a></td>
+<td>Unlicense</td>
+<td>2026-07-20</td>
+<td>不可(被害者・リークサイトの情報で、ファイルの事実がない)</td>
+<td>—</td>
+</tr>
+<tr>
+<td><a href="https://github.com/The-DFIR-Report/Sigma-Rules">The DFIR Report Sigma-Rules</a></td>
+<td>GPL-3.0</td>
+<td>2026-07-08</td>
+<td>不可(<code>LICENSE</code> と <code>README.md</code> しかない)</td>
+<td>—</td>
+</tr>
+<tr>
+<td>filesec.io</td>
+<td>—</td>
+<td>—</td>
+<td>不可(2026-11-07 に名前解決できず、リポジトリも見つからない)</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p>ライセンスの互換性: GPL-3.0 は AGPL-3.0 と組み合わせられる(GPLv3 §13)。Apache-2.0、MIT、CC-BY-4.0 は (A)GPL-3.0 に一方向で互換で、<code>NOTICE</code> での帰属表示が要る。Elastic License 2.0 はオープンソースではなく利用制限が付くため、その文面やルールのロジックを AGPL のコードにも DRL ルールにもコピーしない。</p>
+<h2 id="_4">詳細と効果見込み</h2>
+<h3 id="_5">データの候補</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>出典</th>
+<th>内容(2026-11-07)</th>
+<th>NTFS メタデータで使える部分</th>
+<th>追加される事実</th>
+<th>効果と理由</th>
+<th>限界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HijackLibs</td>
+<td>DLL 627 件。うち 597 件に本来の場所(428 件は System32/SysWOW64)。実行ファイルとの組は、サイドローディング 1,907、環境変数 459、ファントム 20、検索順序 17</td>
+<td>名前とパス: すべて</td>
+<td><code>known hijackable DLL</code> かつ本来の場所の外 → <code>service: unexpected_location</code>。任意で「同じフォルダに脆弱な実行ファイルがある」</td>
+<td><strong class="tag new">高</strong>: DLL サイドローディングは署名済みの実行ファイルと DLL を ProgramData、AppData、Temp、Public に置く。<code>outside_baseline_windows_binary</code> は <code>C:\Windows</code> しか見ないので、ここを拾えない。汎用ルール(<code>unexpected_location</code> + <code>.dll</code>)ならルールに名前を並べずに済む</td>
+<td>627 件中 471 件は Microsoft の DLL。正規アプリが同名の DLL を同梱することがある → <code>baseline_outside</code> と組み合わせる。12 台で測定</td>
+</tr>
+<tr>
+<td>LOLDrivers</td>
+<td>ドライバ 713 件(脆弱 588、悪性 125)。サンプル 2,430 件はハッシュのみ。ファイル名は <code>Tags</code> にあり、一意 647 件、うち 31 件はハッシュ風の名前(<code>driver_&lt;hex&gt;.sys</code>)</td>
+<td>名前のみ(mozu はハッシュを取れない)</td>
+<td><code>.sys</code> に対する <code>known vulnerable driver name</code></td>
+<td><strong class="tag new">中〜高</strong>: abused-folders.ja.md の F3(ベースライン外ドライバの候補)を、カタログにある名前に絞り込める。防御回避のためのドライバ悪用は暗号化の前に報告されている(Ransomware Tool Matrix の 225 ツール中、防御回避が 24)</td>
+<td>名前の一致は BYOVD の検知ではない: バージョン、署名者、ロード、利用は分からない。改名されたドライバは拾えない。修正済みでも同名なら一致する → 事実として出すだけで、それ単独では検知にしない</td>
+</tr>
+<tr>
+<td>LOLBAS</td>
+<td>245 件、本来のパス 613(System32/SysWOW64 227、その他の <code>C:\Windows</code> 80、Program Files 282、その他 24)</td>
+<td>名前とパス: すべて</td>
+<td><code>known LOLBin</code> かつ本来のパスの外</td>
+<td><strong>中</strong>: <code>system_binary_outside_system32</code> を 6 名から 245 名に一般化する。本来のパス以外にコピーされた LOLBin は偽装の兆候</td>
+<td>実行は見えない。改名したコピーは拾えない。ADR 0006 で決定済み</td>
+</tr>
+<tr>
+<td>LOLRMM</td>
+<td>ツール 358 件。うち 318 件にインストールパス(パスなしの名前 846、Program Files 234、ProgramData 46、AppData 35、その他 186)。111 件にディスク上の痕跡 845</td>
+<td>名前とパス</td>
+<td>ベースライン外ディレクトリの詳細表示での <code>catalog match</code>(P4-15)</td>
+<td><strong>中</strong>: RMM はランサムウェアのツールで最大の分類(42 ツール)。専門家でない人が「AnyDesk のフォルダ」と気付ける</td>
+<td>ADR 0019 で製品ルール 307 本は削除済み。データとして出すだけで、検知にはしない</td>
+</tr>
+<tr>
+<td>winbindex</td>
+<td>Microsoft 製バイナリのバージョンとパスの履歴</td>
+<td>名前とパス</td>
+<td>既知のパス以外にある Microsoft 製バイナリ</td>
+<td><strong>低</strong>: ホストのビルドについては、ビルドごとのベースラインがすでに答えている</td>
+<td>大きい。ベースラインがないビルドを扱うとき(P4-5 の近いビルドへのフォールバック)にだけ役立つ</td>
+</tr>
+<tr>
+<td>NSRL RDS</td>
+<td>RDSv3 SQLite。非常に大きい(NIST 自身が注意喚起)。ファイルの行は名前、サイズ、ハッシュを持ち、パスはない</td>
+<td>名前 + サイズ(<code>$MFT</code> にサイズがある)</td>
+<td><code>known software file (name and size)</code></td>
+<td>不明: ベースライン外ファイルのうち他社製ソフトによる誤検知を減らせる可能性がある(product.md P5)。ただし名前 + サイズの照合は弱く、データは巨大</td>
+<td>条件を取得できず。まず P4-4 の正規化と比べる</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="_6">開発用と参照</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>出典</th>
+<th>内容</th>
+<th>効果と理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Atomic Red Team</td>
+<td>353 技術。Windows のテスト数: T1547.001 21、T1053.005 14、T1003.003 11、T1574.001 7、T1070.004 7、T1543.003 6、T1564.001 5、T1486 4、T1036.005 3、T1068 2、T1074.001 2、T1505.003 1</td>
+<td>測定に<strong class="tag new">高</strong>: abused-folders.ja.md の F1〜F7 と P4-9 の G4 回帰サンプル(メンテナーの VM で実行して収集し、収集物はリポジトリの外に置く)</td>
+</tr>
+<tr>
+<td>Ransomware Tool Matrix</td>
+<td>8 分類 225 ツール(RMM 42、認証情報窃取 42、探索 36、攻撃ツール 28、持ち出し 28、防御回避 24、ネットワーク 15、LOLBAS 10)。10 以上の集団が使うツールは 13</td>
+<td>測定に<strong class="tag new">高</strong>: P4-19 のラベルセット(「10 以上の集団が使う 13 ツールの痕跡がレポートに出るか」)。ルールの中身には決して使わない(ADR 0019)</td>
+</tr>
+<tr>
+<td>ThreatLabz ransomware_notes</td>
+<td>222 ファミリー、元の名前のままの要求文ファイル 335(<code>readme*</code> 35、<code>how*to*recover*</code> 12)</td>
+<td><strong class="tag new">中〜高</strong>: P4-9 の汎用の相関ルール「同じ新しいファイル名が数分のうちに多くのディレクトリに作られる」のしきい値を、要求文の名前を並べずに調整できる</td>
+</tr>
+<tr>
+<td>KapeFiles</td>
+<td>ターゲット 427(Apps 194、Windows 102、複合 36、ブラウザ 31、アンチウイルス 29)</td>
+<td><strong>中</strong>: 検知ごとに次に収集すべき KAPE ターゲットを示せる(concept-review.md の追加収集の一覧)。M2 で KAPE の出力はすでに読める</td>
+</tr>
+<tr>
+<td>ForensicArtifacts</td>
+<td>痕跡のパス定義(<code>windows.yaml</code>、<code>webservers.yaml</code> など)。<code>windows_dll_hijacking.yaml</code> は Windows 7 由来</td>
+<td><strong>低〜中</strong>: 追加収集の一覧で KapeFiles と同じ役割。DLL の一覧は <code>C:\Windows</code> 配下ならベースラインのルールでカバー済み</td>
+</tr>
+<tr>
+<td>persistence-info</td>
+<td>44 件、ほとんどがレジストリ。ファイルとして見えるのは Startup フォルダ、タスクスケジューラ、PowerShell プロファイル、ごみ箱、<code>wpbbin</code>、Windows Terminal のプロファイル</td>
+<td><strong>低</strong>: abused-folders.ja.md の F1/F2 と PowerShell プロファイルのルールを裏付ける。それ以外は NTFS から見えない</td>
+</tr>
+<tr>
+<td>Splunk security_content</td>
+<td>2,204 検知(エンドポイント 1,529)、SPL</td>
+<td><strong>低</strong>: Sigma と同じくほとんどがプロセス前提。変換の手間もかかる</td>
+</tr>
+<tr>
+<td>Elastic detection-rules</td>
+<td>EQL/KQL</td>
+<td><strong>低</strong>。ライセンス上、読む以上の再利用はできない</td>
+</tr>
+<tr>
+<td>WTFBins</td>
+<td>正常だが怪しく見えるバイナリ 48 件</td>
+<td><strong>低</strong>: プロセスの振る舞いで、ファイルの事実ではない</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="_7">推奨</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>順</th>
+<th>対応</th>
+<th>理由</th>
+<th>必要な判断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>HijackLibs を <code>unexpected_location</code> のデータにし、汎用ルール 1 本を追加</td>
+<td>決定済み(ADR 0006)。ベースラインのルールが見ない場所で効果が最も大きい</td>
+<td>計画項目(H1)。データの取り込みは H2</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Atomic Red Team で F1〜F7 と P4-9 のサンプルを作る</td>
+<td>G4 なしではルールを採用しない。安価</td>
+<td>計画項目。VM の操作は人が行う</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Ransomware Tool Matrix を P4-19 のラベルセットに使う</td>
+<td>主な利用者の状況で、製品の主張(攻撃関連ファイルの 80 % 以上を表示)を測れる</td>
+<td>P4-19 の ADR に含める</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LOLDrivers の名前を、F3 の候補の横に事実として出す(F3 の測定後)</td>
+<td>一覧にあるドライバ名を他の第三者製ドライバと区別できる。Apache-2.0</td>
+<td>新しい ADR(GPL 以外のデータで、ADR 0019 との境界)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>ThreatLabz の要求文で P4-9 のしきい値を決める</td>
+<td>汎用の相関ルールを測って決められる</td>
+<td>P4-9 の中で</td>
+</tr>
+<tr>
+<td>6</td>
+<td>LOLBAS と LOLRMM を事実として出す</td>
+<td>詳細表示で役立つ。検知にはしない</td>
+<td>P4-13 の後</td>
+</tr>
+<tr>
+<td>—</td>
+<td>KapeFiles / ForensicArtifacts を追加収集の一覧に使う</td>
+<td>その一覧が計画項目になった場合のみ</td>
+<td>まずプロダクトとしてのニーズ</td>
+</tr>
+<tr>
+<td>—</td>
+<td>NSRL、winbindex</td>
+<td>P4-4/P4-5 の数値で誤検知が残ると分かるまで保留</td>
+<td>まず測定</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="_8">注意点</h2>
+<ul>
+<li>ライセンスは各リポジトリの申告による。データセットには別条件のサードパーティの内容が含まれることがある。取り込み時に確認し直す(ADR 0006 の手順)。</li>
+<li>「効果」は件数と適合度からの判断で、測定値ではない。データとして使う項目はどれも、ルールのレベルを決める前に手元の 12 台でホストごとの件数を測る(ADR 0016)。</li>
+<li>名前だけの照合は改名で回避できる。カタログとの一致はすべて検知の横に出す事実で、並び順には決して使わない(AGENTS.md)。</li>
+<li>フィードは件数を数えるために一度だけ(GET のみ)スクラッチ用のディレクトリにダウンロードした。コミットはしていない。</li>
+</ul>
+</main></body></html>
