@@ -355,13 +355,13 @@ Track D: report
 
 Track E: measurement and gate
 - [ ] **P4-19 Accuracy measurement** (`xtask`; ADR P4-0f)
-  - Done when: `xtask accuracy` as in the ADR, with unit tests on synthetic labels; results per corpus host recorded in `docs/research/accuracy.md` against the ≥ 80 % target, with each missed label explained (no evidence-derived names beyond what the ADR allows).
+  - Done when: `xtask accuracy` as in the ADR, with unit tests on synthetic labels; results per corpus host recorded in `docs/research/accuracy.md` against the ≥ 80 % target, with each missed label explained (no evidence-derived names beyond what the ADR allows); per-rule hit counts on the clean VMs of P4-6 and the local hosts, as the measured input for ADR 0016 levels (statistics stay in this record, never in the report).
   - Out of scope: tuning rules inside this item (follow-up items name the gap).
 - [ ] **P4-20 Performance with `$J`** (`xtask`; extends P1-6)
   - Done when: the synthetic generator also writes a 32 MB `$J`; `mozu analyze` on 1 GB `$MFT` + 32 MB `$J` with all own rules and a baseline is ≤ 1 min and ≤ 2 GB peak RSS on the Mac, recorded in `docs/research/baseline-poc.md`.
   - Out of scope: optimization beyond the target.
 - [ ] **P4-21 User manual** (`docs/`; product.md §4 "using only the manual")
-  - Done when: one page in en and ja: download, `mozu collect` on the client, `mozu analyze` with `--baseline auto`, reading the report, next steps; README and usecases.md link it and drop what it replaces.
+  - Done when: one page in en and ja: download, `mozu collect` on the client, `mozu analyze` with `--baseline auto`, reading the report, next steps, including two `jq` recipes over `--jsonl`: the paths to hand to a content scanner (YARA, THOR, Velociraptor) and stacking several hosts by path; README and usecases.md link it and drop what it replaces.
   - Out of scope: developer docs.
 - [ ] **P4-P Prune before the gate** (all crates; AGENTS.md)
   - Done when: every feature, `pub` item, CLI flag, report row and output field is listed with the need or test that justifies it; those without one are removed after human approval. Candidates: merging `public_executable` and `public_script_or_archive` (same folder and level, [research/abused-folders.md](research/abused-folders.md)), `--mask-users`, `mozu rules list`, `mozu baseline list|update`, `mozu rules update` from product.md §5 (not built unless an item needs them), `-i <$MFT> --usn` vs directory input.
@@ -369,6 +369,20 @@ Track E: measurement and gate
 - [ ] **P4-G Gate material**
   - Done when: each product.md §4 criterion has a measured value with its source (P3-G, P4-4/P4-6, P4-19, P4-20); usability session plan for ≥ 3 non-experts with the manual (as `research/phase2-gate.md`). The human runs the sessions and ticks the gate.
   - Out of scope: optimization beyond the gate.
+
+## After the MVP (candidates, not scheduled)
+
+Not plan items yet: each becomes one only with an H1 plan (and an ADR where marked) after the Phase 4 gate. Source: [research/related-work.md](research/related-work.md), [research/concept-review.md](research/concept-review.md).
+
+| Candidate | Need | Decision first |
+|---|---|---|
+| Reference-data facts: LOLBAS name outside its `Full_Path`, HijackLibs DLL outside `ExpectedLocations` (and next to a vulnerable `.exe`), LOLDrivers driver name; rules stay generic | P4, P7 | ADR (ADR 0006 data at runtime; ADR 0019 holds) |
+| `value_count` correlations: one file name created in many folders (ransom note); needs `FileName` and `ParentDirectory` fields | P1 | ADR P4-0c revisited |
+| `Zone.Identifier` `HostUrl`/`ReferrerUrl` as a fact (resident ADS) | P4 | H5 (P2-7 put it out of scope) |
+| Follow-up manifest: one row per candidate file with fixed check identifiers | P4 | Only if the P4-21 `jq` recipe proves insufficient (one way to do a thing) |
+| LOLRMM as a label in File detail and RMM log-write times from USN (`DATA_*`) | P1, P4 | ADR for the `tool-rules` repo (ADR 0019) |
+
+Rejected: YARA in the binary, runtime outlier or rarity scores, importing signature-base filename IOCs (related-work.md).
 
 ## Risks
 
