@@ -25,7 +25,7 @@ ol li{margin:6px 0}
 .new{color:var(--new);background:var(--newbg)} .reuse{color:var(--reuse);background:var(--reusebg)} .hold{color:var(--hold);background:var(--holdbg)}
 @media (max-width:640px){body{font-size:14px} h1{font-size:22px}}
 </style></head>
-<body><nav><a href="#inputs">Inputs</a><a href="#what-mozu-emits-today">What mozu emits today</a><a href="#conclusion">Conclusion</a><a href="#folder-catalog">Folder catalog</a><a href="#candidates">Candidates</a><a href="#effect-on-existing-features">Effect on existing features</a><a href="#for-comparison-with-the-codex-survey">For comparison with the Codex survey</a><a href="#caveats">Caveats</a></nav><main>
+<body><nav><a href="#inputs">Inputs</a><a href="#what-mozu-emits-today">What mozu emits today</a><a href="#conclusion">Conclusion</a><a href="#folder-catalog">Folder catalog</a><a href="#candidates">Candidates</a><a href="#measurement-p4-24-12-hosts">Measurement (P4-24, 12 hosts)</a><a href="#effect-on-existing-features">Effect on existing features</a><a href="#for-comparison-with-the-codex-survey">For comparison with the Codex survey</a><a href="#caveats">Caveats</a></nav><main>
 <h1 id="folders-abused-in-intrusions">Folders abused in intrusions</h1>
 <p>Surveyed 2026-11-07; revised the same day after an independent fact-check (not in the repository). Goal: list the Windows folders that intrusion reports and detection rules name, check what mozu can already express there, and list measurement candidates for the rule review (P4-9), P4-15 and the privilege-grouping question (product.md §6). HTML: <a href="abused-folders.html">abused-folders.html</a>. Plan items that follow: P4-24 (measure the candidates), P2-18 (<code>file_change</code>), P4-P candidate (merge the Public rules). Japanese: <a href="abused-folders.ja.md">abused-folders.ja.md</a>.</p>
 <h2 id="inputs">Inputs</h2>
@@ -476,6 +476,192 @@ ol li{margin:6px 0}
 </tbody>
 </table></div>
 <p>Out of reach (no fact): accessibility-binary replacement (<code>sethc.exe</code>) needs a data-overwrite category on baseline files; Defender exclusions are registry; SigmaHQ's Office <code>XLSTART</code>/Word <code>STARTUP</code> rules need <code>Image</code> except <code>office_addin_persistence</code>.</p>
+<h2 id="measurement-p4-24-12-hosts">Measurement (P4-24, 12 hosts)</h2>
+<p>Run 2026-11-08 with <code>mozu</code> at <code>37942fa</code> (P2-18) and draft rules kept outside the repository (one <code>informational</code> rule per candidate; F1–F3 also with <code>service: baseline_outside</code>; F2 also with <code>UtcTime|exists: true</code>, which within <code>file_event</code> selects USN-created rows only, see the test <code>a_rule_can_select_usn_created_rows_with_utctime_exists</code>). Output was byte-identical on a re-run. The Atomic Red Team step (G4) is still open.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Hosts</th>
+<th>OS (from <code>$MFT</code>)</th>
+<th>Baseline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Yamato CTF ×9 (<code>ACC-*</code>, <code>IT-*</code>)</td>
+<td>Windows 7 SP1, 6.1.7601</td>
+<td>none: VWR has no Windows 7, so these are upper bounds</td>
+</tr>
+<tr>
+<td>Simulated-Case-1 ×3 (desktop6, dc1, files5)</td>
+<td>Server 2025 Standard, 26100.1742</td>
+<td>VWR <code>WindowsServer2025_24H2_Standard_20241101_26100.1742</code> (exact build)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Distinct files matched (paths masked: <code>&lt;user&gt;</code>, <code>&lt;SID&gt;</code>):</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Yamato ×9, no baseline</th>
+<th>dc1 / desktop6 / files5, no baseline</th>
+<th>dc1 / desktop6 / files5, outside baseline</th>
+<th>What matched</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F1 Startup</td>
+<td>1 each; IT-03: 3</td>
+<td>1 / 2 / 0</td>
+<td>1 / 2 / 0</td>
+<td>A lab <code>.lnk</code> in the ProgramData Startup on all 9 Yamato hosts; an <code>.exe</code> and an <code>.hta</code> created in <code>&lt;user&gt;</code>'s Startup (IT-03); a <code>.lnk</code> in a user Startup (dc1, desktop6); a remote-access tool's <code>.lnk</code> in the ProgramData Startup (desktop6)</td>
+</tr>
+<tr>
+<td>F2 tasks</td>
+<td>81–83</td>
+<td>221 / 195 / 222</td>
+<td>33 / 8 / 34</td>
+<td>Outside baseline: Windows' own tasks missing from VWR (27 per dc1/files5 deleted during setup), Edge updater tasks, and a few non-Microsoft names: a random 8-letter task created and deleted (files5), a remote-access tool's watchdog and two generic names (desktop6)</td>
+</tr>
+<tr>
+<td>F2 created (USN only)</td>
+<td>1–3</td>
+<td>221 / 8 / 222</td>
+<td>—</td>
+<td>Yamato: Defender tasks re-created, plus a short odd name on ACC-04 and IT-02. Server: the setup re-created most tasks inside the journal</td>
+</tr>
+<tr>
+<td>F3 <code>.sys</code></td>
+<td>648–652</td>
+<td>1,167 / 1,191 / 1,166</td>
+<td>21 / 45 / 20</td>
+<td>Outside baseline: Defender platform and definition updates, transient folders (<code>Windows\SystemTemp\&lt;GUID&gt;</code>, <code>WinSxS\Temp\InFlight</code>), <code>pagefile.sys</code> at the root, Sysmon (lab), 26 remote-access tool drivers (desktop6), a memory-acquisition driver (dc1)</td>
+</tr>
+<tr>
+<td>F4 PerfLogs (SigmaHQ)</td>
+<td>0</td>
+<td>0 / 0 / 0</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>F5 <code>$Recycle.Bin</code></td>
+<td>0</td>
+<td>0 / 0 / 0</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>F6 trailing space/dot</td>
+<td>0</td>
+<td>0 / 0 / 0</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>F7 root of <code>C:\</code>/ProgramData</td>
+<td>2 each</td>
+<td>1 / 0 / 0</td>
+<td>—</td>
+<td>Lab provisioning only: <code>sysmon.exe</code> and <code>vcredist.exe</code> at <code>C:\</code> (Yamato), a user-creation <code>.ps1</code> at <code>C:\</code> (dc1)</td>
+</tr>
+<tr>
+<td>F10 system names</td>
+<td>0</td>
+<td>0 / 0 / 0</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p>Origin of the rows behind those files (outside baseline where a baseline exists; USN operation from the closing record):</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Yamato ×9</th>
+<th>dc1</th>
+<th>desktop6</th>
+<th>files5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F1</td>
+<td><code>$MFT</code> only; IT-03 also 2 USN <code>FILE_CREATE</code> (<code>.exe</code>, <code>.hta</code>)</td>
+<td>1 <code>$MFT</code>, 1 USN <code>FILE_CREATE</code> (<code>.lnk</code>)</td>
+<td>2 <code>$MFT</code>, 2 USN <code>FILE_CREATE</code> (<code>.lnk</code>)</td>
+<td>—</td>
+</tr>
+<tr>
+<td>F2 (outside baseline)</td>
+<td>—</td>
+<td>6 <code>$MFT</code>, 33 USN <code>FILE_CREATE</code> (27 of the files deleted later); no extension</td>
+<td>8 <code>$MFT</code>, 3 USN <code>FILE_CREATE</code>; no extension</td>
+<td>6 <code>$MFT</code>, 34 USN <code>FILE_CREATE</code> (28 deleted later); no extension</td>
+</tr>
+<tr>
+<td>F2 created (no baseline)</td>
+<td>1–7 USN <code>FILE_CREATE</code> (transacted) per host</td>
+<td>232 USN <code>FILE_CREATE</code></td>
+<td>12</td>
+<td>233</td>
+</tr>
+<tr>
+<td>F3 (outside baseline)</td>
+<td>—</td>
+<td>13 <code>$MFT</code>, 16 USN <code>FILE_CREATE</code> (5 also <code>DATA_OVERWRITE</code>; 10 also <code>BASIC_INFO_CHANGE</code>)</td>
+<td>40 <code>$MFT</code>, 38 USN <code>FILE_CREATE</code> (31 also <code>DATA_OVERWRITE</code>)</td>
+<td>14 <code>$MFT</code>, 15 USN <code>FILE_CREATE</code></td>
+</tr>
+<tr>
+<td>F7</td>
+<td><code>$MFT</code> only (<code>.exe</code> ×2 at <code>C:\</code>)</td>
+<td>1 USN <code>FILE_CREATE</code> (<code>.ps1</code> at <code>C:\</code>)</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p>Decisions; "Hold" and "Keep" are interim until the Atomic step closes P4-24, which ends each candidate as "propose" or "drop":</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Decision</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F1</td>
+<td><strong class="tag new">Propose a rule at a later H1</strong>, without <code>baseline_outside</code>; its level is set there from these counts (ADR 0016)</td>
+<td>Every match is lab tooling or attack-related (labels to be confirmed by the human); the baseline variant would miss the Windows 7 hosts</td>
+</tr>
+<tr>
+<td>F2</td>
+<td><strong class="tag hold">Hold</strong> for own baselines (P4-3, P4-4)</td>
+<td>Most outside-baseline matches are Windows tasks absent from VWR; the few odd names are the interesting part. <code>UtcTime|exists</code> works if "created" is wanted</td>
+</tr>
+<tr>
+<td>F3</td>
+<td><strong class="tag hold">Hold</strong> for P4-4</td>
+<td>Updates, transient folders and <code>pagefile.sys</code> dominate; a rule would need the P2-9d transient exclusions too</td>
+</tr>
+<tr>
+<td>F4, F5, F6, F10</td>
+<td><strong class="tag hold">Keep for the Atomic step</strong>, no rule yet</td>
+<td>0 false positives, but also no positive sample (G4)</td>
+</tr>
+<tr>
+<td>F7</td>
+<td><strong class="tag reuse">Drop</strong> unless the Atomic step shows a case</td>
+<td>Only provisioning artifacts matched</td>
+</tr>
+</tbody>
+</table></div>
 <h2 id="effect-on-existing-features">Effect on existing features</h2>
 <div class="tw"><table>
 <thead>
@@ -563,7 +749,7 @@ ol li{margin:6px 0}
 <ul>
 <li>ATT&amp;CK and Sigma counts measure reporting and rule writing, not prevalence.</li>
 <li>SigmaHQ <code>file_event</code> rules assume a creation by a process; here every <code>$MFT</code> file is a <code>file_event</code>, so loadable rules also fire on old files (detection-gaps.md).</li>
-<li>Nothing here has been run on the 12 local hosts or an attack corpus.</li>
+<li>The 12 local hosts are measured (above); the attack corpus (Atomic Red Team) is not. The Windows 7 hosts have no baseline.</li>
 <li>Default ACLs come from Microsoft documentation and one public list; mozu cannot verify them.</li>
 </ul>
 </main></body></html>

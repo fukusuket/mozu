@@ -25,7 +25,7 @@ ol li{margin:6px 0}
 .new{color:var(--new);background:var(--newbg)} .reuse{color:var(--reuse);background:var(--reusebg)} .hold{color:var(--hold);background:var(--holdbg)}
 @media (max-width:640px){body{font-size:14px} h1{font-size:22px}}
 </style></head>
-<body><nav><a href="#_2">入力</a><a href="#mozu">mozu が現在出しているもの</a><a href="#_4">結論</a><a href="#_5">フォルダ一覧</a><a href="#_6">候補</a><a href="#_7">既存機能への影響</a><a href="#codex">Codex の調査との比較用</a><a href="#_8">注意点</a></nav><main>
+<body><nav><a href="#_2">入力</a><a href="#mozu">mozu が現在出しているもの</a><a href="#_4">結論</a><a href="#_5">フォルダ一覧</a><a href="#_6">候補</a><a href="#p4-2412">測定(P4-24、12 台)</a><a href="#_7">既存機能への影響</a><a href="#codex">Codex の調査との比較用</a><a href="#_8">注意点</a></nav><main>
 <h1 id="_1">攻撃に悪用されるフォルダ</h1>
 <p>調査日 2026-11-07。同日、別途のファクトチェック(リポジトリ外)を受けて改訂。目的: 侵害報告と検知ルールに名前が挙がる Windows のフォルダを洗い出し、mozu が現状そこで何を表現できるかを確認し、ルール見直し(P4-9)、P4-15、権限によるグループ分けの検討(product.md §6)に向けた測定候補を示す。HTML 版: <a href="abused-folders.ja.html">abused-folders.ja.html</a>。続く計画項目: P4-24(候補の測定)、P2-18(<code>file_change</code>)、P4-P の候補(Public の 2 ルールの統合)。英語版: <a href="abused-folders.md">abused-folders.md</a>。</p>
 <h2 id="_2">入力</h2>
@@ -476,6 +476,192 @@ ol li{margin:6px 0}
 </tbody>
 </table></div>
 <p>範囲外(事実がない): ユーザー補助のバイナリの置き換え(<code>sethc.exe</code>)には、ベースラインのファイルに対するデータ上書きのカテゴリが要る。Defender の除外はレジストリにある。SigmaHQ の Office <code>XLSTART</code>/Word <code>STARTUP</code> のルールは、<code>office_addin_persistence</code> を除き <code>Image</code> が必要。</p>
+<h2 id="p4-2412">測定(P4-24、12 台)</h2>
+<p>2026-11-08 に <code>37942fa</code>(P2-18)の <code>mozu</code> と、リポジトリ外に置いた下書きルールで実行した(候補ごとに <code>informational</code> のルール 1 本。F1〜F3 は <code>service: baseline_outside</code> 版も、F2 は <code>file_event</code> の中では USN で作成された行だけを選ぶ <code>UtcTime|exists: true</code> 版も用意。後者が動くことはテスト <code>a_rule_can_select_usn_created_rows_with_utctime_exists</code> で確認)。再実行で出力はバイト単位で一致した。Atomic Red Team の手順(G4)は未実施。</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ホスト</th>
+<th>OS(<code>$MFT</code> から推定)</th>
+<th>ベースライン</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Yamato CTF ×9(<code>ACC-*</code>、<code>IT-*</code>)</td>
+<td>Windows 7 SP1、6.1.7601</td>
+<td>なし: VWR に Windows 7 がないため上限値</td>
+</tr>
+<tr>
+<td>Simulated-Case-1 ×3(desktop6、dc1、files5)</td>
+<td>Server 2025 Standard、26100.1742</td>
+<td>VWR <code>WindowsServer2025_24H2_Standard_20241101_26100.1742</code>(ビルド一致)</td>
+</tr>
+</tbody>
+</table></div>
+<p>一致したファイル数(重複なし。パスは <code>&lt;user&gt;</code>、<code>&lt;SID&gt;</code> で伏せた):</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Yamato ×9、ベースラインなし</th>
+<th>dc1 / desktop6 / files5、ベースラインなし</th>
+<th>dc1 / desktop6 / files5、ベースライン外</th>
+<th>一致したもの</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F1 Startup</td>
+<td>各 1。IT-03 は 3</td>
+<td>1 / 2 / 0</td>
+<td>1 / 2 / 0</td>
+<td>Yamato 全 9 台の ProgramData の Startup にある検証環境用の <code>.lnk</code>。<code>&lt;user&gt;</code> の Startup に作成された <code>.exe</code> と <code>.hta</code>(IT-03)。ユーザーの Startup の <code>.lnk</code>(dc1、desktop6)。ProgramData の Startup にあるリモートアクセスツールの <code>.lnk</code>(desktop6)</td>
+</tr>
+<tr>
+<td>F2 タスク</td>
+<td>81〜83</td>
+<td>221 / 195 / 222</td>
+<td>33 / 8 / 34</td>
+<td>ベースライン外: VWR にない Windows 自身のタスク(dc1/files5 では 27 件がセットアップ中に削除)、Edge の更新タスク、少数の Microsoft 以外の名前(files5 で作成後に削除されたランダムな 8 文字のタスク、desktop6 のリモートアクセスツールの監視タスクと汎用的な名前 2 件)</td>
+</tr>
+<tr>
+<td>F2 作成(USN のみ)</td>
+<td>1〜3</td>
+<td>221 / 8 / 222</td>
+<td>—</td>
+<td>Yamato: 再作成された Defender のタスクと、ACC-04 と IT-02 の短く不自然な名前。Server: セットアップがジャーナルの期間内にほとんどのタスクを作り直していた</td>
+</tr>
+<tr>
+<td>F3 <code>.sys</code></td>
+<td>648〜652</td>
+<td>1,167 / 1,191 / 1,166</td>
+<td>21 / 45 / 20</td>
+<td>ベースライン外: Defender のプラットフォームと定義の更新、一時フォルダ(<code>Windows\SystemTemp\&lt;GUID&gt;</code>、<code>WinSxS\Temp\InFlight</code>)、ルートの <code>pagefile.sys</code>、Sysmon(検証環境)、リモートアクセスツールのドライバ 26 件(desktop6)、メモリ取得用のドライバ(dc1)</td>
+</tr>
+<tr>
+<td>F4 PerfLogs(SigmaHQ)</td>
+<td>0</td>
+<td>0 / 0 / 0</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>F5 <code>$Recycle.Bin</code></td>
+<td>0</td>
+<td>0 / 0 / 0</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>F6 末尾の空白・ドット</td>
+<td>0</td>
+<td>0 / 0 / 0</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>F7 <code>C:\</code>/ProgramData の直下</td>
+<td>各 2</td>
+<td>1 / 0 / 0</td>
+<td>—</td>
+<td>検証環境の構築物のみ: <code>C:\</code> の <code>sysmon.exe</code> と <code>vcredist.exe</code>(Yamato)、<code>C:\</code> のユーザー作成用 <code>.ps1</code>(dc1)</td>
+</tr>
+<tr>
+<td>F10 システム名</td>
+<td>0</td>
+<td>0 / 0 / 0</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p>上記のファイルの元になった行の出どころ(ベースラインがある場合はベースライン外。USN の操作はクローズレコードの理由):</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Yamato ×9</th>
+<th>dc1</th>
+<th>desktop6</th>
+<th>files5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F1</td>
+<td><code>$MFT</code> のみ。IT-03 は USN の <code>FILE_CREATE</code> も 2 件(<code>.exe</code>、<code>.hta</code>)</td>
+<td><code>$MFT</code> 1、USN <code>FILE_CREATE</code> 1(<code>.lnk</code>)</td>
+<td><code>$MFT</code> 2、USN <code>FILE_CREATE</code> 2(<code>.lnk</code>)</td>
+<td>—</td>
+</tr>
+<tr>
+<td>F2(ベースライン外)</td>
+<td>—</td>
+<td><code>$MFT</code> 6、USN <code>FILE_CREATE</code> 33(うち 27 ファイルは後で削除)。拡張子なし</td>
+<td><code>$MFT</code> 8、USN <code>FILE_CREATE</code> 3。拡張子なし</td>
+<td><code>$MFT</code> 6、USN <code>FILE_CREATE</code> 34(うち 28 は後で削除)。拡張子なし</td>
+</tr>
+<tr>
+<td>F2 作成(ベースラインなし)</td>
+<td>ホストごとに USN <code>FILE_CREATE</code>(トランザクション)1〜7</td>
+<td>USN <code>FILE_CREATE</code> 232</td>
+<td>12</td>
+<td>233</td>
+</tr>
+<tr>
+<td>F3(ベースライン外)</td>
+<td>—</td>
+<td><code>$MFT</code> 13、USN <code>FILE_CREATE</code> 16(うち 5 は <code>DATA_OVERWRITE</code> も、10 は <code>BASIC_INFO_CHANGE</code> も)</td>
+<td><code>$MFT</code> 40、USN <code>FILE_CREATE</code> 38(うち 31 は <code>DATA_OVERWRITE</code> も)</td>
+<td><code>$MFT</code> 14、USN <code>FILE_CREATE</code> 15</td>
+</tr>
+<tr>
+<td>F7</td>
+<td><code>$MFT</code> のみ(<code>C:\</code> の <code>.exe</code> ×2)</td>
+<td>USN <code>FILE_CREATE</code> 1(<code>C:\</code> の <code>.ps1</code>)</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p>判断(「保留」と「保持」は暫定。Atomic の手順で P4-24 を閉じるときに、各候補を「提案」か「見送り」に決める):</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>判断</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F1</td>
+<td>後の H1 で<strong class="tag new">ルールを提案</strong>(<code>baseline_outside</code> なし)。レベルはその場でこの件数から決める(ADR 0016)</td>
+<td>一致はすべて検証環境のツールか攻撃関連(ラベルは人が確認)。ベースライン版では Windows 7 のホストを取りこぼす</td>
+</tr>
+<tr>
+<td>F2</td>
+<td>自前のベースライン(P4-3、P4-4)まで<strong class="tag hold">保留</strong></td>
+<td>ベースライン外の一致の多くは VWR にない Windows のタスク。注目すべきは少数の不自然な名前。「作成された」が必要なら <code>UtcTime|exists</code> が使える</td>
+</tr>
+<tr>
+<td>F3</td>
+<td>P4-4 まで<strong class="tag hold">保留</strong></td>
+<td>更新、一時フォルダ、<code>pagefile.sys</code> が大半。ルールには P2-9d と同じ一時フォルダの除外も要る</td>
+</tr>
+<tr>
+<td>F4、F5、F6、F10</td>
+<td><strong class="tag hold">Atomic の手順まで保持</strong>、ルールはまだ作らない</td>
+<td>誤検知 0。ただし陽性のサンプル(G4)もない</td>
+</tr>
+<tr>
+<td>F7</td>
+<td>Atomic の手順で事例が出ない限り<strong class="tag reuse">見送り</strong></td>
+<td>一致したのは構築時の残骸だけ</td>
+</tr>
+</tbody>
+</table></div>
 <h2 id="_7">既存機能への影響</h2>
 <div class="tw"><table>
 <thead>
@@ -563,7 +749,7 @@ ol li{margin:6px 0}
 <ul>
 <li>ATT&amp;CK と Sigma の件数は報告やルール作成の多さを表し、実際の攻撃頻度ではない。</li>
 <li>SigmaHQ の <code>file_event</code> ルールはプロセスによる作成を前提とする。mozu では <code>$MFT</code> のすべてのファイルが <code>file_event</code> になるため、読み込めるルールは古いファイルでも発火する(detection-gaps.md)。</li>
-<li>ここに書いたことは、手元の 12 台でも攻撃コーパスでもまだ実行していない。</li>
+<li>手元の 12 台は測定済み(上記)。攻撃コーパス(Atomic Red Team)は未実施。Windows 7 のホストにはベースラインがない。</li>
 <li>既定の ACL は Microsoft の資料と 1 つの公開リストによる。mozu では確認できない。</li>
 </ul>
 </main></body></html>
