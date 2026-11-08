@@ -109,6 +109,49 @@ Per candidate, record on the 12 local hosts: matching files, parent directory, e
 
 Out of reach (no fact): accessibility-binary replacement (`sethc.exe`) needs a data-overwrite category on baseline files; Defender exclusions are registry; SigmaHQ's Office `XLSTART`/Word `STARTUP` rules need `Image` except `office_addin_persistence`.
 
+## Measurement (P4-24, 12 hosts)
+
+Run 2026-11-08 with `mozu` at `37942fa` (P2-18) and draft rules kept outside the repository (one `informational` rule per candidate; F1–F3 also with `service: baseline_outside`; F2 also with `UtcTime|exists: true`, which within `file_event` selects USN-created rows only, see the test `a_rule_can_select_usn_created_rows_with_utctime_exists`). Output was byte-identical on a re-run. The Atomic Red Team step (G4) is still open.
+
+| Hosts | OS (from `$MFT`) | Baseline |
+|---|---|---|
+| Yamato CTF ×9 (`ACC-*`, `IT-*`) | Windows 7 SP1, 6.1.7601 | none: VWR has no Windows 7, so these are upper bounds |
+| Simulated-Case-1 ×3 (desktop6, dc1, files5) | Server 2025 Standard, 26100.1742 | VWR `WindowsServer2025_24H2_Standard_20241101_26100.1742` (exact build) |
+
+Distinct files matched (paths masked: `<user>`, `<SID>`):
+
+| ID | Yamato ×9, no baseline | dc1 / desktop6 / files5, no baseline | dc1 / desktop6 / files5, outside baseline | What matched |
+|---|---|---|---|---|
+| F1 Startup | 1 each; IT-03: 3 | 1 / 2 / 0 | 1 / 2 / 0 | A lab `.lnk` in the ProgramData Startup on all 9 Yamato hosts; an `.exe` and an `.hta` created in `<user>`'s Startup (IT-03); a `.lnk` in a user Startup (dc1, desktop6); a remote-access tool's `.lnk` in the ProgramData Startup (desktop6) |
+| F2 tasks | 81–83 | 221 / 195 / 222 | 33 / 8 / 34 | Outside baseline: Windows' own tasks missing from VWR (27 per dc1/files5 deleted during setup), Edge updater tasks, and a few non-Microsoft names: a random 8-letter task created and deleted (files5), a remote-access tool's watchdog and two generic names (desktop6) |
+| F2 created (USN only) | 1–3 | 221 / 8 / 222 | — | Yamato: Defender tasks re-created, plus a short odd name on ACC-04 and IT-02. Server: the setup re-created most tasks inside the journal |
+| F3 `.sys` | 648–652 | 1,167 / 1,191 / 1,166 | 21 / 45 / 20 | Outside baseline: Defender platform and definition updates, transient folders (`Windows\SystemTemp\<GUID>`, `WinSxS\Temp\InFlight`), `pagefile.sys` at the root, Sysmon (lab), 26 remote-access tool drivers (desktop6), a memory-acquisition driver (dc1) |
+| F4 PerfLogs (SigmaHQ) | 0 | 0 / 0 / 0 | — | — |
+| F5 `$Recycle.Bin` | 0 | 0 / 0 / 0 | — | — |
+| F6 trailing space/dot | 0 | 0 / 0 / 0 | — | — |
+| F7 root of `C:\`/ProgramData | 2 each | 1 / 0 / 0 | — | Lab provisioning only: `sysmon.exe` and `vcredist.exe` at `C:\` (Yamato), a user-creation `.ps1` at `C:\` (dc1) |
+| F10 system names | 0 | 0 / 0 / 0 | — | — |
+
+Origin of the rows behind those files (outside baseline where a baseline exists; USN operation from the closing record):
+
+| ID | Yamato ×9 | dc1 | desktop6 | files5 |
+|---|---|---|---|---|
+| F1 | `$MFT` only; IT-03 also 2 USN `FILE_CREATE` (`.exe`, `.hta`) | 1 `$MFT`, 1 USN `FILE_CREATE` (`.lnk`) | 2 `$MFT`, 2 USN `FILE_CREATE` (`.lnk`) | — |
+| F2 (outside baseline) | — | 6 `$MFT`, 33 USN `FILE_CREATE` (27 of the files deleted later); no extension | 8 `$MFT`, 3 USN `FILE_CREATE`; no extension | 6 `$MFT`, 34 USN `FILE_CREATE` (28 deleted later); no extension |
+| F2 created (no baseline) | 1–7 USN `FILE_CREATE` (transacted) per host | 232 USN `FILE_CREATE` | 12 | 233 |
+| F3 (outside baseline) | — | 13 `$MFT`, 16 USN `FILE_CREATE` (5 also `DATA_OVERWRITE`; 10 also `BASIC_INFO_CHANGE`) | 40 `$MFT`, 38 USN `FILE_CREATE` (31 also `DATA_OVERWRITE`) | 14 `$MFT`, 15 USN `FILE_CREATE` |
+| F7 | `$MFT` only (`.exe` ×2 at `C:\`) | 1 USN `FILE_CREATE` (`.ps1` at `C:\`) | — | — |
+
+Decisions; "Hold" and "Keep" are interim until the Atomic step closes P4-24, which ends each candidate as "propose" or "drop":
+
+| ID | Decision | Why |
+|---|---|---|
+| F1 | **Propose a rule at a later H1**, without `baseline_outside`; its level is set there from these counts (ADR 0016) | Every match is lab tooling or attack-related (labels to be confirmed by the human); the baseline variant would miss the Windows 7 hosts |
+| F2 | **Hold** for own baselines (P4-3, P4-4) | Most outside-baseline matches are Windows tasks absent from VWR; the few odd names are the interesting part. `UtcTime|exists` works if "created" is wanted |
+| F3 | **Hold** for P4-4 | Updates, transient folders and `pagefile.sys` dominate; a rule would need the P2-9d transient exclusions too |
+| F4, F5, F6, F10 | **Keep for the Atomic step**, no rule yet | 0 false positives, but also no positive sample (G4) |
+| F7 | **Drop** unless the Atomic step shows a case | Only provisioning artifacts matched |
+
 ## Effect on existing features
 
 | Feature | Finding | Suggestion |
@@ -136,5 +179,5 @@ Out of reach (no fact): accessibility-binary replacement (`sethc.exe`) needs a d
 
 - ATT&CK and Sigma counts measure reporting and rule writing, not prevalence.
 - SigmaHQ `file_event` rules assume a creation by a process; here every `$MFT` file is a `file_event`, so loadable rules also fire on old files (detection-gaps.md).
-- Nothing here has been run on the 12 local hosts or an attack corpus.
+- The 12 local hosts are measured (above); the attack corpus (Atomic Red Team) is not. The Windows 7 hosts have no baseline.
 - Default ACLs come from Microsoft documentation and one public list; mozu cannot verify them.

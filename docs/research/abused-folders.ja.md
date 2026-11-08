@@ -109,6 +109,49 @@ mozu には DACL の事実がないため、このリストを確認できない
 
 範囲外(事実がない): ユーザー補助のバイナリの置き換え(`sethc.exe`)には、ベースラインのファイルに対するデータ上書きのカテゴリが要る。Defender の除外はレジストリにある。SigmaHQ の Office `XLSTART`/Word `STARTUP` のルールは、`office_addin_persistence` を除き `Image` が必要。
 
+## 測定(P4-24、12 台)
+
+2026-11-08 に `37942fa`(P2-18)の `mozu` と、リポジトリ外に置いた下書きルールで実行した(候補ごとに `informational` のルール 1 本。F1〜F3 は `service: baseline_outside` 版も、F2 は `file_event` の中では USN で作成された行だけを選ぶ `UtcTime|exists: true` 版も用意。後者が動くことはテスト `a_rule_can_select_usn_created_rows_with_utctime_exists` で確認)。再実行で出力はバイト単位で一致した。Atomic Red Team の手順(G4)は未実施。
+
+| ホスト | OS(`$MFT` から推定) | ベースライン |
+|---|---|---|
+| Yamato CTF ×9(`ACC-*`、`IT-*`) | Windows 7 SP1、6.1.7601 | なし: VWR に Windows 7 がないため上限値 |
+| Simulated-Case-1 ×3(desktop6、dc1、files5) | Server 2025 Standard、26100.1742 | VWR `WindowsServer2025_24H2_Standard_20241101_26100.1742`(ビルド一致) |
+
+一致したファイル数(重複なし。パスは `<user>`、`<SID>` で伏せた):
+
+| ID | Yamato ×9、ベースラインなし | dc1 / desktop6 / files5、ベースラインなし | dc1 / desktop6 / files5、ベースライン外 | 一致したもの |
+|---|---|---|---|---|
+| F1 Startup | 各 1。IT-03 は 3 | 1 / 2 / 0 | 1 / 2 / 0 | Yamato 全 9 台の ProgramData の Startup にある検証環境用の `.lnk`。`<user>` の Startup に作成された `.exe` と `.hta`(IT-03)。ユーザーの Startup の `.lnk`(dc1、desktop6)。ProgramData の Startup にあるリモートアクセスツールの `.lnk`(desktop6) |
+| F2 タスク | 81〜83 | 221 / 195 / 222 | 33 / 8 / 34 | ベースライン外: VWR にない Windows 自身のタスク(dc1/files5 では 27 件がセットアップ中に削除)、Edge の更新タスク、少数の Microsoft 以外の名前(files5 で作成後に削除されたランダムな 8 文字のタスク、desktop6 のリモートアクセスツールの監視タスクと汎用的な名前 2 件) |
+| F2 作成(USN のみ) | 1〜3 | 221 / 8 / 222 | — | Yamato: 再作成された Defender のタスクと、ACC-04 と IT-02 の短く不自然な名前。Server: セットアップがジャーナルの期間内にほとんどのタスクを作り直していた |
+| F3 `.sys` | 648〜652 | 1,167 / 1,191 / 1,166 | 21 / 45 / 20 | ベースライン外: Defender のプラットフォームと定義の更新、一時フォルダ(`Windows\SystemTemp\<GUID>`、`WinSxS\Temp\InFlight`)、ルートの `pagefile.sys`、Sysmon(検証環境)、リモートアクセスツールのドライバ 26 件(desktop6)、メモリ取得用のドライバ(dc1) |
+| F4 PerfLogs(SigmaHQ) | 0 | 0 / 0 / 0 | — | — |
+| F5 `$Recycle.Bin` | 0 | 0 / 0 / 0 | — | — |
+| F6 末尾の空白・ドット | 0 | 0 / 0 / 0 | — | — |
+| F7 `C:\`/ProgramData の直下 | 各 2 | 1 / 0 / 0 | — | 検証環境の構築物のみ: `C:\` の `sysmon.exe` と `vcredist.exe`(Yamato)、`C:\` のユーザー作成用 `.ps1`(dc1) |
+| F10 システム名 | 0 | 0 / 0 / 0 | — | — |
+
+上記のファイルの元になった行の出どころ(ベースラインがある場合はベースライン外。USN の操作はクローズレコードの理由):
+
+| ID | Yamato ×9 | dc1 | desktop6 | files5 |
+|---|---|---|---|---|
+| F1 | `$MFT` のみ。IT-03 は USN の `FILE_CREATE` も 2 件(`.exe`、`.hta`) | `$MFT` 1、USN `FILE_CREATE` 1(`.lnk`) | `$MFT` 2、USN `FILE_CREATE` 2(`.lnk`) | — |
+| F2(ベースライン外) | — | `$MFT` 6、USN `FILE_CREATE` 33(うち 27 ファイルは後で削除)。拡張子なし | `$MFT` 8、USN `FILE_CREATE` 3。拡張子なし | `$MFT` 6、USN `FILE_CREATE` 34(うち 28 は後で削除)。拡張子なし |
+| F2 作成(ベースラインなし) | ホストごとに USN `FILE_CREATE`(トランザクション)1〜7 | USN `FILE_CREATE` 232 | 12 | 233 |
+| F3(ベースライン外) | — | `$MFT` 13、USN `FILE_CREATE` 16(うち 5 は `DATA_OVERWRITE` も、10 は `BASIC_INFO_CHANGE` も) | `$MFT` 40、USN `FILE_CREATE` 38(うち 31 は `DATA_OVERWRITE` も) | `$MFT` 14、USN `FILE_CREATE` 15 |
+| F7 | `$MFT` のみ(`C:\` の `.exe` ×2) | USN `FILE_CREATE` 1(`C:\` の `.ps1`) | — | — |
+
+判断(「保留」と「保持」は暫定。Atomic の手順で P4-24 を閉じるときに、各候補を「提案」か「見送り」に決める):
+
+| ID | 判断 | 理由 |
+|---|---|---|
+| F1 | 後の H1 で**ルールを提案**(`baseline_outside` なし)。レベルはその場でこの件数から決める(ADR 0016) | 一致はすべて検証環境のツールか攻撃関連(ラベルは人が確認)。ベースライン版では Windows 7 のホストを取りこぼす |
+| F2 | 自前のベースライン(P4-3、P4-4)まで**保留** | ベースライン外の一致の多くは VWR にない Windows のタスク。注目すべきは少数の不自然な名前。「作成された」が必要なら `UtcTime|exists` が使える |
+| F3 | P4-4 まで**保留** | 更新、一時フォルダ、`pagefile.sys` が大半。ルールには P2-9d と同じ一時フォルダの除外も要る |
+| F4、F5、F6、F10 | **Atomic の手順まで保持**、ルールはまだ作らない | 誤検知 0。ただし陽性のサンプル(G4)もない |
+| F7 | Atomic の手順で事例が出ない限り**見送り** | 一致したのは構築時の残骸だけ |
+
 ## 既存機能への影響
 
 | 機能 | 調査結果 | 提案 |
@@ -136,5 +179,5 @@ mozu には DACL の事実がないため、このリストを確認できない
 
 - ATT&CK と Sigma の件数は報告やルール作成の多さを表し、実際の攻撃頻度ではない。
 - SigmaHQ の `file_event` ルールはプロセスによる作成を前提とする。mozu では `$MFT` のすべてのファイルが `file_event` になるため、読み込めるルールは古いファイルでも発火する(detection-gaps.md)。
-- ここに書いたことは、手元の 12 台でも攻撃コーパスでもまだ実行していない。
+- 手元の 12 台は測定済み(上記)。攻撃コーパス(Atomic Red Team)は未実施。Windows 7 のホストにはベースラインがない。
 - 既定の ACL は Microsoft の資料と 1 つの公開リストによる。mozu では確認できない。
